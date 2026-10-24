@@ -1,0 +1,91 @@
+import React from "react";
+import ThriveCarousel from "./ThriveCarousel";
+import {
+  THRIVE_CONTENT,
+  THRIVE_PILL_FEATURES,
+} from "@/constants/thrive";
+import Badge from "@/components/ui/Badge";
+import {
+  SparklesIcon,
+  UserSolidIcon,
+  BarChartSolidIcon,
+  HeartSolidIcon,
+} from "@/components/ui/icons";
+
+export function Thrive() {
+  const renderFeatureIcon = (iconType: string) => {
+    switch (iconType) {
+      case "user":
+        return <UserSolidIcon className="w-5 h-5 text-primary" />;
+      case "barchart":
+        return <BarChartSolidIcon className="w-5 h-5 text-primary" />;
+      case "heart":
+        return <HeartSolidIcon className="w-5 h-5 text-primary" />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <section
+      id="thrive"
+      className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden"
+    >
+      {/* Subtle ambient lighting */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-primary/4 rounded-full blur-[130px] pointer-events-none -z-10" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-14 xl:gap-16">
+          {/* Left Column: Image Carousel matching About Odenro pattern */}
+          <div className="lg:col-span-6 w-full">
+            <ThriveCarousel />
+          </div>
+
+          {/* Right Column: Content matching the reference design */}
+          <div className="lg:col-span-6 flex flex-col justify-center items-start">
+            {/* Eyebrow Pill Badge */}
+            <Badge
+              variant="primary"
+              icon={<SparklesIcon className="w-3.5 h-3.5 text-primary shrink-0" />}
+              className="mb-4 sm:mb-5 shadow-2xs font-bold text-primary tracking-wider"
+            >
+              {THRIVE_CONTENT.eyebrow}
+            </Badge>
+
+            {/* Main Headline */}
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-extrabold tracking-tight leading-[1.18] text-slate-900">
+              <span>{THRIVE_CONTENT.titlePart1}</span>
+              <span className="text-primary">{THRIVE_CONTENT.titleHighlight}</span>
+            </h2>
+
+            {/* Description Paragraph */}
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-[17px] text-slate-600 font-normal leading-relaxed max-w-xl">
+              {THRIVE_CONTENT.description}
+            </p>
+
+            {/* 3 Horizontal Pill Features */}
+            <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-3 lg:gap-4 pt-2">
+              {THRIVE_PILL_FEATURES.map((feat) => (
+                <div key={feat.id} className="flex items-center gap-3">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#EBF3FD] flex items-center justify-center shrink-0">
+                    {renderFeatureIcon(feat.iconType)}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs sm:text-[13px] font-bold text-slate-900 leading-snug">
+                      {feat.title}
+                    </span>
+                    <span className="text-[11px] sm:text-xs text-slate-500 font-medium leading-tight">
+                      {feat.subtitle}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Thrive;

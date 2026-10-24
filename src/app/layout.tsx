@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Instrument_Serif } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -39,6 +40,7 @@ export default function RootLayout({
       >
         <Navbar />
         <main className="flex-1 pt-20 sm:pt-24">{children}</main>
+        <Footer />
       </body>
     </html>
   );
