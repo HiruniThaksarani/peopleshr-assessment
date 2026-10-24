@@ -10,6 +10,8 @@ import {
   ClockIcon,
 } from "@/components/ui/icons";
 import { HERO_CONTENT } from "@/constants/hero";
+import Button from "@/components/ui/button";
+import Badge from "@/components/ui/Badge";
 
 export default function HeroSection() {
   const renderHighlightIcon = (type: string) => {
@@ -50,10 +52,13 @@ export default function HeroSection() {
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-10">
           <div className="max-w-xl lg:max-w-xl xl:max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-light border border-blue-200/80 text-primary text-xs font-semibold mb-6 shadow-xs select-none">
-              <SparklesIcon className="w-3.5 h-3.5 text-primary shrink-0" />
-              <span>{HERO_CONTENT.eyebrow}</span>
-            </div>
+            <Badge
+              variant="primary"
+              icon={<SparklesIcon className="w-3.5 h-3.5 text-primary shrink-0" />}
+              className="mb-6 shadow-xs"
+            >
+              {HERO_CONTENT.eyebrow}
+            </Badge>
 
             <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-[52px] xl:text-[58px] text-slate-900 tracking-tight leading-[1.12]">
               {HERO_CONTENT.titlePart1}{" "}
@@ -66,21 +71,19 @@ export default function HeroSection() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3.5 sm:gap-4">
-              <Link
-                href={HERO_CONTENT.ctaPrimary.href}
-                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm font-semibold tracking-wide shadow-[0_6px_20px_-4px_rgba(13,91,189,0.4)] hover:shadow-[0_10px_25px_-4px_rgba(13,91,189,0.55)] transition-all duration-200 select-none group"
-              >
-                <CalendarIcon className="w-4 h-4 text-white/90 group-hover:text-white transition-colors" />
-                <span>{HERO_CONTENT.ctaPrimary.label}</span>
-              </Link>
+              <Button asChild size="lg">
+                <Link href={HERO_CONTENT.ctaPrimary.href}>
+                  <CalendarIcon className="w-4 h-4 text-white/90 group-hover:text-white transition-colors" />
+                  <span>{HERO_CONTENT.ctaPrimary.label}</span>
+                </Link>
+              </Button>
 
-              <Link
-                href={HERO_CONTENT.ctaSecondary.href}
-                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 hover:border-primary/60 text-xs sm:text-sm font-semibold tracking-wide transition-all duration-200 shadow-xs group"
-              >
-                <span>{HERO_CONTENT.ctaSecondary.label}</span>
-                <ChevronRightIcon className="w-3.5 h-3.5 text-slate-400 group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-200" />
-              </Link>
+              <Button asChild variant="outline" size="lg">
+                <Link href={HERO_CONTENT.ctaSecondary.href}>
+                  <span>{HERO_CONTENT.ctaSecondary.label}</span>
+                  <ChevronRightIcon className="w-3.5 h-3.5 text-slate-400 group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-200" />
+                </Link>
+              </Button>
             </div>
 
             <div className="mt-10 pt-8 border-t border-slate-200/80 w-full flex flex-wrap items-center gap-6 sm:gap-8 text-xs text-slate-500 font-medium">

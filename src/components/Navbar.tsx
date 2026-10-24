@@ -21,6 +21,7 @@ import {
   BookOpenIcon,
 } from "@/components/ui/icons";
 import { NAV_ITEMS, NavItem } from "@/constants/navigation";
+import Button from "@/components/ui/button";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -258,13 +259,12 @@ export default function Navbar() {
           />
 
           {/* Request a Demo Button */}
-          <Link
-            href="#demo"
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-2.5 rounded-full bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm font-semibold tracking-wide shadow-[0_4px_16px_-2px_rgba(13,91,189,0.35)] hover:shadow-[0_6px_20px_-2px_rgba(13,91,189,0.5)] transition-all duration-200 select-none group cursor-pointer"
-          >
-            <CalendarIcon className="w-4 h-4 text-white/90 group-hover:text-white transition-colors" />
-            <span>Request a Demo</span>
-          </Link>
+          <Button asChild className="hidden sm:inline-flex">
+            <Link href="#demo">
+              <CalendarIcon className="w-4 h-4 text-white/90 group-hover:text-white transition-colors" />
+              <span>Request a Demo</span>
+            </Link>
+          </Button>
 
           {/* Mobile Menu Hamburger Toggle */}
           <button
@@ -367,14 +367,15 @@ export default function Navbar() {
 
               {/* Mobile CTA Button */}
               <div className="pt-3 mt-2 border-t border-slate-100">
-                <Link
-                  href="#demo"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-3 rounded-full bg-primary hover:bg-primary-hover text-white text-sm font-semibold shadow-[0_4px_16px_-2px_rgba(13,91,189,0.35)]"
-                >
-                  <CalendarIcon className="w-4 h-4 text-white" />
-                  <span>Request a Demo</span>
-                </Link>
+                <Button asChild className="w-full">
+                  <Link
+                    href="#demo"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <CalendarIcon className="w-4 h-4 text-white" />
+                    <span>Request a Demo</span>
+                  </Link>
+                </Button>
               </div>
             </div>
           </motion.div>

@@ -168,3 +168,82 @@ export const CALCULATOR_CONTENT = {
     },
   ] as CompanyTier[],
 };
+
+export type PayrollFrequency = "monthly" | "semi-monthly";
+
+export type CalculatorTab = "summary" | "sinks" | "roi";
+
+export interface CalculatorPreset {
+  id: string;
+  name: string;
+  headcount: number;
+  rate: number;
+  frequency: PayrollFrequency;
+  newHires: number;
+  syncTime: number;
+  errorRate: number;
+}
+
+export interface CalculatorInputs {
+  headcount: number;
+  hourlyRate: number;
+  payrollFreq: PayrollFrequency;
+  newHires: number;
+  syncTime: number;
+  errorRate: number;
+}
+
+export interface SinkCategory {
+  title: string;
+  percent: number;
+  amount: number;
+  hours: number;
+  color: string;
+  description: string;
+}
+
+export interface CalculatorResults {
+  totalWastedHours: number;
+  annualCostOfDrag: number;
+  hoursReclaimed: number;
+  estimatedSoftwareCost: number;
+  netAnnualSavings: number;
+  monthlyLoss: number;
+  weeklyReclaimed: number;
+  roi3Year: number;
+  paybackMonths: number;
+  sinkCategories: SinkCategory[];
+}
+
+export const CALCULATOR_PRESETS: CalculatorPreset[] = [
+  {
+    id: "tech",
+    name: "Tech (120)",
+    headcount: 120,
+    rate: 38,
+    frequency: "monthly",
+    newHires: 6,
+    syncTime: 28,
+    errorRate: 1.8,
+  },
+  {
+    id: "manufacturing",
+    name: "Manufacturing (450)",
+    headcount: 450,
+    rate: 32,
+    frequency: "semi-monthly",
+    newHires: 18,
+    syncTime: 54,
+    errorRate: 2.4,
+  },
+  {
+    id: "retail",
+    name: "Retail (1,100)",
+    headcount: 1100,
+    rate: 24,
+    frequency: "semi-monthly",
+    newHires: 45,
+    syncTime: 86,
+    errorRate: 3.1,
+  },
+];
