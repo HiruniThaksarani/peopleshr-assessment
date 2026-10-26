@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   CURRENT_SYSTEM_OPTIONS,
   TIMELINE_OPTIONS,
@@ -14,11 +14,12 @@ import {
   ArrowLeftIcon,
 } from "@/components/ui/icons";
 import Button from "@/components/ui/button";
+import RecommendationEmailDialog from "../RecommendationEmailDialog";
 
 interface StepSetupProps {
   inputs: BusinessInputs;
   onUpdate: (updates: Partial<BusinessInputs>) => void;
-  onSubmit: () => void;
+  onSubmit: (email?: string) => void;
   onBack: () => void;
 }
 
@@ -28,6 +29,7 @@ export function StepSetup({
   onSubmit,
   onBack,
 }: StepSetupProps) {
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   return (
     <div className="space-y-7">
       {/* Header */}
@@ -42,7 +44,7 @@ export function StepSetup({
 
       {/* Field: Current HR System */}
       <div>
-        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+        <label className="block text-xs font-bold uppercase tracking-wider mb-2.5">
           What are you using to manage HR today?
         </label>
         <div className="space-y-2.5">
@@ -53,7 +55,7 @@ export function StepSetup({
                 key={sys.title}
                 className={`p-3.5 sm:p-4 rounded-2xl border flex items-center gap-3.5 cursor-pointer transition-all duration-200 ${
                   isSelected
-                    ? "bg-blue-50/70 border-primary border-2 shadow-xs"
+                    ? "bg-blue-50/70 border-primary ring-1 ring-primary shadow-xs"
                     : "bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50/60"
                 }`}
               >
@@ -99,7 +101,7 @@ export function StepSetup({
         <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
           When are you hoping to make a change?
         </label>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-stretch">
           {TIMELINE_OPTIONS.map((t) => {
             const isSelected = inputs.timeline === t;
             return (
@@ -107,23 +109,28 @@ export function StepSetup({
                 key={t}
                 type="button"
                 onClick={() => onUpdate({ timeline: t })}
-                className={`p-3.5 rounded-2xl border text-left flex items-center justify-between gap-2.5 transition-all duration-200 cursor-pointer ${
+                className={`p-3.5 rounded-2xl border text-left flex items-center justify-between gap-2.5 transition-all duration-200 cursor-pointer h-full ${
                   isSelected
-                    ? "bg-blue-50/70 border-primary border-2 shadow-xs text-primary"
+                    ? "bg-blue-50/70 border-primary ring-1 ring-primary shadow-xs text-primary"
                     : "bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50/60 text-slate-700"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
                   <ClockIcon
-                    className={`w-4 h-4 ${
+                    className={`w-4 h-4 shrink-0 ${
                       isSelected ? "text-primary" : "text-slate-400"
                     }`}
                   />
                   <span className="text-xs sm:text-sm font-bold">{t}</span>
                 </div>
-                {isSelected && (
-                  <CheckSmallIcon className="w-4 h-4 text-primary stroke-[3]" />
-                )}
+                <CheckSmallIcon
+                  className={`w-4 h-4 shrink-0 stroke-[3] transition-opacity duration-200 ${
+                    isSelected
+                      ? "text-primary opacity-100"
+                      : "opacity-0 pointer-events-none"
+                  }`}
+                  aria-hidden="true"
+                />
               </button>
             );
           })}
@@ -158,13 +165,23 @@ export function StepSetup({
 
         <Button
           size="lg"
-          onClick={onSubmit}
+          onClick={() => setIsEmailModalOpen(true)}
           className="rounded-full shadow-md px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm font-bold group bg-primary hover:bg-primary-hover text-white flex-1 sm:flex-initial justify-center min-w-0"
         >
           <span>See my recommendation</span>
           <ArrowRightIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform shrink-0" />
         </Button>
       </div>
+
+      <RecommendationEmailDialog
+        isOpen={isEmailModalOpen}
+        onOpenChange={setIsEmailModalOpen}
+        inputs={inputs}
+        onComplete={(submittedEmail) => {
+          onUpdate({ email: submittedEmail });
+          onSubmit(submittedEmail);
+        }}
+      />
     </div>
   );
 }

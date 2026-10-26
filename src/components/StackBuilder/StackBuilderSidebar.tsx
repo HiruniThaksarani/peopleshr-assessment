@@ -183,7 +183,7 @@ export function StackBuilderSidebar({ inputs }: StackBuilderSidebarProps) {
 
         <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
           <LockIcon className="w-3.5 h-3.5 shrink-0" />
-          <span>Your answers stay in this prototype until you request a quote.</span>
+          <span>Your answers are private and tailored to your organization.</span>
         </div>
       </div>
     </aside>

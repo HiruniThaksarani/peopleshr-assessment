@@ -214,7 +214,13 @@ export function StackBuilderWizard({
                   <StepSetup
                     inputs={inputs}
                     onUpdate={onUpdateInputs}
-                    onSubmit={() => onComplete(inputs)}
+                    onSubmit={(completedEmail) => {
+                      const finalInputs = completedEmail
+                        ? { ...inputs, email: completedEmail }
+                        : inputs;
+                      onUpdateInputs(finalInputs);
+                      onComplete(finalInputs);
+                    }}
                     onBack={handleBack}
                   />
                 </motion.div>

@@ -193,7 +193,7 @@ export function StackBuilderLiveSidebar({
       {/* Footer Disclaimer with Lock */}
       <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-[11px] text-slate-400">
         <LockIcon className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-        <span>Your answers stay in this prototype until you choose to request a quote.</span>
+        <span>Your answers are private and tailored to your organization.</span>
       </div>
     </aside>
   );

@@ -54,7 +54,7 @@ export function StepBusiness({ inputs, onUpdate, onNext }: StepBusinessProps) {
         <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
           Company size
         </label>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 items-stretch">
           {COMPANY_SIZE_OPTIONS.map((opt) => {
             const isSelected = inputs.employees === opt.id;
             return (
@@ -62,25 +62,30 @@ export function StepBusiness({ inputs, onUpdate, onNext }: StepBusinessProps) {
                 key={opt.id}
                 type="button"
                 onClick={() => onUpdate({ employees: opt.id })}
-                className={`relative p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[78px] ${
+                className={`relative p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between h-full min-h-[88px] sm:min-h-[92px] ${
                   isSelected
-                    ? "bg-blue-50/70 border-primary border-2 shadow-xs"
+                    ? "bg-blue-50/70 border-primary ring-1 ring-primary shadow-xs"
                     : "bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50/60"
                 }`}
               >
-                <div className="flex items-start justify-between w-full">
+                <div className="flex items-start justify-between w-full gap-1.5">
                   <span
-                    className={`text-xs sm:text-sm font-bold leading-tight ${
+                    className={`text-xs sm:text-xs font-bold leading-tight ${
                       isSelected ? "text-primary" : "text-slate-800"
                     }`}
                   >
                     {opt.label}
                   </span>
-                  {isSelected && (
-                    <CheckCircle2Icon className="w-4 h-4 text-primary shrink-0" />
-                  )}
+                  <CheckCircle2Icon
+                    className={`w-4 h-4 shrink-0 transition-opacity duration-200 ${
+                      isSelected
+                        ? "text-primary opacity-100"
+                        : "opacity-0 pointer-events-none"
+                    }`}
+                    aria-hidden="true"
+                  />
                 </div>
-                <span className="text-[11px] text-slate-400 font-medium">
+                <span className="text-[11px] text-slate-400 font-medium mt-2 block">
                   {opt.hint}
                 </span>
               </button>

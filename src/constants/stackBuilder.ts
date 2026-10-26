@@ -35,6 +35,7 @@ export interface BusinessInputs {
   priorities: Record<string, Priority>;
   system: string;
   timeline: string;
+  email?: string;
 }
 
 export const STACK_MODULES: StackModule[] = [
@@ -324,7 +325,14 @@ export const INITIAL_BUSINESS_INPUTS: BusinessInputs = {
   },
   system: "Spreadsheets and email",
   timeline: "Within 3 months",
+  email: "",
 };
+
+export interface ComparisonPoint {
+  type: "gap" | "excess" | "info";
+  label: string;
+  description: string;
+}
 
 export interface MatchScoreResult {
   bundle: BundleInfo;
@@ -332,6 +340,13 @@ export interface MatchScoreResult {
   isRecommended: boolean;
   whyFitsList: string[];
   whyNotText: string;
+  verdictTag?: string;
+  missingModules?: StackModule[];
+  excessModules?: StackModule[];
+  coveredCount?: number;
+  totalModulesCount?: number;
+  coveragePercent?: number;
+  comparisonPoints?: ComparisonPoint[];
 }
 
 export function calculateStackRecommendation(inputs: BusinessInputs): {
@@ -418,7 +433,7 @@ export function calculateStackRecommendation(inputs: BusinessInputs): {
   });
 
   // Rank bundles
-  const ranked = [...STACK_BUNDLES]
+  const ranked: MatchScoreResult[] = [...STACK_BUNDLES]
     .map((b) => ({
       bundle: b,
       score: bundleScores[b.id],
@@ -457,20 +472,140 @@ export function calculateStackRecommendation(inputs: BusinessInputs): {
 
   ranked[0].whyFitsList = whyFitsList;
 
-  // Build "Why not the others?" descriptions
+  // Build "Why not the others?" detailed comparisons
   ranked.forEach((item) => {
     if (item.isRecommended) return;
 
+    const bundleModuleIds = item.bundle.moduleIds;
+    // Missing modules: user needs this module (Must or Nice), but this bundle doesn't have it
+    const missing = activeModules.filter(
+      (m) =>
+        (effectivePriorities[m.id] === "Must" || effectivePriorities[m.id] === "Nice") &&
+        !bundleModuleIds.includes(m.id)
+    );
+    // Excess modules: bundle includes it, but user didn't request it (or marked as Not now)
+    const excess = STACK_MODULES.filter(
+      (m) => bundleModuleIds.includes(m.id) && effectivePriorities[m.id] === "Not now"
+    );
+
+    const covered = activeModules.filter((m) => bundleModuleIds.includes(m.id)).length;
+    const coveragePercent =
+      activeModules.length > 0 ? Math.round((covered / activeModules.length) * 100) : 100;
+
+    item.missingModules = missing;
+    item.excessModules = excess;
+    item.coveredCount = covered;
+    item.totalModulesCount = activeModules.length;
+    item.coveragePercent = coveragePercent;
+
+    const compPoints: ComparisonPoint[] = [];
+
     if (item.bundle.id === "Foundation") {
-      item.whyNotText =
-        "Covers core needs but may be limited for your growth plans and additional requirements.";
+      const missingMustNames = missing
+        .filter((m) => effectivePriorities[m.id] === "Must")
+        .map((m) => m.name);
+
+      if (missingMustNames.length > 0) {
+        item.verdictTag = `Missing ${missingMustNames.length} Key ${
+          missingMustNames.length === 1 ? "Priority" : "Priorities"
+        }`;
+        item.whyNotText = `Foundation is designed for early-stage teams needing basic digitisation. It lacks ${missingMustNames.join(
+          ", "
+        )}, which you identified as essential for your operations.`;
+        compPoints.push({
+          type: "gap",
+          label: "Missing Capabilities",
+          description: `Does not include ${missingMustNames.slice(0, 3).join(", ")}.`,
+        });
+      } else {
+        item.verdictTag = "Limited Growth Headroom";
+        item.whyNotText =
+          "Covers essential employee administration, but lacks automated workflows and scaling capabilities suited for your team size.";
+      }
+
+      compPoints.push({
+        type: "info",
+        label: "Best Fit Scope",
+        description: "Optimal for startups & small teams (1–50) replacing manual spreadsheets.",
+      });
+
+      if (inputs.employees !== "1-50") {
+        compPoints.push({
+          type: "gap",
+          label: "Headcount Scalability",
+          description: `Built for small businesses; may require re-platforming as your ${inputs.employees} team grows.`,
+        });
+      }
     } else if (item.bundle.id === "Enterprise") {
-      item.whyNotText =
-        "Includes advanced capabilities you may not need right now based on your current setup.";
+      if (!isMultiCountry && inputs.employees !== "1,000+") {
+        item.verdictTag = "Excessive Complexity for Current Scale";
+        item.whyNotText = `Enterprise includes global multi-entity payroll compliance, custom REST APIs, and enterprise governance workflows that introduce unnecessary implementation time and cost for your ${inputs.employees} team.`;
+        compPoints.push({
+          type: "excess",
+          label: "Feature Overhead",
+          description: "Multi-country entity statutory compliance and custom ERP middleware not required today.",
+        });
+        compPoints.push({
+          type: "info",
+          label: "Implementation Runway",
+          description: "Typically requires 8–12 weeks of deployment compared to 2–4 weeks for your recommended stack.",
+        });
+        compPoints.push({
+          type: "info",
+          label: "Upgrade Flexibility",
+          description: "You can seamlessly graduate to Enterprise as you expand cross-border or exceed 1,000+ employees.",
+        });
+      } else {
+        item.verdictTag = "Alternative Tier";
+        item.whyNotText =
+          "Includes advanced capabilities and custom architecture you may prefer to evaluate in phase 2.";
+        compPoints.push({
+          type: "info",
+          label: "Enterprise Architecture",
+          description: "Includes enterprise SSO, dedicated SLA, and customized REST API integrations.",
+        });
+      }
+    } else if (item.bundle.id === "Growth") {
+      if (topBundle.id === "Foundation") {
+        item.verdictTag = "More than You Need Today";
+        item.whyNotText = `Growth provides a full talent management and automated payroll platform, which exceeds what is necessary for your current ${inputs.employees} team setup.`;
+        compPoints.push({
+          type: "excess",
+          label: "Operational Overhead",
+          description: "Includes recruitment pipelines and performance appraisals you might not need immediately.",
+        });
+        compPoints.push({
+          type: "info",
+          label: "Best Fit Scope",
+          description: "Ideal when you expand beyond 50 employees or decide to bring payroll processing in-house.",
+        });
+      } else if (topBundle.id === "Enterprise") {
+        item.verdictTag = "Lacks Cross-Border Governance";
+        item.whyNotText =
+          "Growth is a comprehensive single-country solution, but lacks the multi-country statutory payroll frameworks and enterprise integration suite required for your scale.";
+        compPoints.push({
+          type: "gap",
+          label: "Multi-Country Support",
+          description: "Lacks native cross-border entity consolidation and localized statutory tax engines.",
+        });
+        compPoints.push({
+          type: "gap",
+          label: "Enterprise Controls",
+          description: "Does not include custom REST API endpoints, enterprise RBAC, or dedicated infrastructure.",
+        });
+      }
     } else {
+      item.verdictTag = "Alternative Option";
       item.whyNotText =
         "A strong general option, but your specific requirements point more decisively to the recommended setup.";
+      compPoints.push({
+        type: "info",
+        label: "Alternative Fit",
+        description: "Provides alternative module configurations suitable for different organizational priorities.",
+      });
     }
+
+    item.comparisonPoints = compPoints;
   });
 
   return {

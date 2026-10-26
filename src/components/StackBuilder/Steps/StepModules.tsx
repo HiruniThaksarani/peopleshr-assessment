@@ -102,8 +102,8 @@ export function StepModules({
         </div>
       </div>
 
-      {/* Module Sorter Rows */}
-      <div className="space-y-2.5">
+      {/* Module Sorter Rows (2 cards per row) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 items-stretch">
         {STACK_MODULES.map((module) => {
           const currentPriority =
             module.id === "multi" && isMultiCountry
@@ -115,34 +115,34 @@ export function StepModules({
           return (
             <div
               key={module.id}
-              className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/90 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 hover:border-slate-300 transition-colors"
+              className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/90 shadow-2xs flex flex-col justify-between gap-3.5 hover:border-slate-300 transition-colors h-full"
             >
-              {/* Left: Icon and Title */}
-              <div className="flex items-start sm:items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
+              {/* Top: Icon, Title and Description */}
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0 mt-0.5">
                   {getModuleIcon(module.iconName)}
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 flex-wrap">
                     <span className="text-xs sm:text-sm font-bold text-slate-900 leading-snug">
                       {module.name}
                     </span>
                     {isLocked && (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-primary bg-primary-light px-2 py-0.5 rounded-full">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-primary bg-primary-light px-2 py-0.5 rounded-full shrink-0">
                         <LockIcon className="w-2.5 h-2.5" />
                         <span>Rule applied</span>
                       </span>
                     )}
                   </div>
-                  <p className="text-[11.5px] sm:text-xs text-slate-500 font-normal leading-tight mt-0.5">
+                  <p className="text-[11.5px] sm:text-xs text-slate-500 font-normal leading-tight mt-1">
                     {module.short}
                   </p>
                 </div>
               </div>
 
-              {/* Right: 3-Segment Segmented Control */}
+              {/* Bottom: 3-Segment Segmented Control */}
               <div
-                className="inline-flex p-1 rounded-xl bg-slate-100/90 self-start sm:self-center shrink-0 border border-slate-200/60"
+                className="grid grid-cols-3 p-1 rounded-xl bg-slate-100/90 border border-slate-200/60 mt-auto"
                 role="group"
                 aria-label={`Priority for ${module.name}`}
               >
@@ -167,7 +167,7 @@ export function StepModules({
                       type="button"
                       disabled={isOptionDisabled}
                       onClick={() => handlePriorityChange(module.id, pOption)}
-                      className={`px-3 py-1.5 text-xs rounded-lg transition-all duration-150 cursor-pointer ${
+                      className={`py-1.5 px-1.5 text-xs text-center rounded-lg transition-all duration-150 cursor-pointer whitespace-nowrap ${
                         isActive
                           ? activeBg
                           : "text-slate-600 hover:text-slate-900 hover:bg-white/50"
@@ -198,7 +198,7 @@ export function StepModules({
           onClick={onBack}
           className="rounded-full px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold gap-1.5 sm:gap-2 shrink-0"
         >
-          <ArrowLeftIcon className="w-4 h-4 text-slate-600" />
+          <ArrowLeftIcon className="w-4 h-4 text-primary" />
           <span>Back</span>
         </Button>
 

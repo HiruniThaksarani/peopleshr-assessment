@@ -79,7 +79,7 @@ export function StepChallenges({
       </div>
 
       {/* Grid of Challenges */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-stretch">
         {CHALLENGE_OPTIONS.map((challenge, idx) => {
           const isSelected = inputs.problems.includes(challenge);
           return (
@@ -87,9 +87,9 @@ export function StepChallenges({
               key={challenge}
               type="button"
               onClick={() => toggleProblem(challenge)}
-              className={`p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 ${
+              className={`p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 h-full ${
                 isSelected
-                  ? "bg-blue-50/70 border-primary border-2 shadow-xs"
+                  ? "bg-blue-50/70 border-primary ring-1 ring-primary shadow-xs"
                   : "bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50/60"
               }`}
             >
@@ -151,7 +151,7 @@ export function StepChallenges({
           onClick={onBack}
           className="rounded-full px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold gap-1.5 sm:gap-2 shrink-0"
         >
-          <ArrowLeftIcon className="w-4 h-4 text-slate-600" />
+          <ArrowLeftIcon className="w-4 h-4 text-primary" />
           <span>Back</span>
         </Button>
 

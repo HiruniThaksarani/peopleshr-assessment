@@ -61,33 +61,33 @@ export const ALL_PACKAGES: PackageItem[] = [
     ctaText: "Configure in Stack Builder",
     ctaHref: "/packages/stack-builder?bundle=Growth",
   },
-  {
-    id: "Professional",
-    name: "Professional",
-    category: "TALENT & WORKFORCE OPTIMIZATION",
-    iconType: "star",
-    themeColor: "emerald",
-    description:
-      "Advanced workforce scheduling, 360 reviews and operational analytics for multi-site mid-market teams.",
-    bestFor: "Established mid-market teams (251–1,000 employees) with complex shifts and talent requirements.",
-    includedServices: [
-      "HR Essentials",
-      "Payroll & Time",
-      "People Experience",
-      "Talent & Performance",
-      "People Insights",
-    ],
-    features: [
-      "Everything in Growth",
-      "Executive workforce analytics & dashboards",
-      "Shift rosters, geofencing & biometric sync",
-      "360-degree feedback & continuous OKRs",
-      "Multi-tier approval matrices & custom workflows",
-      "Dedicated onboarding manager & priority SLA",
-    ],
-    ctaText: "Configure in Stack Builder",
-    ctaHref: "/packages/stack-builder?bundle=Professional",
-  },
+  // {
+  //   id: "Professional",
+  //   name: "Professional",
+  //   category: "TALENT & WORKFORCE OPTIMIZATION",
+  //   iconType: "star",
+  //   themeColor: "emerald",
+  //   description:
+  //     "Advanced workforce scheduling, 360 reviews and operational analytics for multi-site mid-market teams.",
+  //   bestFor: "Established mid-market teams (251–1,000 employees) with complex shifts and talent requirements.",
+  //   includedServices: [
+  //     "HR Essentials",
+  //     "Payroll & Time",
+  //     "People Experience",
+  //     "Talent & Performance",
+  //     "People Insights",
+  //   ],
+  //   features: [
+  //     "Everything in Growth",
+  //     "Executive workforce analytics & dashboards",
+  //     "Shift rosters, geofencing & biometric sync",
+  //     "360-degree feedback & continuous OKRs",
+  //     "Multi-tier approval matrices & custom workflows",
+  //     "Dedicated onboarding manager & priority SLA",
+  //   ],
+  //   ctaText: "Configure in Stack Builder",
+  //   ctaHref: "/packages/stack-builder?bundle=Professional",
+  // },
   {
     id: "Enterprise",
     name: "Enterprise",
@@ -118,12 +118,12 @@ export const ALL_PACKAGES: PackageItem[] = [
   },
 ];
 
-// The 3 curated packages displayed on the home page
+// The curated packages displayed on the home page
 export const FEATURED_HOME_PACKAGES: PackageItem[] = [
-  ALL_PACKAGES[0], // Foundation
-  ALL_PACKAGES[1], // Growth (Most Popular)
-  ALL_PACKAGES[3], // Enterprise
-];
+  ALL_PACKAGES.find((p) => p.id === "Foundation") || ALL_PACKAGES[0],
+  ALL_PACKAGES.find((p) => p.id === "Growth") || ALL_PACKAGES[1],
+  ALL_PACKAGES.find((p) => p.id === "Enterprise") || ALL_PACKAGES[ALL_PACKAGES.length - 1],
+].filter(Boolean);
 
 export const PACKAGES_CONTENT = {
   eyebrow: "OUR PACKAGES",

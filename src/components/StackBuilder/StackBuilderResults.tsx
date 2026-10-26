@@ -30,7 +30,8 @@ import {
   STACK_MODULES,
 } from "@/constants/stackBuilder";
 import StackBuilderBreadcrumb from "./StackBuilderBreadcrumb";
-import StackBuilderQuoteModal from "./StackBuilderQuoteModal";
+import PackageComparisonModal from "./PackageComparisonModal";
+import { TableProperties, X, Users, ArrowRight as ArrowRightLucide } from "lucide-react";
 
 interface StackBuilderResultsProps {
   inputs: BusinessInputs;
@@ -45,10 +46,10 @@ export function StackBuilderResults({
   onStartOver,
   onNavigateOverview,
 }: StackBuilderResultsProps) {
-  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
+  const [compareModalOpen, setCompareModalOpen] = useState(false);
   const [featuresExpanded, setFeaturesExpanded] = useState(false);
 
-  const { recommended, others, activeModules } = calculateStackRecommendation(inputs);
+  const { recommended, others, scores, activeModules } = calculateStackRecommendation(inputs);
 
   const renderBundleIcon = (iconType: string, color: string) => {
     const iconClass = "w-6 h-6";
@@ -117,6 +118,11 @@ export function StackBuilderResults({
           </h1>
           <p className="mt-1.5 text-xs sm:text-sm text-slate-500 font-normal">
             Based on your business details and preferences, here is the best fit for your organisation.
+            {inputs.email && (
+              <span className="block mt-1 sm:inline sm:ml-2 sm:mt-0 font-semibold text-primary">
+                · Summary emailed to {inputs.email}
+              </span>
+            )}
           </p>
         </div>
 
@@ -126,9 +132,9 @@ export function StackBuilderResults({
             variant="outline"
             onClick={onEditAnswers}
             size="sm"
-            className="rounded-full text-xs font-bold text-slate-700 hover:text-primary gap-1.5 border-slate-200 bg-white shadow-2xs"
+            className="rounded-full text-xs font-bold gap-1.5 shadow-2xs"
           >
-            <PencilIcon className="w-3.5 h-3.5 text-slate-500" />
+            <PencilIcon className="w-3.5 h-3.5 text-primary" />
             <span>Edit Answers</span>
           </Button>
 
@@ -136,9 +142,9 @@ export function StackBuilderResults({
             variant="outline"
             onClick={onStartOver}
             size="sm"
-            className="rounded-full text-xs font-bold text-slate-700 hover:text-slate-900 gap-1.5 border-slate-200 bg-white shadow-2xs"
+            className="rounded-full text-xs font-bold gap-1.5 shadow-2xs"
           >
-            <RotateCcwIcon className="w-3.5 h-3.5 text-slate-500" />
+            <RotateCcwIcon className="w-3.5 h-3.5 text-primary" />
             <span>Start Over</span>
           </Button>
         </div>
@@ -239,44 +245,217 @@ export function StackBuilderResults({
           </div>
 
           {/* "Why Not The Others?" Comparison Section */}
-          <div>
-            <h3 className="text-sm font-extrabold text-slate-900 tracking-tight mb-4">
-              Why not the others?
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200/80">
+              <div>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+                  Why not the others?
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-500 font-normal mt-0.5">
+                  Detailed analysis of how alternative packages compare to your required priorities and scale.
+                </p>
+              </div>
+
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setCompareModalOpen(true)}
+                className="rounded-full text-xs font-bold text-primary hover:text-primary-hover border-blue-200 bg-blue-50/50 hover:bg-blue-100/50 gap-2 shrink-0 self-start sm:self-auto shadow-2xs"
+              >
+                <TableProperties className="w-3.5 h-3.5 text-primary" />
+                <span>Full Comparison Matrix</span>
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
               {others.map((alt) => {
-                const altIconBg =
+                const altTheme =
                   alt.bundle.themeColor === "orange"
-                    ? "bg-orange-50 text-orange-600 border-orange-100"
+                    ? {
+                        bg: "bg-orange-50 text-orange-600 border-orange-100",
+                        accent: "border-orange-200/70",
+                        badge: "bg-orange-50 text-orange-700 border-orange-200/60",
+                      }
                     : alt.bundle.themeColor === "blue"
-                    ? "bg-blue-50 text-primary border-blue-100"
-                    : "bg-purple-50 text-purple-600 border-purple-100";
+                    ? {
+                        bg: "bg-blue-50 text-primary border-blue-100",
+                        accent: "border-blue-200/70",
+                        badge: "bg-blue-50 text-primary border-blue-200/60",
+                      }
+                    : {
+                        bg: "bg-purple-50 text-purple-600 border-purple-100",
+                        accent: "border-purple-200/70",
+                        badge: "bg-purple-50 text-purple-700 border-purple-200/60",
+                      };
 
                 return (
                   <div
                     key={alt.bundle.id}
-                    className="rounded-3xl bg-white border border-slate-200/90 p-6 shadow-[0_10px_30px_-12px_rgba(13,91,189,0.05)] hover:border-slate-300 transition-colors"
+                    className="rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-7 shadow-[0_10px_32px_-12px_rgba(13,91,189,0.06)] hover:border-slate-300 transition-all space-y-5"
                   >
-                    <div className="flex items-center justify-between mb-3.5">
-                      <div className="flex items-center gap-2.5">
+                    {/* Top Row: Icon, Title, Subtitle + Score & Verdict Badges */}
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-slate-100">
+                      <div className="flex items-start gap-3.5">
                         <div
-                          className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 border ${altIconBg}`}
+                          className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 border ${altTheme.bg} shadow-2xs`}
                         >
                           {renderBundleIcon(alt.bundle.iconType, alt.bundle.themeColor)}
                         </div>
-                        <h4 className="text-base font-extrabold text-slate-900">
-                          {alt.bundle.name}
-                        </h4>
+                        <div>
+                          <div className="flex items-center gap-2.5 flex-wrap">
+                            <h4 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-snug">
+                              {alt.bundle.name} Package
+                            </h4>
+                            {alt.verdictTag && (
+                              <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200/80">
+                                {alt.verdictTag}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xs text-slate-500 font-normal mt-0.5">
+                            {alt.bundle.subtitle}
+                          </p>
+                        </div>
                       </div>
 
-                      <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
-                        {alt.score}% match
-                      </span>
+                      {/* Score widget */}
+                      <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-1 shrink-0 bg-slate-50 sm:bg-transparent p-2 sm:p-0 rounded-xl">
+                        <span className="text-xs text-slate-500 font-medium sm:hidden">Compatibility:</span>
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xl font-extrabold text-slate-800">
+                            {alt.score}%
+                          </span>
+                          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                            Match
+                          </span>
+                        </div>
+                      </div>
                     </div>
 
-                    <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                    {/* Detailed Rationale Quote box */}
+                    <div className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/70 text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
                       {alt.whyNotText}
-                    </p>
+                    </div>
+
+                    {/* Scope & Capability Metrics */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+                      {/* Left Metric: Module Coverage */}
+                      <div className="p-3.5 rounded-2xl border border-slate-100 bg-slate-50/50 flex flex-col justify-between">
+                        <div className="flex items-center justify-between text-xs mb-1.5">
+                          <span className="text-slate-500 font-medium">Required Priority Coverage</span>
+                          <span className="font-extrabold text-slate-800">
+                            {alt.coveredCount} of {alt.totalModulesCount} ({alt.coveragePercent}%)
+                          </span>
+                        </div>
+                        <div className="w-full h-1.5 rounded-full bg-slate-200/70 overflow-hidden">
+                          <div
+                            className={`h-full rounded-full transition-all duration-500 ${
+                              (alt.coveragePercent || 0) > 75
+                                ? "bg-emerald-500"
+                                : (alt.coveragePercent || 0) > 50
+                                ? "bg-amber-500"
+                                : "bg-rose-400"
+                            }`}
+                            style={{ width: `${alt.coveragePercent || 0}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Right Metric: Target Scope */}
+                      <div className="p-3.5 rounded-2xl border border-slate-100 bg-slate-50/50 flex items-center gap-3 text-xs text-slate-600">
+                        <Users className="w-4 h-4 text-slate-400 shrink-0" />
+                        <div>
+                          <strong className="block text-slate-800 font-bold leading-tight">
+                            Target Headcount Fit
+                          </strong>
+                          <span className="text-[11.5px] text-slate-500">
+                            {alt.bundle.bestFor}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Missing and/or Excess Capabilities Tags */}
+                    {alt.missingModules && alt.missingModules.length > 0 && (
+                      <div className="space-y-2">
+                        <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block">
+                          Missing vs your selected priorities:
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {alt.missingModules.map((m) => (
+                            <span
+                              key={m.id}
+                              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-rose-50 text-rose-700 border border-rose-200/80 text-xs font-semibold"
+                            >
+                              <X className="w-3.5 h-3.5 text-rose-500" />
+                              <span>{m.name}</span>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {alt.excessModules && alt.excessModules.length > 0 && (
+                      <div className="space-y-2">
+                        <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+                          Features outside your immediate scope:
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {alt.excessModules.map((m) => (
+                            <span
+                              key={m.id}
+                              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-100 text-slate-600 border border-slate-200 text-xs font-medium"
+                            >
+                              <span className="text-slate-400">+</span>
+                              <span>{m.name}</span>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Differentiators Bullet Points */}
+                    {alt.comparisonPoints && alt.comparisonPoints.length > 0 && (
+                      <div className="pt-2 space-y-2.5 border-t border-slate-100">
+                        {alt.comparisonPoints.map((point, pIdx) => (
+                          <div
+                            key={pIdx}
+                            className="flex items-start gap-2.5 text-xs text-slate-600 leading-relaxed"
+                          >
+                            <span
+                              className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold ${
+                                point.type === "gap"
+                                  ? "bg-rose-100 text-rose-700"
+                                  : point.type === "excess"
+                                  ? "bg-amber-100 text-amber-700"
+                                  : "bg-blue-100 text-primary"
+                              }`}
+                            >
+                              {point.type === "gap" ? "✕" : point.type === "excess" ? "!" : "i"}
+                            </span>
+                            <div>
+                              <strong className="text-slate-800 font-bold mr-1">
+                                {point.label}:
+                              </strong>
+                              <span>{point.description}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Card Actions */}
+                    <div className="pt-3 flex items-center justify-between gap-3 border-t border-slate-100 text-xs">
+                      <button
+                        type="button"
+                        onClick={() => setCompareModalOpen(true)}
+                        className="font-bold text-primary hover:text-primary-hover hover:underline inline-flex items-center gap-1.5 cursor-pointer"
+                      >
+                        <span>Compare features side-by-side</span>
+                        <ArrowRightLucide className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   </div>
                 );
               })}
@@ -344,21 +523,12 @@ export function StackBuilderResults({
             </div>
 
             {/* CTAs at Bottom of Sidebar */}
-            <div className="space-y-2.5 pt-4 border-t border-slate-100 print:hidden">
+            <div className="pt-4 border-t border-slate-100 print:hidden">
               <Button
-                onClick={() => setQuoteModalOpen(true)}
-                className="w-full rounded-full shadow-md py-3 text-xs sm:text-sm font-bold justify-center group"
-              >
-                <span>Get a Tailored Quote</span>
-                <ArrowRightIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
-              </Button>
-
-              <Button
-                variant="outline"
                 onClick={handlePrintPDF}
-                className="w-full rounded-full py-2.5 text-xs font-bold text-slate-700 hover:text-slate-900 border-slate-200 justify-center gap-2 bg-white"
+                className="w-full rounded-full shadow-md py-3 text-xs sm:text-sm font-bold justify-center group bg-primary hover:bg-primary-hover text-white gap-2"
               >
-                <DownloadIcon className="w-3.5 h-3.5 text-slate-500" />
+                <DownloadIcon className="w-4 h-4 text-white" />
                 <span>Download Recommendation (PDF)</span>
               </Button>
             </div>
@@ -366,12 +536,13 @@ export function StackBuilderResults({
         </div>
       </div>
 
-      {/* Tailored Quote Modal */}
-      <StackBuilderQuoteModal
-        isOpen={quoteModalOpen}
-        onClose={() => setQuoteModalOpen(false)}
-        inputs={inputs}
-        result={recommended}
+      {/* Full Side-by-Side Comparison Matrix Modal */}
+      <PackageComparisonModal
+        isOpen={compareModalOpen}
+        onOpenChange={setCompareModalOpen}
+        recommended={recommended}
+        others={others}
+        scores={scores}
       />
     </div>
   );

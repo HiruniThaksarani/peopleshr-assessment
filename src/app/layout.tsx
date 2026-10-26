@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Instrument_Serif } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -41,6 +42,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1 pt-[72px]">{children}</main>
         <Footer />
+        <Toaster richColors position="top-right" closeButton />
       </body>
     </html>
   );
