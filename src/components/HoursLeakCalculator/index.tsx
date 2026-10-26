@@ -14,169 +14,95 @@ import {
   UsersIcon,
   ReceiptIcon,
   ArrowRightIcon,
-  SparklesIcon,
-  CheckCircle2Icon,
+  BarChartAscendingIcon,
+  InfoIcon,
 } from "@/components/ui/icons";
 import { CALCULATOR_CONTENT } from "@/constants/calculator";
+import { cn } from "@/lib/utils";
 import Button from "@/components/ui/button";
-import Badge from "@/components/ui/Badge";
 import HoursLeakStatCard from "./HoursLeakStatCard";
-import LeakAreaCard from "./LeakAreaCard";
+import Calculator3DGraphic from "./Calculator3DGraphic";
 
 export function HoursLeakCalculator() {
-  const [selectedTierIndex, setSelectedTierIndex] = useState<number>(1); // Default to Benchmark (100 - 250)
-  const [activeAreaId, setActiveAreaId] = useState<string | null>(null);
+  const [selectedTierIndex, setSelectedTierIndex] = useState<number>(1); // Default to Benchmark (100 – 250)
 
   const activeTier = CALCULATOR_CONTENT.companyTiers[selectedTierIndex];
 
-  const renderTrustIcon = (iconName: string) => {
+  const renderFeatureIcon = (iconName: string) => {
     switch (iconName) {
-      case "calculator":
-        return <CalculatorIcon className="w-4 h-4 text-primary shrink-0" />;
-      case "lightbulb":
-        return <LightbulbIcon className="w-4 h-4 text-amber-500 shrink-0" />;
-      case "shield":
-        return <ShieldCheckIcon className="w-4 h-4 text-emerald-600 shrink-0" />;
+      case "clock":
+        return <ClockIcon className="w-5 h-5 text-primary stroke-[2.2]" />;
+      case "chart":
+        return <BarChartAscendingIcon className="w-5 h-5 text-primary" />;
+      case "users":
+        return <UsersIcon className="w-5 h-5 text-primary stroke-[2.2]" />;
       default:
-        return <SparklesIcon className="w-4 h-4 text-primary shrink-0" />;
+        return <ClockIcon className="w-5 h-5 text-primary stroke-[2.2]" />;
     }
   };
 
   const renderAreaIcon = (iconName: string) => {
     switch (iconName) {
       case "file-text":
-        return <FileTextIcon className="w-5 h-5" />;
+        return <FileTextIcon className="w-4 h-4 text-primary" />;
       case "calendar":
-        return <CalendarIcon className="w-5 h-5" />;
+        return <CalendarIcon className="w-4 h-4 text-primary" />;
       case "users":
-        return <UsersIcon className="w-5 h-5" />;
+        return <UsersIcon className="w-4 h-4 text-primary" />;
       case "receipt":
-        return <ReceiptIcon className="w-5 h-5" />;
+        return <ReceiptIcon className="w-4 h-4 text-primary" />;
       case "shield-check":
-        return <ShieldCheckIcon className="w-5 h-5" />;
+        return <ShieldCheckIcon className="w-4 h-4 text-primary" />;
       default:
-        return <FileTextIcon className="w-5 h-5" />;
+        return <FileTextIcon className="w-4 h-4 text-primary" />;
     }
   };
-
-  const statCardsData = [
-    {
-      id: "hours",
-      badgeLabel: "Wasted",
-      label: "Hours lost per year",
-      value: activeTier.hoursLost,
-      subtext: `Equivalent to ${activeTier.fteEquivalent}`,
-      icon: <ClockIcon className="w-5 h-5 stroke-[2.25]" />,
-      color: "rose" as const,
-    },
-    {
-      id: "value",
-      badgeLabel: "Savings",
-      label: "Potential value",
-      value: activeTier.potentialValue,
-      subtext: "per year (est.)",
-      icon: <CoinsStackIcon className="w-5 h-5 stroke-[2.25]" />,
-      color: "emerald" as const,
-    },
-    {
-      id: "roi",
-      badgeLabel: "Growth",
-      label: "Projected ROI",
-      value: activeTier.projectedRoi,
-      subtext: "over 3 years",
-      icon: <TrendingUpIcon className="w-5 h-5 stroke-[2.25]" />,
-      color: "blue" as const,
-    },
-  ];
 
   return (
     <section
       id="hours-calculator"
-      className="relative w-full py-12 sm:py-16 lg:py-20 bg-white overflow-hidden my-8"
+      className="relative w-full py-14 sm:py-20 lg:py-24 overflow-hidden"
     >
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-blue-100/50 via-primary/5 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
-      <div className="absolute top-10 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-primary-light/40 to-transparent rounded-full blur-[120px] pointer-events-none -z-10" />
-
+ 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-[28px] sm:rounded-[36px] bg-gradient-to-br from-[#f8faff] via-[#f1f6fd] to-[#eaf2fc] border border-blue-100/90 p-6 sm:p-10 lg:p-12 xl:p-14 shadow-[0_20px_50px_-20px_rgba(13,91,189,0.08)] overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-blue-200/25 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-14 items-center">
-            {/* Left: Overview & Actions */}
-            <div className="lg:col-span-6 flex flex-col justify-between">
-              <div>
-                <Badge
-                  variant="primary"
-                  icon={<CalculatorIcon className="w-3.5 h-3.5 text-primary" />}
-                  className="mb-5 shadow-xs"
-                >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
+          {/* Left Column: Heading, features, CTA button & 3D visual */}
+          <div className="lg:col-span-5 flex flex-col justify-between">
+            <div>
+              {/* Eyebrow badge */}
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/70 shadow-2xs mb-6 self-start">
+                <CalculatorIcon className="w-3.5 h-3.5 text-primary" />
+                <span className="text-[11px] font-bold text-primary tracking-wider uppercase">
                   {CALCULATOR_CONTENT.eyebrow}
-                </Badge>
-
-                <h2 className="font-extrabold text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] text-slate-900 tracking-tight leading-[1.14]">
-                  {CALCULATOR_CONTENT.titlePart1}{" "}
-                  <span className="text-primary block sm:inline">
-                    {CALCULATOR_CONTENT.titleHighlight}
-                  </span>
-                </h2>
-
-                <p className="mt-4 sm:mt-5 text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-xl">
-                  {CALCULATOR_CONTENT.subtitle}
-                </p>
-
-                <div className="mt-8 flex flex-wrap items-center gap-4 sm:gap-6">
-                  <Button asChild size="lg">
-                    <Link href="/calculator">
-                      <span>{CALCULATOR_CONTENT.ctaPrimary.label}</span>
-                      <ArrowRightIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-200" />
-                    </Link>
-                  </Button>
-
-                  <Link
-                    href={CALCULATOR_CONTENT.ctaSecondary.href}
-                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-primary hover:text-primary-hover transition-colors group cursor-pointer"
-                  >
-                    <span>{CALCULATOR_CONTENT.ctaSecondary.label}</span>
-                    <ArrowRightIcon className="w-3.5 h-3.5 text-primary group-hover:translate-x-1 transition-transform duration-200" />
-                  </Link>
-                </div>
-
-                <div className="mt-7 flex items-center gap-2">
-                  <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
-                    Team Size:
-                  </span>
-                  <div className="inline-flex p-1 rounded-full bg-white/80 border border-blue-100 shadow-2xs backdrop-blur-xs">
-                    {CALCULATOR_CONTENT.companyTiers.map((tier, idx) => (
-                      <button
-                        key={tier.id}
-                        type="button"
-                        onClick={() => setSelectedTierIndex(idx)}
-                        className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-150 cursor-pointer ${
-                          selectedTierIndex === idx
-                            ? "bg-primary text-white shadow-xs"
-                            : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-                        }`}
-                      >
-                        {tier.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                </span>
               </div>
 
-              <div className="mt-10 sm:mt-12 pt-8 border-t border-blue-100/90 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-4 lg:gap-5">
-                {CALCULATOR_CONTENT.trustMetrics.map((metric) => (
-                  <div key={metric.title} className="flex items-start gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-white/90 border border-blue-100 shadow-2xs flex items-center justify-center shrink-0 mt-0.5">
-                      {renderTrustIcon(metric.icon)}
+              {/* Headline */}
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-extrabold text-slate-900 tracking-tight leading-[1.14]">
+                {CALCULATOR_CONTENT.titlePart1}{" "}
+                <span className="text-primary block sm:inline">
+                  {CALCULATOR_CONTENT.titleHighlight}
+                </span>
+              </h2>
+
+              {/* Subtitle */}
+              <p className="mt-4 sm:mt-5 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+                {CALCULATOR_CONTENT.subtitle}
+              </p>
+
+              {/* 3 Value Proposition Features */}
+              <div className="mt-8 flex flex-col gap-4 sm:gap-5">
+                {CALCULATOR_CONTENT.features.map((feat) => (
+                  <div key={feat.title} className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-blue-50/90 border border-blue-100 flex items-center justify-center text-primary shrink-0 shadow-2xs">
+                      {renderFeatureIcon(feat.icon)}
                     </div>
                     <div>
                       <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-snug">
-                        {metric.title}
+                        {feat.title}
                       </h4>
-                      <p className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5 leading-snug">
-                        {metric.subtitle}
+                      <p className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">
+                        {feat.subtitle}
                       </p>
                     </div>
                   </div>
@@ -184,72 +110,140 @@ export function HoursLeakCalculator() {
               </div>
             </div>
 
-            {/* Right: Metrics & Breakdown */}
-            <div className="lg:col-span-6 flex flex-col gap-5 sm:gap-6">
-              {/* Reusable Metric Cards (no design repetition) */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4">
-                {statCardsData.map((card) => (
-                  <HoursLeakStatCard
-                    key={card.id}
-                    badgeLabel={card.badgeLabel}
-                    label={card.label}
-                    value={card.value}
-                    subtext={card.subtext}
-                    icon={card.icon}
-                    color={card.color}
-                  />
-                ))}
+            {/* Bottom Row: CTA Button + 3D Graphic */}
+            <div className="mt-9 sm:mt-11 flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 relative">
+              <Button asChild size="lg" className="shrink-0">
+                <Link href={CALCULATOR_CONTENT.ctaPrimary.href}>
+                  <span>{CALCULATOR_CONTENT.ctaPrimary.label}</span>
+                  <ArrowRightIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-200" />
+                </Link>
+              </Button>
+
+              {/* 3D Dashboard Chart Graphic */}
+              <div className="relative w-44 sm:w-52 lg:w-56 -my-6 shrink-0 hidden sm:block">
+                <Calculator3DGraphic />
               </div>
+            </div>
+          </div>
 
-              {/* Common Leak Areas Card */}
-              <div className="bg-white/95 backdrop-blur-xs rounded-2xl p-5 sm:p-6 lg:p-7 border border-slate-200/70 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] flex flex-col justify-between">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-4 sm:pb-5 border-b border-slate-100">
-                  <h3 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">
-                    {CALCULATOR_CONTENT.commonAreas.heading}
-                  </h3>
-                  <span className="self-start sm:self-auto text-[11px] font-semibold text-primary bg-primary-light/90 px-3 py-1 rounded-full border border-blue-200/70">
-                    {CALCULATOR_CONTENT.commonAreas.badge}
-                  </span>
-                </div>
+          {/* Right Column: Calculator Card */}
+          <div className="lg:col-span-7">
+            <div className="bg-white rounded-[24px] sm:rounded-[32px] p-6 sm:p-8 lg:p-9 shadow-[0_20px_60px_-15px_rgba(13,91,189,0.08)] border border-slate-100 flex flex-col justify-between">
+              {/* Card Header: Team size selector */}
+              <div>
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                  Select your team size
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-500 mt-1 font-normal">
+                  Choose the number of employees to see your estimated impact.
+                </p>
 
-                {/* Common Areas Grid with Reusable LeakAreaCard */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-5">
-                  {CALCULATOR_CONTENT.commonAreas.items.map((item) => {
-                    const isSelected = activeAreaId === item.id;
+                {/* Team size buttons */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mt-5">
+                  {CALCULATOR_CONTENT.companyTiers.map((tier, idx) => {
+                    const isSelected = selectedTierIndex === idx;
                     return (
-                      <LeakAreaCard
-                        key={item.id}
-                        item={item}
-                        icon={renderAreaIcon(item.icon)}
-                        isSelected={isSelected}
-                        onSelect={() =>
-                          setActiveAreaId(isSelected ? null : item.id)
-                        }
-                        onMouseEnter={() => setActiveAreaId(item.id)}
-                        onMouseLeave={() => setActiveAreaId(null)}
-                      />
+                      <button
+                        key={tier.id}
+                        type="button"
+                        onClick={() => setSelectedTierIndex(idx)}
+                        className={cn(
+                          "py-2.5 sm:py-3 px-2 sm:px-4 rounded-xl text-xs sm:text-sm transition-all duration-150 text-center cursor-pointer",
+                          isSelected
+                            ? "bg-primary text-white shadow-xs font-semibold"
+                            : "bg-white border border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50/60 font-medium"
+                        )}
+                      >
+                        {tier.label}
+                      </button>
                     );
                   })}
                 </div>
+              </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-100/90 flex items-center justify-between text-xs text-slate-500">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2Icon className="w-3.5 h-3.5 text-primary shrink-0" />
-                    <span>
-                      {activeAreaId
-                        ? CALCULATOR_CONTENT.commonAreas.items.find(
-                            (a) => a.id === activeAreaId
-                          )?.highlightText
-                        : "Hover over any area to see automation opportunities"}
+              {/* 3 Metric Stat Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 mt-6">
+                <HoursLeakStatCard
+                  label="Hours saved per year"
+                  value={activeTier.hoursLost}
+                  subtext={`Equivalent to ${activeTier.fteEquivalent}`}
+                  icon={<ClockIcon className="w-4 h-4 stroke-[2.2]" />}
+                  color="rose"
+                />
+                <HoursLeakStatCard
+                  label="Potential value per year"
+                  value={activeTier.potentialValue}
+                  subtext="Based on industry benchmark"
+                  icon={<CoinsStackIcon className="w-4 h-4 stroke-[2.2]" />}
+                  color="emerald"
+                />
+                <HoursLeakStatCard
+                  label="Projected ROI"
+                  value={activeTier.projectedRoi}
+                  subtext="Over 3 years"
+                  icon={<TrendingUpIcon className="w-4 h-4 stroke-[2.2]" />}
+                  color="purple"
+                />
+              </div>
+
+              {/* Where time is currently lost breakdown */}
+              <div className="mt-8">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5">
+                  <h4 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">
+                    Where time is currently lost
+                  </h4>
+                  <div className="flex items-center gap-1.5 self-start sm:self-auto">
+                    <span className="text-[11px] sm:text-xs font-medium text-slate-500 bg-slate-100/90 px-3 py-1 rounded-full">
+                      Based on industry benchmark data
                     </span>
+                    <button
+                      type="button"
+                      title="Industry benchmark assumptions"
+                      aria-label="Industry benchmark assumptions"
+                      className="text-primary hover:text-blue-700 transition-colors p-0.5 cursor-pointer"
+                    >
+                      <InfoIcon className="w-4 h-4 text-primary shrink-0" />
+                    </button>
                   </div>
-                  <Link
-                    href="/calculator"
-                    className="text-[11px] font-bold text-primary hover:text-primary-hover hover:underline transition-colors"
-                  >
-                    Calculate custom impact →
-                  </Link>
                 </div>
+
+                {/* 5 Progress Bars */}
+                <div className="flex flex-col gap-3.5 mt-2">
+                  {CALCULATOR_CONTENT.commonAreas.items.map((item) => (
+                    <div key={item.id} className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-4 h-4 shrink-0 flex items-center justify-center">
+                        {renderAreaIcon(item.icon)}
+                      </div>
+                      <span className="text-xs sm:text-sm font-medium text-slate-700 w-36 sm:w-44 shrink-0 truncate">
+                        {item.label}
+                      </span>
+                      <div className="flex-1 h-3 sm:h-3.5 bg-[#eef4fe] rounded-full overflow-hidden relative">
+                        <div
+                          className="h-full bg-primary rounded-full transition-all duration-500"
+                          style={{ width: `${item.hoursPercentage}%` }}
+                        />
+                      </div>
+                      <span className="text-xs sm:text-sm font-semibold text-slate-700 w-9 text-right shrink-0">
+                        {item.hoursPercentage}%
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Card Footer */}
+              <div className="pt-6 mt-6 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div className="flex items-center gap-2 text-slate-500">
+                  <LightbulbIcon className="w-4 h-4 text-amber-500 shrink-0" />
+                  <span>{CALCULATOR_CONTENT.footerNote}</span>
+                </div>
+                <Link
+                  href={CALCULATOR_CONTENT.methodologyLink.href}
+                  className="font-semibold text-primary hover:text-blue-700 transition-colors inline-flex items-center gap-1 shrink-0 cursor-pointer"
+                >
+                  <span>{CALCULATOR_CONTENT.methodologyLink.label}</span>
+                  <ArrowRightIcon className="w-3.5 h-3.5 text-primary" />
+                </Link>
               </div>
             </div>
           </div>

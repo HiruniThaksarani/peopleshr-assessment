@@ -275,6 +275,7 @@ export function ImpactAnalysisCard({
           type="button"
           onClick={onExportClick}
           size="lg"
+           variant="outline"
           className="w-full sm:w-auto flex-1"
         >
           <DownloadIcon className="w-4 h-4 text-white" />
@@ -284,7 +285,6 @@ export function ImpactAnalysisCard({
         <Button
           type="button"
           onClick={onBookClick}
-          variant="outline"
           size="lg"
           className="w-full sm:w-auto"
         >

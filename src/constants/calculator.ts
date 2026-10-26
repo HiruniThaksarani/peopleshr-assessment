@@ -31,20 +31,43 @@ export interface CompanyTier {
   projectedRoi: string;
 }
 
+export interface FeatureItem {
+  icon: "clock" | "chart" | "users";
+  title: string;
+  subtitle: string;
+}
+
 export const CALCULATOR_CONTENT = {
-  eyebrow: "HR HOURS LEAK CALCULATOR",
-  titlePart1: "Where Is Your HR Team's",
-  titleHighlight: "Time Going?",
+  eyebrow: "HR SAVINGS CALCULATOR",
+  titlePart1: "See how much time your HR team could",
+  titleHighlight: "save",
   subtitle:
-    "Manual payroll preparation, attendance reconciliation and repetitive HR tasks can quietly consume valuable hours. Discover the real impact and see how much time and cost you could save with PeoplesHR.",
+    "Manual HR tasks like payroll, leave management and employee onboarding can take hundreds of hours every year. Get a personalised estimate based on your team size and see the real impact with PeoplesHR.",
   ctaPrimary: {
-    label: "Explore Your HR Impact",
-    href: "#calculator",
+    label: "Calculate your savings",
+    href: "/calculator",
   },
   ctaSecondary: {
     label: "Learn more",
     href: "#products",
   },
+  features: [
+    {
+      icon: "clock",
+      title: "Quick and easy",
+      subtitle: "Takes less than 2 minutes",
+    },
+    {
+      icon: "chart",
+      title: "Based on real benchmarks",
+      subtitle: "Using industry data",
+    },
+    {
+      icon: "users",
+      title: "Personalised to your organisation",
+      subtitle: "See time, cost and ROI potential",
+    },
+  ] as FeatureItem[],
   trustMetrics: [
     {
       icon: "calculator",
@@ -65,7 +88,7 @@ export const CALCULATOR_CONTENT = {
   statCards: [
     {
       id: "hours",
-      label: "Hours lost per year",
+      label: "Hours saved per year",
       value: "3,000",
       subtext: "Equivalent to 1.4 FTE",
       icon: "clock",
@@ -73,9 +96,9 @@ export const CALCULATOR_CONTENT = {
     },
     {
       id: "value",
-      label: "Potential value",
+      label: "Potential value per year",
       value: "$144,000",
-      subtext: "per year (est.)",
+      subtext: "Based on industry benchmark",
       icon: "coins",
       color: "emerald",
     },
@@ -83,13 +106,13 @@ export const CALCULATOR_CONTENT = {
       id: "roi",
       label: "Projected ROI",
       value: "410%",
-      subtext: "over 3 years",
+      subtext: "Over 3 years",
       icon: "trending-up",
       color: "blue",
     },
   ] as StatCardItem[],
   commonAreas: {
-    heading: "Common areas where time is lost",
+    heading: "Where time is currently lost",
     badge: "Based on industry benchmark data",
     items: [
       {
@@ -132,7 +155,7 @@ export const CALCULATOR_CONTENT = {
   companyTiers: [
     {
       id: "small",
-      label: "50 - 100",
+      label: "50 – 100",
       employeeRange: "50-100 employees",
       hoursLost: "1,450",
       fteEquivalent: "0.7 FTE",
@@ -141,7 +164,7 @@ export const CALCULATOR_CONTENT = {
     },
     {
       id: "benchmark",
-      label: "100 - 250",
+      label: "100 – 250",
       employeeRange: "100-250 employees",
       hoursLost: "3,000",
       fteEquivalent: "1.4 FTE",
@@ -150,7 +173,7 @@ export const CALCULATOR_CONTENT = {
     },
     {
       id: "mid",
-      label: "250 - 500",
+      label: "250 – 500",
       employeeRange: "250-500 employees",
       hoursLost: "5,800",
       fteEquivalent: "2.8 FTE",
@@ -167,6 +190,11 @@ export const CALCULATOR_CONTENT = {
       projectedRoi: "540%",
     },
   ] as CompanyTier[],
+  footerNote: "These are estimated figures based on industry benchmarks. Your results may vary.",
+  methodologyLink: {
+    label: "Learn about our methodology",
+    href: "/methodology",
+  },
 };
 
 export type PayrollFrequency = "monthly" | "semi-monthly";
