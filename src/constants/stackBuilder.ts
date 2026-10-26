@@ -17,7 +17,7 @@ export interface BundleInfo {
   eyebrow: string;
   subtitle: string;
   bestFor: string;
-  themeColor: "blue" | "green" | "purple" | "amber";
+  themeColor: "orange" | "blue" | "green" | "purple" | "amber";
   iconType: "cube" | "chart" | "building" | "star";
   features: string[];
   moduleIds: string[];
@@ -147,7 +147,7 @@ export const STACK_BUNDLES: BundleInfo[] = [
     eyebrow: "ESSENTIAL HR OPERATIONS",
     subtitle: "Core digital HR capabilities to organize employee administration.",
     bestFor: "Small businesses & startups (1–50 employees) replacing spreadsheets.",
-    themeColor: "blue",
+    themeColor: "orange",
     iconType: "cube",
     features: [
       "Core HR & digital employee records",
@@ -165,7 +165,7 @@ export const STACK_BUNDLES: BundleInfo[] = [
     eyebrow: "COMPLETE HR & PAYROLL",
     subtitle: "Unified HR, automated payroll and talent acquisition for scaling teams.",
     bestFor: "Growing organizations (51–250 employees) with expanding requirements.",
-    themeColor: "green",
+    themeColor: "blue",
     iconType: "chart",
     features: [
       "Everything in Foundation",

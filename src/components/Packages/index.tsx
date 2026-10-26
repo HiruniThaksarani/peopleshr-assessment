@@ -8,9 +8,6 @@ import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/button";
 import { LayoutGridIcon, ArrowRightIcon } from "@/components/ui/icons";
 import PackageCard from "./PackageCard";
-import PackageVisualFoundation from "./PackageVisualFoundation";
-import PackageVisualGrowth from "./PackageVisualGrowth";
-import PackageVisualEnterprise from "./PackageVisualEnterprise";
 import StackBuilderBanner from "./StackBuilderBanner";
 
 export function Packages() {
@@ -63,25 +60,16 @@ export function Packages() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-7 mb-10 sm:mb-14 items-stretch"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-7 mb-10 sm:mb-14 items-stretch pt-6"
         >
           {/* 1. Foundation */}
-          <PackageCard
-            pkg={foundationPkg}
-            visual={<PackageVisualFoundation />}
-          />
+          <PackageCard pkg={foundationPkg} />
 
           {/* 2. Growth */}
-          <PackageCard
-            pkg={growthPkg}
-            visual={<PackageVisualGrowth />}
-          />
+          <PackageCard pkg={growthPkg} />
 
           {/* 3. Enterprise */}
-          <PackageCard
-            pkg={enterprisePkg}
-            visual={<PackageVisualEnterprise />}
-          />
+          <PackageCard pkg={enterprisePkg} />
         </motion.div>
 
         {/* Explore More Packages CTA Button */}

@@ -2,9 +2,6 @@
 
 import React from "react";
 import { PackageCard } from "@/components/Packages/PackageCard";
-import { PackageVisualFoundation } from "@/components/Packages/PackageVisualFoundation";
-import { PackageVisualGrowth } from "@/components/Packages/PackageVisualGrowth";
-import { PackageVisualEnterprise } from "@/components/Packages/PackageVisualEnterprise";
 import { BundleInfo } from "@/constants/stackBuilder";
 import { PackageItem } from "@/constants/packages";
 
@@ -35,7 +32,7 @@ export function PackageOverviewCard({
         ? "COMPLETE HR SOLUTION"
         : "ADVANCED CAPABILITIES"),
     iconType: isFoundation ? "cube" : isGrowth ? "document" : "building",
-    themeColor: isFoundation ? "blue" : isGrowth ? "emerald" : "purple",
+    themeColor: isFoundation ? "orange" : isGrowth ? "blue" : "purple",
     description:
       (bundle as any).description ||
       (bundle as BundleInfo).subtitle ||
@@ -48,16 +45,9 @@ export function PackageOverviewCard({
     popular: isGrowth || (bundle as any).popular || (bundle as any).featured,
   };
 
-  const renderVisual = () => {
-    if (isFoundation) return <PackageVisualFoundation />;
-    if (isEnterprise) return <PackageVisualEnterprise />;
-    return <PackageVisualGrowth />;
-  };
-
   return (
     <PackageCard
       pkg={pkg}
-      visual={renderVisual()}
       onActionClick={onSelect}
       className={className}
     />

@@ -3,7 +3,7 @@ export interface PackageItem {
   name: string;
   category: string;
   iconType: "cube" | "document" | "building" | "star";
-  themeColor: "blue" | "emerald" | "amber" | "purple";
+  themeColor: "orange" | "rose" | "sky" | "slate" | "blue" | "emerald" | "amber" | "purple";
   description: string;
   bestFor: string;
   features: string[];
@@ -19,7 +19,7 @@ export const ALL_PACKAGES: PackageItem[] = [
     name: "Foundation",
     category: "ESSENTIAL HR OPERATIONS",
     iconType: "cube",
-    themeColor: "blue",
+    themeColor: "orange",
     description:
       "Get started with essential core HR tools to organize employee administration and simplify daily workflows.",
     bestFor: "Startups & small businesses (1–50 employees) replacing spreadsheets and manual paperwork.",
@@ -39,7 +39,7 @@ export const ALL_PACKAGES: PackageItem[] = [
     name: "Growth",
     category: "COMPLETE HR SOLUTION",
     iconType: "document",
-    themeColor: "emerald",
+    themeColor: "blue",
     popular: true,
     description:
       "Streamline your HR and automated payroll with a complete set of capabilities for scaling organizations.",
@@ -66,7 +66,7 @@ export const ALL_PACKAGES: PackageItem[] = [
     name: "Professional",
     category: "TALENT & WORKFORCE OPTIMIZATION",
     iconType: "star",
-    themeColor: "amber",
+    themeColor: "emerald",
     description:
       "Advanced workforce scheduling, 360 reviews and operational analytics for multi-site mid-market teams.",
     bestFor: "Established mid-market teams (251–1,000 employees) with complex shifts and talent requirements.",
@@ -200,3 +200,85 @@ export const PACKAGE_SERVICE_MATRIX = [
     enterprise: "30+ Countries & ERP APIs",
   },
 ];
+
+export interface PackageThemeConfig {
+  card: string;
+  icon: string;
+  checkBg: string;
+  checkIcon: string;
+}
+
+export const getPackageThemeConfig = (
+  themeColor: PackageItem["themeColor"],
+  isPopular?: boolean
+): PackageThemeConfig => {
+  if (isPopular) {
+    return {
+      card: "bg-gradient-to-b from-[#eaf2fc] via-[#f5f9ff] to-white border-1 border-primary shadow-[0_24px_50px_-10px_rgba(13,91,189,0.24)] ring-1 ring-primary/20 scale-[1.01] z-10 hover:shadow-[0_32px_64px_-10px_rgba(13,91,189,0.36)] hover:border-primary-dark hover:ring-primary/40 hover:-translate-y-1.5 transition-all duration-300",
+      icon: "bg-blue-100/80 border border-blue-200 text-primary",
+      checkBg: "bg-primary/10",
+      checkIcon: "text-primary",
+    };
+  }
+
+  switch (themeColor) {
+    case "orange":
+      return {
+        card: "bg-white border border-slate-200/90 shadow-[0_12px_36px_-12px_rgba(249,115,22,0.06)] hover:shadow-[0_24px_48px_-12px_rgba(249,115,22,0.2)] hover:border-orange-400/80 hover:-translate-y-1 transition-all duration-300",
+        icon: "bg-orange-50 border border-orange-100 text-orange-600",
+        checkBg: "bg-orange-50",
+        checkIcon: "text-orange-600",
+      };
+    case "amber":
+      return {
+        card: "bg-white border border-slate-200/90 shadow-[0_12px_36px_-12px_rgba(245,158,11,0.06)] hover:shadow-[0_24px_48px_-12px_rgba(245,158,11,0.2)] hover:border-amber-400/80 hover:-translate-y-1 transition-all duration-300",
+        icon: "bg-amber-50 border border-amber-100 text-amber-600",
+        checkBg: "bg-amber-50",
+        checkIcon: "text-amber-600",
+      };
+    case "purple":
+      return {
+        card: "bg-white border border-slate-200/90 shadow-[0_12px_36px_-12px_rgba(168,85,247,0.06)] hover:shadow-[0_24px_48px_-12px_rgba(168,85,247,0.2)] hover:border-purple-400/80 hover:-translate-y-1 transition-all duration-300",
+        icon: "bg-purple-50 border border-purple-100 text-purple-600",
+        checkBg: "bg-purple-50",
+        checkIcon: "text-purple-600",
+      };
+    case "emerald":
+      return {
+        card: "bg-white border border-slate-200/90 shadow-[0_12px_36px_-12px_rgba(16,185,129,0.06)] hover:shadow-[0_24px_48px_-12px_rgba(16,185,129,0.2)] hover:border-emerald-400/80 hover:-translate-y-1 transition-all duration-300",
+        icon: "bg-emerald-50 border border-emerald-100 text-emerald-600",
+        checkBg: "bg-emerald-50",
+        checkIcon: "text-emerald-600",
+      };
+    case "sky":
+      return {
+        card: "bg-white border border-slate-200/90 shadow-[0_12px_36px_-12px_rgba(14,165,233,0.06)] hover:shadow-[0_24px_48px_-12px_rgba(14,165,233,0.2)] hover:border-sky-400/80 hover:-translate-y-1 transition-all duration-300",
+        icon: "bg-sky-50 border border-sky-100 text-sky-600",
+        checkBg: "bg-sky-50",
+        checkIcon: "text-sky-600",
+      };
+    case "rose":
+      return {
+        card: "bg-white border border-slate-200/90 shadow-[0_12px_36px_-12px_rgba(244,63,94,0.06)] hover:shadow-[0_24px_48px_-12px_rgba(244,63,94,0.2)] hover:border-rose-400/80 hover:-translate-y-1 transition-all duration-300",
+        icon: "bg-rose-50 border border-rose-100 text-rose-600",
+        checkBg: "bg-rose-50",
+        checkIcon: "text-rose-600",
+      };
+    case "slate":
+      return {
+        card: "bg-white border border-slate-200/90 shadow-[0_12px_36px_-12px_rgba(100,116,139,0.06)] hover:shadow-[0_24px_48px_-12px_rgba(100,116,139,0.2)] hover:border-slate-400/80 hover:-translate-y-1 transition-all duration-300",
+        icon: "bg-slate-50 border border-slate-200 text-slate-700",
+        checkBg: "bg-slate-100",
+        checkIcon: "text-slate-700",
+      };
+    case "blue":
+    default:
+      return {
+        card: "bg-white border border-slate-200/90 shadow-[0_12px_36px_-12px_rgba(13,91,189,0.06)] hover:shadow-[0_24px_48px_-12px_rgba(13,91,189,0.18)] hover:border-primary/60 hover:-translate-y-1 transition-all duration-300",
+        icon: "bg-blue-50 border border-blue-100 text-primary",
+        checkBg: "bg-blue-50",
+        checkIcon: "text-primary",
+      };
+  }
+};
+

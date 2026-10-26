@@ -6,10 +6,6 @@ import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/button";
 import { CustomBreadcrumb } from "@/components/ui/breadcrumb";
 import { PackageCard } from "@/components/Packages/PackageCard";
-import { PackageVisualFoundation } from "@/components/Packages/PackageVisualFoundation";
-import { PackageVisualGrowth } from "@/components/Packages/PackageVisualGrowth";
-import { PackageVisualProfessional } from "@/components/Packages/PackageVisualProfessional";
-import { PackageVisualEnterprise } from "@/components/Packages/PackageVisualEnterprise";
 import {
   ALL_PACKAGES,
   PACKAGE_SERVICE_MATRIX,
@@ -24,22 +20,6 @@ import {
 } from "@/components/ui/icons";
 
 export function PackagesPage() {
-  const [activeFilter, setActiveFilter] = useState<string>("all");
-
-  const renderVisual = (pkgId: string) => {
-    switch (pkgId) {
-      case "Foundation":
-        return <PackageVisualFoundation />;
-      case "Growth":
-        return <PackageVisualGrowth />;
-      case "Professional":
-        return <PackageVisualProfessional />;
-      case "Enterprise":
-        return <PackageVisualEnterprise />;
-      default:
-        return <PackageVisualGrowth />;
-    }
-  };
 
   return (
     <div className="w-full min-h-screen bg-[#f8fbff] text-slate-800 pb-24">
@@ -122,12 +102,11 @@ export function PackagesPage() {
         </div>
 
         {/* 4 Packages Grid (Foundation, Growth, Professional, Enterprise) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch pt-6">
           {ALL_PACKAGES.map((pkg) => (
             <PackageCard
               key={pkg.id}
               pkg={pkg}
-              visual={renderVisual(pkg.id)}
             />
           ))}
         </div>
@@ -154,10 +133,10 @@ export function PackagesPage() {
                   <th className="py-4 px-6 text-xs font-bold text-slate-900 uppercase tracking-wider w-[34%]">
                     Platform Service
                   </th>
-                  <th className="py-4 px-4 text-xs font-bold text-blue-600 uppercase tracking-wider text-center w-[16.5%]">
+                  <th className="py-4 px-4 text-xs font-bold text-orange-600 uppercase tracking-wider text-center w-[16.5%]">
                     Foundation
                   </th>
-                  <th className="py-4 px-4 text-xs font-bold text-emerald-600 uppercase tracking-wider text-center w-[16.5%] bg-emerald-50/40">
+                  <th className="py-4 px-4 text-xs font-bold text-primary uppercase tracking-wider text-center w-[16.5%] bg-blue-50/60">
                     Growth ★
                   </th>
                   <th className="py-4 px-4 text-xs font-bold text-amber-600 uppercase tracking-wider text-center w-[16.5%]">
@@ -182,28 +161,28 @@ export function PackagesPage() {
                     {/* Foundation */}
                     <td className="py-4 px-4 text-center">
                       {row.foundation === true ? (
-                        <span className="w-5 h-5 rounded-full bg-blue-50 text-primary mx-auto inline-flex items-center justify-center">
+                        <span className="w-5 h-5 rounded-full bg-orange-50 text-orange-600 mx-auto inline-flex items-center justify-center">
                           <CheckSmallIcon className="w-4 h-4 stroke-[2.8]" />
                         </span>
                       ) : row.foundation === false ? (
                         <span className="text-slate-300 font-bold">—</span>
                       ) : (
-                        <span className="inline-block px-2 py-0.5 rounded-md text-[10.5px] font-semibold bg-blue-50 text-blue-700">
+                        <span className="inline-block px-2 py-0.5 rounded-md text-[10.5px] font-semibold bg-orange-50 text-orange-700">
                           {row.foundation}
                         </span>
                       )}
                     </td>
 
                     {/* Growth */}
-                    <td className="py-4 px-4 text-center bg-emerald-50/20">
+                    <td className="py-4 px-4 text-center bg-blue-50/30">
                       {row.growth === true ? (
-                        <span className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 mx-auto inline-flex items-center justify-center">
+                        <span className="w-5 h-5 rounded-full bg-blue-100/80 text-primary mx-auto inline-flex items-center justify-center">
                           <CheckSmallIcon className="w-4 h-4 stroke-[2.8]" />
                         </span>
                       ) : row.growth === false ? (
                         <span className="text-slate-300 font-bold">—</span>
                       ) : (
-                        <span className="inline-block px-2 py-0.5 rounded-md text-[10.5px] font-semibold bg-emerald-50 text-emerald-700">
+                        <span className="inline-block px-2 py-0.5 rounded-md text-[10.5px] font-semibold bg-blue-100/90 text-primary">
                           {row.growth}
                         </span>
                       )}

@@ -246,7 +246,9 @@ export function StackBuilderResults({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {others.map((alt) => {
                 const altIconBg =
-                  alt.bundle.themeColor === "blue"
+                  alt.bundle.themeColor === "orange"
+                    ? "bg-orange-50 text-orange-600 border-orange-100"
+                    : alt.bundle.themeColor === "blue"
                     ? "bg-blue-50 text-primary border-blue-100"
                     : "bg-purple-50 text-purple-600 border-purple-100";
 
