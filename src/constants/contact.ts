@@ -59,7 +59,7 @@ export const FOOTER_TOOL_LINKS: FooterLink[] = [
 
 export const FOOTER_RESOURCE_LINKS: FooterLink[] = [
   { label: "Customer Case Studies", href: "#case-studies" },
-  { label: "HR Insights & Blog", href: "#blog" },
+  { label: "HR Insights & Blog", href: "/blog" },
   { label: "Statutory Labor Guides", href: "#guides" },
   { label: "Help Center & Support", href: "#help-center" },
   { label: "API & Webhook Docs", href: "#api-docs" },

@@ -205,7 +205,7 @@ export const NAV_ITEMS: NavItem[] = [
           {
             title: "HR Insights & Blog",
             description: "Trends in human capital, labor regulations & leadership",
-            href: "#blog",
+            href: "/blog",
             iconName: "book",
           },
           {
@@ -233,6 +233,11 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: "Services",
     href: "/services",
+    hasDropdown: false,
+  },
+  {
+    label: "Blog",
+    href: "/blog",
     hasDropdown: false,
   },
   {

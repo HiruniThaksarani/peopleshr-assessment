@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Instrument_Serif } from "next/font/google";
+import React, { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
@@ -39,7 +40,9 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-full flex flex-col font-sans bg-background text-foreground"
       >
-        <Navbar />
+        <Suspense fallback={<div className="h-[72px] bg-white border-b border-slate-100" />}>
+          <Navbar />
+        </Suspense>
         <main className="flex-1 pt-[72px]">{children}</main>
         <Footer />
         <Toaster richColors position="top-right" closeButton />
