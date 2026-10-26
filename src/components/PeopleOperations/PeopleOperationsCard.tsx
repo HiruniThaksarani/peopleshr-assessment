@@ -13,16 +13,20 @@ import {
   ShieldCheckIcon,
 } from "@/components/ui/icons";
 
+import { MotionDiv } from "@/components/framer-motion";
+
 export interface PeopleOperationsCardProps {
   feature: OperationFeatureItem;
   showDivider?: boolean;
   className?: string;
+  index?: number;
 }
 
 export function PeopleOperationsCard({
   feature,
   showDivider = false,
   className = "",
+  index = 0,
 }: PeopleOperationsCardProps) {
   const renderIcon = (iconName: OperationFeatureItem["iconName"]) => {
     switch (iconName) {
@@ -46,15 +50,18 @@ export function PeopleOperationsCard({
   const cardHref = feature.href || "/services";
 
   return (
-    <div
+    <MotionDiv
+      delay={index * 0.08}
+      duration={0.6}
+      yOffset={25}
       className={cn(
-        "relative flex flex-col items-center text-center px-4 sm:px-5 lg:px-4 py-4 sm:py-6 group transition-all duration-200",
+        "relative flex flex-col items-center text-center px-4 sm:px-5 lg:px-4 py-4 sm:py-6 group transition-all duration-300 hover:-translate-y-1",
         className
       )}
     >
       <Link
         href={cardHref}
-        className="flex flex-col items-center text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl p-2 -m-2"
+        className="flex flex-col items-center text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl p-2 -m-2 w-full"
       >
         {/* Icon Container with pastel background matching image */}
         <div
@@ -85,7 +92,7 @@ export function PeopleOperationsCard({
           aria-hidden="true"
         />
       )}
-    </div>
+    </MotionDiv>
   );
 }
 

@@ -2,16 +2,17 @@
 
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { PACKAGES_CONTENT } from "@/constants/packages";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/button";
 import { LayoutGridIcon, ArrowRightIcon } from "@/components/ui/icons";
 import PackageCard from "./PackageCard";
 import StackBuilderBanner from "./StackBuilderBanner";
+import { MotionDiv, MotionH2, MotionP } from "@/components/framer-motion";
 
 export function Packages() {
   const [foundationPkg, growthPkg, enterprisePkg] = PACKAGES_CONTENT.packages;
+  const cards = [foundationPkg, growthPkg, enterprisePkg];
 
   return (
     <section
@@ -24,60 +25,62 @@ export function Packages() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
-        >
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           {/* Eyebrow Pill Badge */}
-          <Badge
-            variant="primary"
-            icon={<LayoutGridIcon className="w-3.5 h-3.5 text-primary shrink-0" />}
-            className="mb-4 sm:mb-5 shadow-2xs font-bold text-primary tracking-wider uppercase"
-          >
-            {PACKAGES_CONTENT.eyebrow}
-          </Badge>
+          <MotionDiv delay={0} duration={0.5} yOffset={15}>
+            <Badge
+              variant="primary"
+              icon={<LayoutGridIcon className="w-3.5 h-3.5 text-primary shrink-0" />}
+              className="mb-4 sm:mb-5 shadow-2xs font-bold text-primary tracking-wider uppercase"
+            >
+              {PACKAGES_CONTENT.eyebrow}
+            </Badge>
+          </MotionDiv>
 
           {/* Section Main Heading */}
-          <h2 className="font-extrabold text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] text-slate-900 tracking-tight leading-[1.14]">
+          <MotionH2
+            delay={0.1}
+            duration={0.65}
+            yOffset={20}
+            className="font-extrabold text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] text-slate-900 tracking-tight leading-[1.14]"
+          >
             {PACKAGES_CONTENT.titleLead}{" "}
             <span className="text-primary block sm:inline">
               {PACKAGES_CONTENT.titleHighlight}
             </span>
-          </h2>
+          </MotionH2>
 
           {/* Subtitle */}
-          <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-[17px] text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
+          <MotionP
+            delay={0.2}
+            duration={0.6}
+            yOffset={15}
+            className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-[17px] text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto"
+          >
             {PACKAGES_CONTENT.subtitle}
-          </p>
-        </motion.div>
+          </MotionP>
+        </div>
 
-        {/* 3 Packages Cards Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-7 mb-10 sm:mb-14 items-stretch pt-6"
-        >
-          {/* 1. Foundation */}
-          <PackageCard pkg={foundationPkg} />
-
-          {/* 2. Growth */}
-          <PackageCard pkg={growthPkg} />
-
-          {/* 3. Enterprise */}
-          <PackageCard pkg={enterprisePkg} />
-        </motion.div>
+        {/* 3 Packages Cards Grid with Individual Stagger */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-7 mb-10 sm:mb-14 items-stretch pt-6">
+          {cards.map((pkg, idx) => (
+            <MotionDiv
+              key={pkg.id}
+              delay={0.1 + idx * 0.12}
+              duration={0.6}
+              yOffset={30}
+              className="h-full flex"
+            >
+              <PackageCard pkg={pkg} className="w-full hover:-translate-y-1.5 transition-all duration-300" />
+            </MotionDiv>
+          ))}
+        </div>
 
         {/* Explore More Packages CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+        <MotionDiv
+          delay={0.3}
+          duration={0.5}
+          yOffset={15}
           className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-12 sm:mb-16 text-center"
         >
           <Button
@@ -92,17 +95,16 @@ export function Packages() {
           <span className="text-xs text-slate-500 font-medium">
             Compare all 4 tiers, included services &amp; features
           </span>
-        </motion.div>
+        </MotionDiv>
 
         {/* Bottom Interactive Tool Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
+        <MotionDiv
+          delay={0.35}
+          duration={0.6}
+          yOffset={25}
         >
           <StackBuilderBanner />
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

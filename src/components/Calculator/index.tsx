@@ -19,6 +19,11 @@ import {
 import CalculatorDocument from "./CalculatorDocument";
 import CalculatorDocumentPreviewModal from "./CalculatorDocumentPreviewModal";
 import ScheduleAuditDialog from "./ScheduleAuditDialog";
+import {
+  MotionDiv,
+  MotionH1,
+  MotionP,
+} from "@/components/framer-motion";
 
 export function Calculator() {
 
@@ -182,33 +187,51 @@ export function Calculator() {
       {/* Interactive Screen Dashboard UI */}
       <div className="print:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
         {/* Top Breadcrumb Navigation */}
-        <div className="mb-6">
+        {/* Breadcrumb Navigation */}
+        <MotionDiv delay={0} duration={0.4} yOffset={10} className="mb-6">
           <CustomBreadcrumb
             items={[
               { label: "Home", href: "/" },
               { label: "HR ROI Calculator", isCurrent: true },
             ]}
           />
-        </div>
+        </MotionDiv>
 
         {/* Page Header */}
-        <div className=" lg:items-start gap-6 pb-8 border-b border-slate-200/80">
+        <div className="lg:items-start gap-6 pb-8 border-b border-slate-200/80">
           <div className="w-full">
-            <Badge variant="primary" className="mb-3.5">
-              HR ROI Calculator
-            </Badge>
+            <MotionDiv delay={0.05} duration={0.5} yOffset={15}>
+              <Badge variant="primary" className="mb-3.5">
+                HR ROI Calculator
+              </Badge>
+            </MotionDiv>
 
-            <h1 className="font-extrabold text-3xl sm:text-4xl lg:text-[42px] text-slate-900 tracking-tight leading-[1.15]">
+            <MotionH1
+              delay={0.12}
+              duration={0.65}
+              yOffset={20}
+              className="font-extrabold text-3xl sm:text-4xl lg:text-[42px] text-slate-900 tracking-tight leading-[1.15]"
+            >
               The True Cost of Inefficient Work &amp; Manual HR
-            </h1>
+            </MotionH1>
 
-            <p className="mt-3.5 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+            <MotionP
+              delay={0.22}
+              duration={0.6}
+              yOffset={15}
+              className="mt-3.5 text-sm sm:text-base text-slate-600 font-normal leading-relaxed"
+            >
               Manual spreadsheets, disjointed payroll files, and fragmented onboarding quietly drain corporate cashflow. Model your exact organizational parameters to calculate hours lost and your projected ROI with PeoplesHR.
-            </p>
+            </MotionP>
           </div>
 
           {/* Preset Loaders */}
-          <div className="flex flex-col sm:flex-col sm:items-start gap-2.5 self-start lg:self-end mt-4">
+          <MotionDiv
+            delay={0.28}
+            duration={0.6}
+            yOffset={15}
+            className="flex flex-col sm:flex-col sm:items-start gap-2.5 self-start lg:self-end mt-4"
+          >
             <span className="text-xs font-bold uppercase tracking-wider whitespace-nowrap">
               Load Preset:
             </span>
@@ -228,13 +251,18 @@ export function Calculator() {
                 </button>
               ))}
             </div>
-          </div>
+          </MotionDiv>
         </div>
 
         {/* Main 2-Column Calculator Dashboard */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Workforce Parameters */}
-          <div className="lg:col-span-5">
+          <MotionDiv
+            delay={0.15}
+            duration={0.65}
+            yOffset={25}
+            className="lg:col-span-5"
+          >
             <WorkforceParametersCard
               inputs={inputs}
               onReset={() => handleLoadPreset(CALCULATOR_PRESETS[0])}
@@ -263,10 +291,15 @@ export function Calculator() {
                 setActivePreset("");
               }}
             />
-          </div>
+          </MotionDiv>
 
           {/* Right Column: Quantified Impact Analysis */}
-          <div className="lg:col-span-7">
+          <MotionDiv
+            delay={0.25}
+            duration={0.65}
+            yOffset={25}
+            className="lg:col-span-7"
+          >
             <ImpactAnalysisCard
               headcount={headcount}
               results={results}
@@ -275,11 +308,16 @@ export function Calculator() {
               onExportClick={() => setShowExportModal(true)}
               onBookClick={() => setShowBookingModal(true)}
             />
-          </div>
+          </MotionDiv>
         </div>
 
         {/* Supporting Context & Methodology Footnote */}
-        <div className="mt-12 p-6 rounded-2xl bg-white border border-slate-200/80 text-xs text-slate-500">
+        <MotionDiv
+          delay={0.35}
+          duration={0.65}
+          yOffset={20}
+          className="mt-12 p-6 rounded-2xl bg-white border border-slate-200/80 text-xs text-slate-500"
+        >
           <div className="flex items-center gap-2 mb-2">
             <ShieldCheckIcon className="w-4 h-4 text-primary" />
             <h4 className="font-bold text-slate-800">
@@ -289,7 +327,7 @@ export function Calculator() {
           <p className="leading-relaxed">
             Data models derived from aggregated analysis across 1,200+ enterprise HR transformations, APA payroll frequency benchmarks, and SHRM talent acquisition metrics. Annual drag includes direct time spent on routine double entry, discrepancy handling, and cross-checking spreadsheets. Savings reflect automation efficiency factors realized after PeoplesHR deployment.
           </p>
-        </div>
+        </MotionDiv>
       </div>
 
       {/* Print-Only Dedicated Executive Document */}

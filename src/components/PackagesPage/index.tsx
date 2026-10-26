@@ -19,6 +19,13 @@ import {
   BuildingOfficeIcon,
 } from "@/components/ui/icons";
 
+import {
+  MotionDiv,
+  MotionH1,
+  MotionH2,
+  MotionP,
+} from "@/components/framer-motion";
+
 export function PackagesPage() {
 
   return (
@@ -31,37 +38,54 @@ export function PackagesPage() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb Navigation */}
-          <div className="mb-6">
+          <MotionDiv delay={0} duration={0.4} yOffset={10} className="mb-6">
             <CustomBreadcrumb
               items={[
                 { label: "Home", href: "/" },
                 { label: "Packages", isCurrent: true },
               ]}
             />
-          </div>
+          </MotionDiv>
 
           {/* Heading */}
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
             <div className="max-w-3xl">
-              <Badge
-                variant="primary"
-                icon={<LayersStackIcon className="w-3.5 h-3.5 text-primary" />}
-                className="mb-4 shadow-2xs font-bold tracking-wider uppercase"
+              <MotionDiv delay={0.05} duration={0.5} yOffset={15}>
+                <Badge
+                  variant="primary"
+                  icon={<LayersStackIcon className="w-3.5 h-3.5 text-primary" />}
+                  className="mb-4 shadow-2xs font-bold tracking-wider uppercase"
+                >
+                  PRE-CONFIGURED SOLUTION PACKAGES
+                </Badge>
+              </MotionDiv>
+
+              <MotionH1
+                delay={0.12}
+                duration={0.65}
+                yOffset={20}
+                className="font-extrabold text-3xl sm:text-4xl lg:text-[46px] text-slate-900 tracking-tight leading-[1.14]"
               >
-                PRE-CONFIGURED SOLUTION PACKAGES
-              </Badge>
-
-              <h1 className="font-extrabold text-3xl sm:text-4xl lg:text-[46px] text-slate-900 tracking-tight leading-[1.14]">
                 Complete HR Packages for Every Growth Stage
-              </h1>
+              </MotionH1>
 
-              <p className="mt-4 text-sm sm:text-base lg:text-[17px] text-slate-600 font-normal leading-relaxed max-w-2xl">
+              <MotionP
+                delay={0.22}
+                duration={0.6}
+                yOffset={15}
+                className="mt-4 text-sm sm:text-base lg:text-[17px] text-slate-600 font-normal leading-relaxed max-w-2xl"
+              >
                 Choose a turnkey solution package tailored to your headcount and operational complexity, or use our interactive HR Stack Builder to configure a custom modular setup.
-              </p>
+              </MotionP>
             </div>
 
             {/* Header Action Button */}
-            <div className="shrink-0 flex flex-col items-start lg:items-end gap-2">
+            <MotionDiv
+              delay={0.28}
+              duration={0.6}
+              yOffset={15}
+              className="shrink-0 flex flex-col items-start lg:items-end gap-2"
+            >
               <Button
                 asChild
                 size="lg"
@@ -79,7 +103,7 @@ export function PackagesPage() {
               <span className="text-xs text-slate-500 font-medium">
                 Answer 4 short steps to calculate your ideal match
               </span>
-            </div>
+            </MotionDiv>
           </div>
         </div>
       </section>
@@ -89,30 +113,55 @@ export function PackagesPage() {
         {/* Section Title */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <span className="text-xs font-bold text-primary uppercase tracking-wider block">
-              FOUR CURATED TIERS
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-0.5">
+            <MotionDiv delay={0} duration={0.4} yOffset={10}>
+              <span className="text-xs font-bold text-primary uppercase tracking-wider block">
+                FOUR CURATED TIERS
+              </span>
+            </MotionDiv>
+            <MotionH2
+              delay={0.1}
+              duration={0.6}
+              yOffset={15}
+              className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-0.5"
+            >
               Explore All Available Packages
-            </h2>
+            </MotionH2>
           </div>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-md">
+          <MotionP
+            delay={0.15}
+            duration={0.6}
+            yOffset={15}
+            className="text-xs sm:text-sm text-slate-500 max-w-md"
+          >
             Click any package to check compatibility in our interactive HR Stack Builder with pre-selected requirements.
-          </p>
+          </MotionP>
         </div>
 
         {/* 4 Packages Grid (Foundation, Growth, Professional, Enterprise) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch pt-6">
-          {ALL_PACKAGES.map((pkg) => (
-            <PackageCard
+          {ALL_PACKAGES.map((pkg, idx) => (
+            <MotionDiv
               key={pkg.id}
-              pkg={pkg}
-            />
+              delay={0.1 + idx * 0.1}
+              duration={0.6}
+              yOffset={25}
+              className="h-full flex"
+            >
+              <PackageCard
+                pkg={pkg}
+                className="w-full hover:-translate-y-1.5 transition-all duration-300"
+              />
+            </MotionDiv>
           ))}
         </div>
 
         {/* Services & Package Alignment Matrix Section */}
-        <section className="mt-20 sm:mt-24 pt-12 border-t border-slate-200/80">
+        <MotionDiv
+          delay={0.2}
+          duration={0.65}
+          yOffset={30}
+          className="mt-20 sm:mt-24 pt-12 border-t border-slate-200/80"
+        >
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">
               SERVICES ARCHITECTURE
@@ -222,14 +271,19 @@ export function PackagesPage() {
               </tbody>
             </table>
           </div>
-        </section>
+        </MotionDiv>
 
         {/* Bottom Interactive CTA Banner */}
-        <section className="mt-16 sm:mt-20 relative rounded-3xl bg-gradient-to-r from-blue-50/80 via-sky-50/50 to-indigo-50/60 border border-blue-100 p-8 sm:p-10 shadow-[0_16px_45px_-12px_rgba(13,91,189,0.08)] overflow-hidden">
+        <MotionDiv
+          delay={0.3}
+          duration={0.65}
+          yOffset={25}
+          className="mt-16 sm:mt-20 relative rounded-3xl bg-gradient-to-r from-blue-50/80 via-sky-50/50 to-indigo-50/60 border border-blue-100 p-8 sm:p-10 shadow-[0_16px_45px_-12px_rgba(13,91,189,0.08)] overflow-hidden"
+        >
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100/80 text-primary text-[10.5px] font-extrabold tracking-wider uppercase mb-3">
-                <SparklesIcon className="w-3 h-3 text-primary" />
+                <SparklesIcon className="w-3.5 h-3.5 text-primary" />
                 <span>INTERACTIVE STACK BUILDER</span>
               </div>
               <h3 className="text-xl sm:text-2xl lg:text-[28px] font-extrabold text-slate-900 tracking-tight leading-snug">
@@ -256,7 +310,7 @@ export function PackagesPage() {
               </Button>
             </div>
           </div>
-        </section>
+        </MotionDiv>
       </div>
     </div>
   );

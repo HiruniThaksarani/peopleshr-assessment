@@ -23,6 +23,9 @@ import Button from "@/components/ui/button";
 import HoursLeakStatCard from "./HoursLeakStatCard";
 import Calculator3DGraphic from "./Calculator3DGraphic";
 
+import { MotionDiv, MotionH2, MotionP } from "@/components/framer-motion";
+import { motion } from "framer-motion";
+
 export function HoursLeakCalculator() {
   const [selectedTierIndex, setSelectedTierIndex] = useState<number>(1); // Default to Benchmark (100 – 250)
 
@@ -63,37 +66,54 @@ export function HoursLeakCalculator() {
       id="hours-calculator"
       className="relative w-full py-14 sm:py-20 lg:py-24 overflow-hidden"
     >
- 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
           {/* Left Column: Heading, features, CTA button & 3D visual */}
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
               {/* Eyebrow badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/70 shadow-2xs mb-6 self-start">
-                <CalculatorIcon className="w-3.5 h-3.5 text-primary" />
-                <span className="text-[11px] font-bold text-primary tracking-wider uppercase">
-                  {CALCULATOR_CONTENT.eyebrow}
-                </span>
-              </div>
+              <MotionDiv delay={0} duration={0.5} yOffset={15}>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/70 shadow-2xs mb-6 self-start">
+                  <CalculatorIcon className="w-3.5 h-3.5 text-primary" />
+                  <span className="text-[11px] font-bold text-primary tracking-wider uppercase">
+                    {CALCULATOR_CONTENT.eyebrow}
+                  </span>
+                </div>
+              </MotionDiv>
 
               {/* Headline */}
-              <h2 className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-extrabold text-slate-900 tracking-tight leading-[1.14]">
+              <MotionH2
+                delay={0.1}
+                duration={0.65}
+                yOffset={20}
+                className="text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-extrabold text-slate-900 tracking-tight leading-[1.14]"
+              >
                 {CALCULATOR_CONTENT.titlePart1}{" "}
                 <span className="text-primary block sm:inline">
                   {CALCULATOR_CONTENT.titleHighlight}
                 </span>
-              </h2>
+              </MotionH2>
 
               {/* Subtitle */}
-              <p className="mt-4 sm:mt-5 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+              <MotionP
+                delay={0.2}
+                duration={0.6}
+                yOffset={15}
+                className="mt-4 sm:mt-5 text-sm sm:text-base text-slate-600 font-normal leading-relaxed"
+              >
                 {CALCULATOR_CONTENT.subtitle}
-              </p>
+              </MotionP>
 
-              {/* 3 Value Proposition Features */}
+              {/* 3 Value Proposition Features with stagger */}
               <div className="mt-8 flex flex-col gap-4 sm:gap-5">
-                {CALCULATOR_CONTENT.features.map((feat) => (
-                  <div key={feat.title} className="flex items-center gap-3.5">
+                {CALCULATOR_CONTENT.features.map((feat, idx) => (
+                  <MotionDiv
+                    key={feat.title}
+                    delay={0.25 + idx * 0.08}
+                    duration={0.5}
+                    yOffset={15}
+                    className="flex items-center gap-3.5"
+                  >
                     <div className="w-10 h-10 rounded-xl bg-blue-50/90 border border-blue-100 flex items-center justify-center text-primary shrink-0 shadow-2xs">
                       {renderFeatureIcon(feat.icon)}
                     </div>
@@ -105,13 +125,18 @@ export function HoursLeakCalculator() {
                         {feat.subtitle}
                       </p>
                     </div>
-                  </div>
+                  </MotionDiv>
                 ))}
               </div>
             </div>
 
             {/* Bottom Row: CTA Button + 3D Graphic */}
-            <div className="mt-9 sm:mt-11 flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 relative">
+            <MotionDiv
+              delay={0.4}
+              duration={0.6}
+              yOffset={20}
+              className="mt-9 sm:mt-11 flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 relative"
+            >
               <Button asChild size="lg" className="shrink-0">
                 <Link href={CALCULATOR_CONTENT.ctaPrimary.href}>
                   <span>{CALCULATOR_CONTENT.ctaPrimary.label}</span>
@@ -123,11 +148,16 @@ export function HoursLeakCalculator() {
               <div className="relative w-44 sm:w-52 lg:w-56 -my-6 shrink-0 hidden sm:block">
                 <Calculator3DGraphic />
               </div>
-            </div>
+            </MotionDiv>
           </div>
 
           {/* Right Column: Calculator Card */}
-          <div className="lg:col-span-7">
+          <MotionDiv
+            delay={0.15}
+            duration={0.7}
+            yOffset={30}
+            className="lg:col-span-7"
+          >
             <div className="bg-white rounded-[24px] sm:rounded-[32px] p-6 sm:p-8 lg:p-9 shadow-[0_20px_60px_-15px_rgba(13,91,189,0.08)] border border-slate-100 flex flex-col justify-between">
               {/* Card Header: Team size selector */}
               <div>
@@ -148,9 +178,9 @@ export function HoursLeakCalculator() {
                         type="button"
                         onClick={() => setSelectedTierIndex(idx)}
                         className={cn(
-                          "py-2.5 sm:py-3 px-2 sm:px-4 rounded-xl text-xs sm:text-sm transition-all duration-150 text-center cursor-pointer",
+                          "py-2.5 sm:py-3 px-2 sm:px-4 rounded-xl text-xs sm:text-sm transition-all duration-200 text-center cursor-pointer active:scale-95",
                           isSelected
-                            ? "bg-primary text-white shadow-xs font-semibold"
+                            ? "bg-primary text-white shadow-xs font-semibold scale-[1.02]"
                             : "bg-white border border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50/60 font-medium"
                         )}
                       >
@@ -207,9 +237,9 @@ export function HoursLeakCalculator() {
                   </div>
                 </div>
 
-                {/* 5 Progress Bars */}
+                {/* 5 Progress Bars with Animated Fill */}
                 <div className="flex flex-col gap-3.5 mt-2">
-                  {CALCULATOR_CONTENT.commonAreas.items.map((item) => (
+                  {CALCULATOR_CONTENT.commonAreas.items.map((item, idx) => (
                     <div key={item.id} className="flex items-center gap-3 sm:gap-4">
                       <div className="w-4 h-4 shrink-0 flex items-center justify-center">
                         {renderAreaIcon(item.icon)}
@@ -218,9 +248,16 @@ export function HoursLeakCalculator() {
                         {item.label}
                       </span>
                       <div className="flex-1 h-3 sm:h-3.5 bg-[#eef4fe] rounded-full overflow-hidden relative">
-                        <div
-                          className="h-full bg-primary rounded-full transition-all duration-500"
-                          style={{ width: `${item.hoursPercentage}%` }}
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${item.hoursPercentage}%` }}
+                          viewport={{ once: true, margin: "-40px" }}
+                          transition={{
+                            duration: 0.8,
+                            delay: 0.2 + idx * 0.08,
+                            ease: [0.21, 0.47, 0.32, 0.98],
+                          }}
+                          className="h-full bg-primary rounded-full"
                         />
                       </div>
                       <span className="text-xs sm:text-sm font-semibold text-slate-700 w-9 text-right shrink-0">
@@ -246,7 +283,7 @@ export function HoursLeakCalculator() {
                 </Link>
               </div>
             </div>
-          </div>
+          </MotionDiv>
         </div>
       </div>
     </section>
