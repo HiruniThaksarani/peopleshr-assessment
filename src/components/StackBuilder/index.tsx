@@ -158,7 +158,7 @@ export function StackBuilder({ initialView }: StackBuilderProps) {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#f8fbff] text-slate-800 pb-20">
+    <div className="w-full min-h-screen bg-[#f8fbff] text-slate-800 pb-20 print:bg-white print:p-0 print:min-h-0">
       {/* Main View Container */}
       <main className="w-full">
         {view === "wizard" && (

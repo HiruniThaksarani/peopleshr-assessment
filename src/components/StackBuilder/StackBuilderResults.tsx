@@ -31,7 +31,9 @@ import {
 } from "@/constants/stackBuilder";
 import StackBuilderBreadcrumb from "./StackBuilderBreadcrumb";
 import PackageComparisonModal from "./PackageComparisonModal";
-import { TableProperties, X, Users, ArrowRight as ArrowRightLucide } from "lucide-react";
+import RecommendationDocument from "./RecommendationDocument";
+import RecommendationDocumentPreviewModal from "./RecommendationDocumentPreviewModal";
+import { TableProperties, X, Users, ArrowRight as ArrowRightLucide, FileText } from "lucide-react";
 
 interface StackBuilderResultsProps {
   inputs: BusinessInputs;
@@ -47,6 +49,7 @@ export function StackBuilderResults({
   onNavigateOverview,
 }: StackBuilderResultsProps) {
   const [compareModalOpen, setCompareModalOpen] = useState(false);
+  const [documentPreviewOpen, setDocumentPreviewOpen] = useState(false);
   const [featuresExpanded, setFeaturesExpanded] = useState(false);
 
   const { recommended, others, scores, activeModules } = calculateStackRecommendation(inputs);
@@ -95,7 +98,9 @@ export function StackBuilderResults({
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 print:p-0">
+    <div className="w-full">
+      {/* Screen Interactive UI (Hidden during print) */}
+      <div className="print:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* Breadcrumb */}
       <div className="print:hidden">
         <StackBuilderBreadcrumb
@@ -523,7 +528,7 @@ export function StackBuilderResults({
             </div>
 
             {/* CTAs at Bottom of Sidebar */}
-            <div className="pt-4 border-t border-slate-100 print:hidden">
+            <div className="space-y-2.5 pt-4 border-t border-slate-100 print:hidden">
               <Button
                 onClick={handlePrintPDF}
                 className="w-full rounded-full shadow-md py-3 text-xs sm:text-sm font-bold justify-center group bg-primary hover:bg-primary-hover text-white gap-2"
@@ -531,9 +536,31 @@ export function StackBuilderResults({
                 <DownloadIcon className="w-4 h-4 text-white" />
                 <span>Download Recommendation (PDF)</span>
               </Button>
+
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setDocumentPreviewOpen(true)}
+                className="w-full rounded-full py-2.5 text-xs font-bold text-slate-700 hover:text-primary border-slate-200 justify-center gap-2 bg-white hover:bg-slate-50 transition-colors shadow-2xs"
+              >
+                <FileText className="w-3.5 h-3.5 text-slate-500" />
+                <span>Preview Detailed Report</span>
+              </Button>
             </div>
           </div>
         </div>
+      </div>
+      </div>
+
+      {/* Print-Only Dedicated Executive Document */}
+      <div className="hidden print:block w-full">
+        <RecommendationDocument
+          inputs={inputs}
+          recommended={recommended}
+          others={others}
+          scores={scores}
+          activeModules={activeModules}
+        />
       </div>
 
       {/* Full Side-by-Side Comparison Matrix Modal */}
@@ -543,6 +570,17 @@ export function StackBuilderResults({
         recommended={recommended}
         others={others}
         scores={scores}
+      />
+
+      {/* Interactive Document Preview & Print Modal */}
+      <RecommendationDocumentPreviewModal
+        isOpen={documentPreviewOpen}
+        onOpenChange={setDocumentPreviewOpen}
+        inputs={inputs}
+        recommended={recommended}
+        others={others}
+        scores={scores}
+        activeModules={activeModules}
       />
     </div>
   );

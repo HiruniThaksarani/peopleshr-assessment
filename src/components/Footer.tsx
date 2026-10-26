@@ -33,7 +33,7 @@ import Badge from "@/components/ui/Badge";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#080d1a] text-white pt-12 sm:pt-16 pb-8 overflow-hidden relative border-t border-slate-800/80">
+    <footer className="w-full bg-[#080d1a] text-white pt-12 sm:pt-16 pb-8 overflow-hidden relative border-t border-slate-800/80 print:hidden">
       {/* Subtle ambient light glows */}
       <div className="absolute top-0 right-1/4 w-[420px] h-[420px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-[320px] h-[320px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none" />

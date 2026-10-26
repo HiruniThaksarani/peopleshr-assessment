@@ -1,19 +1,12 @@
 "use client";
 
-import React, { useState, useMemo, useId } from "react";
-import Link from "next/link";
+import React, { useState, useMemo } from "react";
 import Badge from "@/components/ui/Badge";
-import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/button";
 import { CustomBreadcrumb } from "@/components/ui/breadcrumb";
 import WorkforceParametersCard from "./WorkforceParametersCard";
 import ImpactAnalysisCard from "./ImpactAnalysisCard";
-import {
-  FileTextIcon,
-  DownloadIcon,
-  CalendarIcon,
-  ShieldCheckIcon,
-} from "@/components/ui/icons";
+import { ShieldCheckIcon } from "@/components/ui/icons";
 import {
   CALCULATOR_PRESETS,
   CalculatorPreset,
@@ -23,9 +16,11 @@ import {
   PayrollFrequency,
   SinkCategory,
 } from "@/constants/calculator";
+import CalculatorDocument from "./CalculatorDocument";
+import CalculatorDocumentPreviewModal from "./CalculatorDocumentPreviewModal";
+import ScheduleAuditDialog from "./ScheduleAuditDialog";
 
 export function Calculator() {
-  const formId = useId();
 
   // State
   const [headcount, setHeadcount] = useState<number>(120);
@@ -183,263 +178,143 @@ export function Calculator() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
-      {/* Top Breadcrumb Navigation */}
-      <div className="mb-6">
-        <CustomBreadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: "HR ROI Calculator", isCurrent: true },
-          ]}
+    <div className="w-full">
+      {/* Interactive Screen Dashboard UI */}
+      <div className="print:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
+        {/* Top Breadcrumb Navigation */}
+        <div className="mb-6">
+          <CustomBreadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "HR ROI Calculator", isCurrent: true },
+            ]}
+          />
+        </div>
+
+        {/* Page Header */}
+        <div className=" lg:items-start gap-6 pb-8 border-b border-slate-200/80">
+          <div className="w-full">
+            <Badge variant="primary" className="mb-3.5">
+              HR ROI Calculator
+            </Badge>
+
+            <h1 className="font-extrabold text-3xl sm:text-4xl lg:text-[42px] text-slate-900 tracking-tight leading-[1.15]">
+              The True Cost of Inefficient Work &amp; Manual HR
+            </h1>
+
+            <p className="mt-3.5 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+              Manual spreadsheets, disjointed payroll files, and fragmented onboarding quietly drain corporate cashflow. Model your exact organizational parameters to calculate hours lost and your projected ROI with PeoplesHR.
+            </p>
+          </div>
+
+          {/* Preset Loaders */}
+          <div className="flex flex-col sm:flex-col sm:items-start gap-2.5 self-start lg:self-end mt-4">
+            <span className="text-xs font-bold uppercase tracking-wider whitespace-nowrap">
+              Load Preset:
+            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              {CALCULATOR_PRESETS.map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => handleLoadPreset(p)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                    activePreset === p.id
+                      ? "bg-primary text-white shadow-xs"
+                      : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-200"
+                  }`}
+                >
+                  {p.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Main 2-Column Calculator Dashboard */}
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Column: Workforce Parameters */}
+          <div className="lg:col-span-5">
+            <WorkforceParametersCard
+              inputs={inputs}
+              onReset={() => handleLoadPreset(CALCULATOR_PRESETS[0])}
+              onHeadcountChange={(val) => {
+                setHeadcount(val);
+                setActivePreset("");
+              }}
+              onHourlyRateChange={(val) => {
+                setHourlyRate(val);
+                setActivePreset("");
+              }}
+              onPayrollFreqChange={(freq) => {
+                setPayrollFreq(freq);
+                setActivePreset("");
+              }}
+              onNewHiresChange={(val) => {
+                setNewHires(val);
+                setActivePreset("");
+              }}
+              onSyncTimeChange={(val) => {
+                setSyncTime(val);
+                setActivePreset("");
+              }}
+              onErrorRateChange={(val) => {
+                setErrorRate(val);
+                setActivePreset("");
+              }}
+            />
+          </div>
+
+          {/* Right Column: Quantified Impact Analysis */}
+          <div className="lg:col-span-7">
+            <ImpactAnalysisCard
+              headcount={headcount}
+              results={results}
+              activeTab={activeTab}
+              onTabChange={setActiveTab}
+              onExportClick={() => setShowExportModal(true)}
+              onBookClick={() => setShowBookingModal(true)}
+            />
+          </div>
+        </div>
+
+        {/* Supporting Context & Methodology Footnote */}
+        <div className="mt-12 p-6 rounded-2xl bg-white border border-slate-200/80 text-xs text-slate-500">
+          <div className="flex items-center gap-2 mb-2">
+            <ShieldCheckIcon className="w-4 h-4 text-primary" />
+            <h4 className="font-bold text-slate-800">
+              Benchmark Methodology &amp; Modeling Assumptions
+            </h4>
+          </div>
+          <p className="leading-relaxed">
+            Data models derived from aggregated analysis across 1,200+ enterprise HR transformations, APA payroll frequency benchmarks, and SHRM talent acquisition metrics. Annual drag includes direct time spent on routine double entry, discrepancy handling, and cross-checking spreadsheets. Savings reflect automation efficiency factors realized after PeoplesHR deployment.
+          </p>
+        </div>
+      </div>
+
+      {/* Print-Only Dedicated Executive Document */}
+      <div className="hidden print:block w-full">
+        <CalculatorDocument
+          inputs={inputs}
+          results={results}
         />
       </div>
 
-      {/* Page Header */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-slate-200/80">
-        <div className="max-w-3xl">
-          <Badge variant="primary" pulseDot className="mb-3.5">
-            CHALLENGE 01 · PROBLEM AWARENESS &amp; VALUE QUANTIFICATION
-          </Badge>
-
-          <h1 className="font-extrabold text-3xl sm:text-4xl lg:text-[42px] text-slate-900 tracking-tight leading-[1.15]">
-            The True Cost of Inefficient Work &amp; Manual HR
-          </h1>
-
-          <p className="mt-3.5 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Manual spreadsheets, disjointed payroll files, and fragmented onboarding quietly drain corporate cashflow. Model your exact organizational parameters to calculate hours lost and your projected ROI with PeoplesHR.
-          </p>
-        </div>
-
-        {/* Preset Loaders */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 self-start lg:self-end">
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider whitespace-nowrap">
-            Load Preset:
-          </span>
-          <div className="flex flex-wrap items-center gap-2">
-            {CALCULATOR_PRESETS.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => handleLoadPreset(p)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
-                  activePreset === p.id
-                    ? "bg-primary text-white shadow-xs"
-                    : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-200"
-                }`}
-              >
-                {p.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Main 2-Column Calculator Dashboard */}
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Column: Workforce Parameters */}
-        <div className="lg:col-span-5">
-          <WorkforceParametersCard
-            inputs={inputs}
-            onReset={() => handleLoadPreset(CALCULATOR_PRESETS[0])}
-            onHeadcountChange={(val) => {
-              setHeadcount(val);
-              setActivePreset("");
-            }}
-            onHourlyRateChange={(val) => {
-              setHourlyRate(val);
-              setActivePreset("");
-            }}
-            onPayrollFreqChange={(freq) => {
-              setPayrollFreq(freq);
-              setActivePreset("");
-            }}
-            onNewHiresChange={(val) => {
-              setNewHires(val);
-              setActivePreset("");
-            }}
-            onSyncTimeChange={(val) => {
-              setSyncTime(val);
-              setActivePreset("");
-            }}
-            onErrorRateChange={(val) => {
-              setErrorRate(val);
-              setActivePreset("");
-            }}
-          />
-        </div>
-
-        {/* Right Column: Quantified Impact Analysis */}
-        <div className="lg:col-span-7">
-          <ImpactAnalysisCard
-            headcount={headcount}
-            results={results}
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-            onExportClick={() => setShowExportModal(true)}
-            onBookClick={() => setShowBookingModal(true)}
-          />
-        </div>
-      </div>
-
-      {/* Supporting Context & Methodology Footnote */}
-      <div className="mt-12 p-6 rounded-2xl bg-white border border-slate-200/80 text-xs text-slate-500">
-        <div className="flex items-center gap-2 mb-2">
-          <ShieldCheckIcon className="w-4 h-4 text-primary" />
-          <h4 className="font-bold text-slate-800">
-            Benchmark Methodology &amp; Modeling Assumptions
-          </h4>
-        </div>
-        <p className="leading-relaxed">
-          Data models derived from aggregated analysis across 1,200+ enterprise HR transformations, APA payroll frequency benchmarks, and SHRM talent acquisition metrics. Annual drag includes direct time spent on routine double entry, discrepancy handling, and cross-checking spreadsheets. Savings reflect automation efficiency factors realized after PeoplesHR deployment.
-        </p>
-      </div>
-
-      {/* Modal 1: Export Executive Business Case */}
-      <Modal
+      {/* Executive ROI Business Case Document Preview Modal */}
+      <CalculatorDocumentPreviewModal
         isOpen={showExportModal}
-        onClose={() => setShowExportModal(false)}
-        maxWidth="max-w-xl"
-      >
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-light text-primary text-xs font-bold mb-3">
-          <FileTextIcon className="w-3.5 h-3.5" />
-          <span>EXECUTIVE BUSINESS CASE</span>
-        </div>
+        onOpenChange={setShowExportModal}
+        inputs={inputs}
+        results={results}
+      />
 
-        <h3 className="text-xl font-extrabold text-slate-900">
-          PeoplesHR ROI &amp; Value Quantification Report
-        </h3>
-        <p className="text-xs text-slate-600 mt-1">
-          Prepared for {headcount} Employee Organization (${hourlyRate}/hr loaded rate)
-        </p>
-
-        <div className="mt-5 p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-2.5 text-xs text-slate-700">
-          <div className="flex justify-between">
-            <span>Current Annual Drag:</span>
-            <strong className="text-slate-900 font-bold">
-              ${results.annualCostOfDrag.toLocaleString()}
-            </strong>
-          </div>
-          <div className="flex justify-between">
-            <span>Projected Net Annual Savings:</span>
-            <strong className="text-emerald-600 font-bold">
-              ${results.netAnnualSavings.toLocaleString()}
-            </strong>
-          </div>
-          <div className="flex justify-between">
-            <span>Admin Hours Reclaimed:</span>
-            <strong className="text-primary font-bold">
-              {results.hoursReclaimed.toLocaleString()} hrs/year
-            </strong>
-          </div>
-          <div className="flex justify-between">
-            <span>Expected Payback Period:</span>
-            <strong className="text-slate-900 font-bold">
-              {results.paybackMonths} months
-            </strong>
-          </div>
-          <div className="flex justify-between">
-            <span>Projected 3-Year ROI:</span>
-            <strong className="text-slate-900 font-bold">
-              {results.roi3Year}%
-            </strong>
-          </div>
-        </div>
-
-        <div className="mt-6 flex items-center gap-3">
-          <Button
-            type="button"
-            onClick={() => window.print()}
-            size="lg"
-            className="flex-1"
-          >
-            <DownloadIcon className="w-4 h-4 text-white" />
-            <span>Print / Save as PDF</span>
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            size="lg"
-            onClick={() => setShowExportModal(false)}
-            className="px-5"
-          >
-            Close
-          </Button>
-        </div>
-      </Modal>
-
-      {/* Modal 2: Booking Review Modal */}
-      <Modal
+      {/* Modal 2: Schedule a Tailored HR Audit Dialog */}
+      <ScheduleAuditDialog
         isOpen={showBookingModal}
-        onClose={() => setShowBookingModal(false)}
-        maxWidth="max-w-lg"
-      >
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-light text-primary text-xs font-bold mb-3">
-          <CalendarIcon className="w-3.5 h-3.5" />
-          <span>CONFIRM 15-MINUTE FINANCIAL REVIEW</span>
-        </div>
-
-        <h3 className="text-xl font-extrabold text-slate-900">
-          Schedule a Tailored HR Audit
-        </h3>
-        <p className="text-xs text-slate-600 mt-1">
-          Our HR advisory team will review your organization&apos;s parameters ({headcount} staff) and deliver a customized business justification deck.
-        </p>
-
-        <div className="mt-5 space-y-3">
-          <div>
-            <label
-              htmlFor={`${formId}-name`}
-              className="block text-xs font-bold text-slate-700 mb-1"
-            >
-              Your Name
-            </label>
-            <input
-              id={`${formId}-name`}
-              type="text"
-              placeholder="Jane Doe"
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-primary"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor={`${formId}-email`}
-              className="block text-xs font-bold text-slate-700 mb-1"
-            >
-              Work Email
-            </label>
-            <input
-              id={`${formId}-email`}
-              type="email"
-              placeholder="jane@company.com"
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-primary"
-            />
-          </div>
-        </div>
-
-        <div className="mt-6 flex items-center gap-3">
-          <Button
-            asChild
-            size="lg"
-            className="flex-1"
-          >
-            <Link
-              href="#demo"
-              onClick={() => setShowBookingModal(false)}
-            >
-              Confirm &amp; Reserve Session
-            </Link>
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            size="lg"
-            onClick={() => setShowBookingModal(false)}
-            className="px-5"
-          >
-            Cancel
-          </Button>
-        </div>
-      </Modal>
+        onOpenChange={setShowBookingModal}
+        headcount={headcount}
+        results={results}
+      />
     </div>
   );
 }

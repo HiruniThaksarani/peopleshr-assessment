@@ -128,3 +128,65 @@ body {
   -webkit-animation-play-state: paused !important;
   animation-play-state: paused !important;
 }
+
+/* ==========================================
+   Professional Print & PDF Export Styles
+   ========================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm;
+  }
+
+  html,
+  body,
+  body[data-scroll-locked] {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 10pt !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Completely hide web shell, headers, footers, and interactive UI */
+  header,
+  nav,
+  footer,
+  aside,
+  button,
+  .toaster,
+  .print-hidden,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Completely hide Radix UI dialog overlays, modals, and portals during print */
+  [data-radix-portal],
+  [role="dialog"],
+  [data-state="open"] {
+    display: none !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    width: 100% !important;
+  }
+
+  .avoid-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .page-break-before {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+}

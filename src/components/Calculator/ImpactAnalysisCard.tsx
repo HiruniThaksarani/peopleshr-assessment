@@ -278,7 +278,7 @@ export function ImpactAnalysisCard({
            variant="outline"
           className="w-full sm:w-auto flex-1"
         >
-          <DownloadIcon className="w-4 h-4 text-white" />
+          <DownloadIcon className="w-4 h-4 text-primary" />
           <span>Export Executive Business Case (.PDF)</span>
         </Button>
 
