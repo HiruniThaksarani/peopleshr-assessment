@@ -32,7 +32,7 @@ export const HERO_CONTENT = {
     { label: "Payroll managementy", type: "calculator" },
     { label: "Workforce insights", type: "clock" },
   ],
-  image: "/hero.png",
+  image: "/image.png",
   imageAlt: "PeoplesHR Workforce Management Platform",
 };
 
