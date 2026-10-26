@@ -5,6 +5,7 @@ import Link from "next/link";
 import Badge from "@/components/ui/Badge";
 import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/button";
+import { CustomBreadcrumb } from "@/components/ui/breadcrumb";
 import WorkforceParametersCard from "./WorkforceParametersCard";
 import ImpactAnalysisCard from "./ImpactAnalysisCard";
 import {
@@ -182,16 +183,15 @@ export function Calculator() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      {/* Top Breadcrumb and Back Navigation */}
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
+      {/* Top Breadcrumb Navigation */}
       <div className="mb-6">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-500 hover:text-primary transition-colors group"
-        >
-          <span className="group-hover:-translate-x-0.5 transition-transform">←</span>
-          <span>Back to Home Overview</span>
-        </Link>
+        <CustomBreadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "HR ROI Calculator", isCurrent: true },
+          ]}
+        />
       </div>
 
       {/* Page Header */}

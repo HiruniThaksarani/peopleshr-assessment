@@ -85,11 +85,11 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)] py-3 sm:py-3.5"
-          : "bg-white/95 sm:bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_2px_12px_-3px_rgba(0,0,0,0.04)] py-3.5 sm:py-4"
+          ? "bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]"
+          : "bg-white/95 sm:bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_2px_12px_-3px_rgba(0,0,0,0.04)]"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
         {/* Brand Logo */}
         <Link
           href="/"

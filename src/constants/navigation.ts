@@ -91,6 +91,13 @@ export const NAV_ITEMS: NavItem[] = [
         heading: "Free Calculators & Audits",
         items: [
           {
+            title: "HR Stack Builder",
+            description: "Build and shape your tailored HR capability stack",
+            href: "/packages/stack-builder",
+            badge: "Popular",
+            iconName: "sparkles",
+          },
+          {
             title: "HR ROI Calculator",
             description: "Calculate hours saved and financial return on HR automation",
             href: "/calculator",
@@ -217,6 +224,16 @@ export const NAV_ITEMS: NavItem[] = [
         ],
       },
     ],
+  },
+  {
+    label: "Packages",
+    href: "/packages",
+    hasDropdown: false,
+  },
+  {
+    label: "Services",
+    href: "/services",
+    hasDropdown: false,
   },
   {
     label: "Pricing",

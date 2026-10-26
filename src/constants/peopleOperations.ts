@@ -5,17 +5,18 @@ export interface OperationFeatureItem {
   iconName: "users" | "file-text" | "calendar" | "chart-bars" | "star" | "shield-check";
   iconBgColor: string;
   iconColor: string;
+  href?: string;
 }
 
 export const PEOPLE_OPERATIONS_CONTENT = {
-  eyebrow: "ALL YOUR PEOPLE OPERATIONS",
+  eyebrow: "OUR SERVICES",
   titleLead: "Everything You Need to",
   titleHighlight: "Manage Your People",
   subtitle:
     "From core HR to payroll, attendance to performance, PeoplesHR helps you streamline every aspect of your workforce - in one unified platform.",
   cta: {
-    label: "Explore All Features",
-    href: "#products",
+    label: "Explore All Services",
+    href: "/services",
   },
   features: [
     {

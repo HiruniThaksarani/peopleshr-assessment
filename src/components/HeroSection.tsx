@@ -28,7 +28,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative w-full bg-white overflow-hidden py-10">
+    <section className="relative w-full bg-white overflow-hidden pt-4 sm:pt-6 pb-10 sm:pb-14">
       <div className="absolute top-0 right-0 w-[640px] h-[640px] bg-gradient-to-bl from-blue-100/60 via-primary/5 to-transparent rounded-full blur-[130px] pointer-events-none -z-10" />
 
       <div className="relative w-full min-h-[560px] lg:min-h-[640px] xl:min-h-[640px] flex items-center">

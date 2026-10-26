@@ -1,6 +1,6 @@
 import React from "react";
 import HeroSection from "@/components/HeroSection";
-import PeopleOperationsSection from "@/components/PeopleOperationsSection";
+import ServicesSection from "@/components/ServicesSection";
 import PackagesSection from "@/components/PackagesSection";
 import ThriveSection from "@/components/ThriveSection";
 import HoursLeakCalculatorSection from "@/components/HoursLeakCalculatorSection";
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="w-full">
       <HeroSection />
-      <PeopleOperationsSection />
+      <ServicesSection />
       <ThriveSection />
       <PackagesSection />
       <HoursLeakCalculatorSection />

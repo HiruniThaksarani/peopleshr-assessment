@@ -10,7 +10,7 @@ import PeopleOperationsBackground from "./PeopleOperationsBackground";
 export function PeopleOperations() {
   return (
     <section
-      id="features"
+      id="services"
       className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden"
     >
       {/* Decorative ambient background waves & glows */}

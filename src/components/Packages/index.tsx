@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { PACKAGES_CONTENT } from "@/constants/packages";
 import Badge from "@/components/ui/Badge";
-import { LayoutGridIcon } from "@/components/ui/icons";
+import Button from "@/components/ui/button";
+import { LayoutGridIcon, ArrowRightIcon } from "@/components/ui/icons";
 import PackageCard from "./PackageCard";
 import PackageVisualFoundation from "./PackageVisualFoundation";
 import PackageVisualGrowth from "./PackageVisualGrowth";
@@ -80,6 +82,30 @@ export function Packages() {
             pkg={enterprisePkg}
             visual={<PackageVisualEnterprise />}
           />
+        </motion.div>
+
+        {/* Explore More Packages CTA Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-12 sm:mb-16 text-center"
+        >
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="rounded-full px-8 py-3.5 text-xs sm:text-sm font-bold text-slate-800 bg-white hover:bg-slate-50 border-slate-300 shadow-xs hover:border-primary/50 group"
+          >
+            <Link href="/packages" className="inline-flex items-center gap-2">
+              <span>{PACKAGES_CONTENT.exploreAllCta.label}</span>
+              <ArrowRightIcon className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
+          <span className="text-xs text-slate-500 font-medium">
+            Compare all 4 tiers, included services &amp; features
+          </span>
         </motion.div>
 
         {/* Bottom Interactive Tool Card */}
