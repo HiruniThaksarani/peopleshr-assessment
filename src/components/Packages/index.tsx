@@ -95,12 +95,10 @@ export function Packages() {
           <Button
             asChild
             size="lg"
-            variant="outline"
-            className="rounded-full px-8 py-3.5 text-xs sm:text-sm font-bold text-slate-800 bg-white hover:bg-slate-50 border-slate-300 shadow-xs hover:border-primary/50 group"
           >
             <Link href="/packages" className="inline-flex items-center gap-2">
               <span>{PACKAGES_CONTENT.exploreAllCta.label}</span>
-              <ArrowRightIcon className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />
+              <ArrowRightIcon className="w-4 h-4 text-white/90 group-hover:text-white transition-colors" />
             </Link>
           </Button>
           <span className="text-xs text-slate-500 font-medium">

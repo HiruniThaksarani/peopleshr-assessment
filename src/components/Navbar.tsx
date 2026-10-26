@@ -93,7 +93,7 @@ export default function Navbar() {
         {/* Brand Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none select-none"
+          className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none select-none shrink-0"
           aria-label="PeoplesHR Home"
         >
           {/* Logo Icon */}
@@ -258,13 +258,15 @@ export default function Navbar() {
             aria-hidden="true"
           />
 
-          {/* Request a Demo Button */}
-          <Button asChild className="hidden sm:inline-flex">
-            <Link href="#demo">
-              <CalendarIcon className="w-4 h-4 text-white/90 group-hover:text-white transition-colors" />
-              <span>Request a Demo</span>
-            </Link>
-          </Button>
+          {/* Request a Demo Button (Desktop) */}
+          <div className="hidden md:block">
+            <Button asChild>
+              <Link href="#demo">
+                <CalendarIcon className="w-4 h-4 text-white/90 group-hover:text-white transition-colors" />
+                <span>Request a Demo</span>
+              </Link>
+            </Button>
+          </div>
 
           {/* Mobile Menu Hamburger Toggle */}
           <button

@@ -143,13 +143,13 @@ export function StepChallenges({
       </div>
 
       {/* Navigation Buttons */}
-      <div className="pt-2 flex items-center justify-between">
+      <div className="pt-2 flex items-center justify-between gap-2.5 sm:gap-4">
         <Button
           type="button"
           variant="outline"
           size="lg"
           onClick={onBack}
-          className="rounded-full px-6 py-3 text-xs sm:text-sm font-bold gap-2"
+          className="rounded-full px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold gap-1.5 sm:gap-2 shrink-0"
         >
           <ArrowLeftIcon className="w-4 h-4 text-slate-600" />
           <span>Back</span>
@@ -158,7 +158,7 @@ export function StepChallenges({
         <Button
           size="lg"
           onClick={onNext}
-          className="rounded-full shadow-md px-7 py-3 text-xs sm:text-sm font-bold group"
+          className="rounded-full shadow-md px-5 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm font-bold group"
         >
           <span>Continue</span>
           <ArrowRightIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />

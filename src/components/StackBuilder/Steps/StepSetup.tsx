@@ -144,13 +144,13 @@ export function StepSetup({
       </div>
 
       {/* Navigation Buttons */}
-      <div className="pt-2 flex items-center justify-between">
+      <div className="pt-3 flex items-center justify-between gap-2.5 sm:gap-4">
         <Button
           type="button"
           variant="outline"
           size="lg"
           onClick={onBack}
-          className="rounded-full px-6 py-3 text-xs sm:text-sm font-bold gap-2"
+          className="rounded-full px-3.5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-bold gap-1.5 sm:gap-2 shrink-0"
         >
           <ArrowLeftIcon className="w-4 h-4 text-slate-600" />
           <span>Back</span>
@@ -159,10 +159,10 @@ export function StepSetup({
         <Button
           size="lg"
           onClick={onSubmit}
-          className="rounded-full shadow-md px-7 py-3 text-xs sm:text-sm font-bold group bg-primary hover:bg-primary-hover text-white"
+          className="rounded-full shadow-md px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm font-bold group bg-primary hover:bg-primary-hover text-white flex-1 sm:flex-initial justify-center min-w-0"
         >
           <span>See my recommendation</span>
-          <ArrowRightIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+          <ArrowRightIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform shrink-0" />
         </Button>
       </div>
     </div>

@@ -151,7 +151,7 @@ export function StackBuilderWizard({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Active Step Card */}
         <div className="lg:col-span-8">
-          <div className="rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-9 shadow-[0_12px_36px_-12px_rgba(13,91,189,0.06)] min-h-[520px]">
+          <div className="rounded-3xl bg-white border border-slate-200/90 p-4 sm:p-7 md:p-9 shadow-[0_12px_36px_-12px_rgba(13,91,189,0.06)] min-h-[520px]">
             <AnimatePresence mode="wait">
               {currentStep === 0 && (
                 <motion.div

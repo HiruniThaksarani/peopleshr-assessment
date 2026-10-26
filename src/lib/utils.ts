@@ -1,5 +1,5 @@
 export function cn(...inputs: (string | undefined | null | false | Record<string, boolean>)[]) {
-  return inputs
+  const classes = inputs
     .flatMap((input) => {
       if (!input) return [];
       if (typeof input === "string") return input.split(" ");
@@ -10,6 +10,19 @@ export function cn(...inputs: (string | undefined | null | false | Record<string
       }
       return [];
     })
-    .filter(Boolean)
-    .join(" ");
+    .filter(Boolean);
+
+  if (classes.includes("hidden")) {
+    return classes
+      .filter(
+        (cls) =>
+          cls !== "inline-flex" &&
+          cls !== "flex" &&
+          cls !== "block" &&
+          cls !== "inline-block"
+      )
+      .join(" ");
+  }
+
+  return classes.join(" ");
 }
