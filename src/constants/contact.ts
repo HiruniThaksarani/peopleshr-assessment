@@ -40,30 +40,17 @@ export const SOCIAL_LINKS = {
 export const FOOTER_MODULE_LINKS: FooterLink[] = [
   { label: "Solution Packages", href: "/packages", badge: "Packages" },
   { label: "Platform Features", href: "/features", badge: "Overview" },
-  { label: "Core HR & Directory", href: "#core-hr" },
-  { label: "Payroll & Compensation", href: "#payroll", badge: "Popular" },
-  { label: "Time & Attendance", href: "#attendance" },
-  { label: "Performance & Goals", href: "#performance" },
-  { label: "Talent Acquisition", href: "#recruitment" },
-  { label: "Employee Self-Service (ESS)", href: "#self-service" },
+  { label: "Implementation Services", href: "/services" },
 ];
 
 export const FOOTER_TOOL_LINKS: FooterLink[] = [
   { label: "HR Stack Builder", href: "/packages/stack-builder", badge: "New" },
   { label: "HR ROI Calculator", href: "/calculator", badge: "Interactive" },
-  { label: "Hours Leak Estimator", href: "#calculator" },
-  { label: "HR Maturity Benchmark", href: "#maturity-assessment" },
-  { label: "Statutory Compliance Checklist", href: "#compliance-check", badge: "New" },
-  { label: "Workforce Cost Simulator", href: "#simulator" },
 ];
 
 export const FOOTER_RESOURCE_LINKS: FooterLink[] = [
-  { label: "Contact & Demo", href: "/contact", badge: "Live Walkthrough" },
-  { label: "Customer Case Studies", href: "#case-studies" },
   { label: "HR Insights & Blog", href: "/blog" },
-  { label: "Statutory Labor Guides", href: "#guides" },
-  { label: "Help Center & Support", href: "#help-center" },
-  { label: "API & Webhook Docs", href: "#api-docs" },
+  { label: "Contact & Demo", href: "/contact", badge: "Live" },
 ];
 
 export const FOOTER_LEGAL_LINKS: FooterLink[] = [

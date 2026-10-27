@@ -165,7 +165,7 @@ export function HoursLeakCalculator() {
                   Select your team size
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-500 mt-1 font-normal">
-                  Choose the number of employees to see your estimated impact.
+                  Choose the number of employees to estimate recovered hours, direct dollar savings, and ROI.
                 </p>
 
                 {/* Team size buttons */}
@@ -201,16 +201,16 @@ export function HoursLeakCalculator() {
                   color="rose"
                 />
                 <HoursLeakStatCard
-                  label="Potential value per year"
+                  label="Annual financial savings"
                   value={activeTier.potentialValue}
-                  subtext="Based on industry benchmark"
+                  subtext="Direct labor & overhead recovered"
                   icon={<CoinsStackIcon className="w-4 h-4 stroke-[2.2]" />}
                   color="emerald"
                 />
                 <HoursLeakStatCard
-                  label="Projected ROI"
+                  label="Projected 3-Year ROI"
                   value={activeTier.projectedRoi}
-                  subtext="Over 3 years"
+                  subtext="Payback in under 4 months"
                   icon={<TrendingUpIcon className="w-4 h-4 stroke-[2.2]" />}
                   color="purple"
                 />

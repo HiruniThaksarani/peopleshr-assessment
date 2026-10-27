@@ -231,14 +231,19 @@ export default function Footer() {
                     )}
                   </li>
                 ))}
-                {FOOTER_RESOURCE_LINKS.slice(0, 2).map((link) => (
-                  <li key={link.label}>
+                {FOOTER_RESOURCE_LINKS.map((link) => (
+                  <li key={link.label} className="flex items-center gap-1.5">
                     <Link
                       href={link.href}
                       className="hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
+                    {link.badge && (
+                      <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-primary/30 text-blue-300 border border-primary/40">
+                        {link.badge}
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>

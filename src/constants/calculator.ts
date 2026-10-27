@@ -38,11 +38,11 @@ export interface FeatureItem {
 }
 
 export const CALCULATOR_CONTENT = {
-  eyebrow: "HR SAVINGS CALCULATOR",
-  titlePart1: "See how much time your HR team could",
+  eyebrow: "TIME & COST SAVINGS CALCULATOR",
+  titlePart1: "See how much time and money your organization can",
   titleHighlight: "save",
   subtitle:
-    "Manual HR tasks like payroll, leave management and employee onboarding can take hundreds of hours every year. Get a personalised estimate based on your team size and see the real impact with PeoplesHR.",
+    "Manual payroll reconciliation, attendance disputes, and paper-based onboarding drain hundreds of productive hours and thousands in labor costs each year. Get a personalized estimate of your time and financial savings based on your team size.",
   ctaPrimary: {
     label: "Calculate your savings",
     href: "/calculator",
@@ -54,18 +54,18 @@ export const CALCULATOR_CONTENT = {
   features: [
     {
       icon: "clock",
-      title: "Quick and easy",
-      subtitle: "Takes less than 2 minutes",
+      title: "Quick & Easy Estimate",
+      subtitle: "Takes under 2 minutes to calculate time and cost impact",
     },
     {
       icon: "chart",
-      title: "Based on real benchmarks",
-      subtitle: "Using industry data",
+      title: "Industry Labor Benchmarks",
+      subtitle: "Based on real workforce wage and operational loss data",
     },
     {
       icon: "users",
-      title: "Personalised to your organisation",
-      subtitle: "See time, cost and ROI potential",
+      title: "Personalized Financial Return",
+      subtitle: "See recovered hours, net dollar savings, and 3-year ROI",
     },
   ] as FeatureItem[],
   trustMetrics: [
@@ -96,59 +96,59 @@ export const CALCULATOR_CONTENT = {
     },
     {
       id: "value",
-      label: "Potential value per year",
+      label: "Annual financial savings",
       value: "$144,000",
-      subtext: "Based on industry benchmark",
+      subtext: "Direct labor & overhead recovered",
       icon: "coins",
       color: "emerald",
     },
     {
       id: "roi",
-      label: "Projected ROI",
+      label: "Projected 3-Year ROI",
       value: "410%",
-      subtext: "Over 3 years",
+      subtext: "Payback in under 4 months",
       icon: "trending-up",
       color: "blue",
     },
   ] as StatCardItem[],
   commonAreas: {
-    heading: "Where time is currently lost",
+    heading: "Where time & labor budget leak",
     badge: "Based on industry benchmark data",
     items: [
       {
         id: "payroll",
-        label: "Payroll preparation",
+        label: "Payroll preparation & rework",
         icon: "file-text",
         hoursPercentage: 32,
-        highlightText: "Payslip checks & manual pay runs",
+        highlightText: "Payslip checks & error recalculations",
       },
       {
         id: "attendance",
-        label: "Leave & attendance",
+        label: "Leave & attendance audits",
         icon: "calendar",
         hoursPercentage: 24,
-        highlightText: "Leave approvals & overtime auditing",
+        highlightText: "Overtime audits & dispute resolution",
       },
       {
         id: "onboarding",
-        label: "Onboarding",
+        label: "Onboarding & provisioning",
         icon: "users",
         hoursPercentage: 18,
         highlightText: "Document forms & manual provisioning",
       },
       {
         id: "claims",
-        label: "Claims processing",
+        label: "Expense claims processing",
         icon: "receipt",
         hoursPercentage: 14,
         highlightText: "Receipt verification & disbursement",
       },
       {
         id: "compliance",
-        label: "Compliance reporting",
+        label: "Compliance & tax reporting",
         icon: "shield-check",
         hoursPercentage: 12,
-        highlightText: "Statutory audits & policy tracking",
+        highlightText: "Statutory audits & penalty avoidance",
       },
     ] as CommonAreaItem[],
   },
@@ -190,7 +190,7 @@ export const CALCULATOR_CONTENT = {
       projectedRoi: "540%",
     },
   ] as CompanyTier[],
-  footerNote: "These are estimated figures based on industry benchmarks. Your results may vary.",
+  footerNote: "Estimated time and dollar savings are modeled on industry benchmarks. Individual financial outcomes may vary.",
   methodologyLink: {
     label: "Learn about our methodology",
     href: "/methodology",
