@@ -21,11 +21,11 @@ export const HERO_CONTENT = {
     "Streamline your HR operations, empower your people, and make smarter decisions with PeoplesHR - the complete HR platform for growing businesses.",
   ctaPrimary: {
     label: "Request a Demo",
-    href: "#demo",
+    href: "/contact",
   },
   ctaSecondary: {
-    label: "Explore Platform",
-    href: "#products",
+    label: "Explore Packages",
+    href: "/packages",
   },
   highlights: [
     { label: "Security and compliance", type: "shield" },

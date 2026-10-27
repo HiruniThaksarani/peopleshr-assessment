@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/icons";
 import { STACK_BUNDLES, BundleInfo } from "@/constants/stackBuilder";
 import PackageOverviewCard from "./PackageOverviewCard";
-import StackBuilderBreadcrumb from "./StackBuilderBreadcrumb";
 
 interface StackBuilderOverviewProps {
   onStartBuilder: (preselectedBundle?: BundleInfo) => void;
@@ -20,10 +19,7 @@ interface StackBuilderOverviewProps {
 
 export function StackBuilderOverview({ onStartBuilder }: StackBuilderOverviewProps) {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-      {/* Breadcrumbs */}
-      <StackBuilderBreadcrumb />
-
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
       {/* Header Section */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-10 border-b border-slate-200/80">
         <div className="max-w-3xl">

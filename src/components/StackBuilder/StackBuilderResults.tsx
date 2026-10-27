@@ -29,7 +29,6 @@ import {
   StackModule,
   STACK_MODULES,
 } from "@/constants/stackBuilder";
-import StackBuilderBreadcrumb from "./StackBuilderBreadcrumb";
 import PackageComparisonModal from "./PackageComparisonModal";
 import RecommendationDocument from "./RecommendationDocument";
 import RecommendationDocumentPreviewModal from "./RecommendationDocumentPreviewModal";
@@ -100,16 +99,8 @@ export function StackBuilderResults({
   return (
     <div className="w-full">
       {/* Screen Interactive UI (Hidden during print) */}
-      <div className="print:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-      {/* Breadcrumb */}
-      <div className="print:hidden">
-        <StackBuilderBreadcrumb
-          current="Results"
-          onNavigateOverview={onNavigateOverview}
-        />
-      </div>
-
-      {/* Header Section with Actions */}
+      <div className="print:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
+        {/* Header Section with Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 mb-8 border-b border-slate-200/80">
         <div>
           <Badge

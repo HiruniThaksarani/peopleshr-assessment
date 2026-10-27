@@ -19,10 +19,6 @@ export function Packages() {
       id="packages"
       className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden"
     >
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-[140px] pointer-events-none -z-10" />
-      <div className="absolute bottom-10 right-0 w-[500px] h-[500px] bg-primary/4 rounded-full blur-[130px] pointer-events-none -z-10" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">

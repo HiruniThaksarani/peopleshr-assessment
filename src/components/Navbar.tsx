@@ -121,20 +121,40 @@ export default function Navbar() {
             const isOpen = activeDropdown === item.label;
 
             if (!item.hasDropdown) {
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : item.href === "/packages"
+                  ? pathname === "/packages"
+                  : pathname === item.href ||
+                    (Boolean(pathname?.startsWith(`${item.href}/`)) &&
+                      !pathname?.startsWith("/packages/stack-builder"));
+
               return (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    pathname === item.href
-                      ? "text-slate-900 font-semibold"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                  className={`px-3.5 py-2 rounded-lg text-sm transition-colors ${
+                    isActive
+                      ? "text-primary font-semibold"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium"
                   }`}
                 >
                   {item.label}
                 </Link>
               );
             }
+
+            const isDropdownActive =
+              item.dropdownSections?.some((section) =>
+                section.items.some(
+                  (sub) =>
+                    pathname === sub.href ||
+                    Boolean(pathname?.startsWith(`${sub.href}/`))
+                )
+              ) ||
+              pathname === "/packages/stack-builder" ||
+              pathname === "/calculator";
 
             return (
               <div
@@ -148,16 +168,22 @@ export default function Navbar() {
                     setActiveDropdown(isOpen ? null : item.label)
                   }
                   aria-expanded={isOpen}
-                  className={`flex items-center gap-1 px-3.5 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none ${
+                  className={`flex items-center gap-1 px-3.5 py-2 rounded-lg text-sm transition-colors focus:outline-none ${
                     isOpen
                       ? "text-primary bg-primary-light/60 font-semibold"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                      : isDropdownActive
+                      ? "text-primary font-semibold"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium"
                   }`}
                 >
                   <span>{item.label}</span>
                   <ChevronDownIcon
                     className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-primary" : "text-slate-400"
+                      isOpen
+                        ? "rotate-180 text-primary"
+                        : isDropdownActive
+                        ? "text-primary"
+                        : "text-slate-400"
                     }`}
                   />
                 </button>
@@ -171,12 +197,12 @@ export default function Navbar() {
                       exit={{ opacity: 0, y: 6, scale: 0.98 }}
                       transition={{ duration: 0.16, ease: "easeOut" }}
                       className={`absolute top-full mt-2 bg-white/98 backdrop-blur-xl rounded-2xl border border-slate-200/90 shadow-[0_20px_50px_-12px_rgba(15,23,42,0.14)] p-4 sm:p-5 z-50 ${
-                        item.featured ? "w-[680px] -left-36" : "w-[560px] -left-20"
+                        item.featured ? "w-[600px] -left-28" : "w-[460px] -left-16"
                       }`}
                     >
-                      <div className="flex gap-6">
+                      <div className="flex gap-5">
                         {/* Sections & Links */}
-                        <div className="flex-1 flex flex-col gap-5">
+                        <div className="flex-1 flex flex-col gap-4">
                           {item.dropdownSections?.map((section, sIdx) => (
                             <div key={sIdx}>
                               {section.heading && (
@@ -184,7 +210,7 @@ export default function Navbar() {
                                   {section.heading}
                                 </p>
                               )}
-                              <div className="grid grid-cols-2 gap-1.5">
+                              <div className="grid grid-cols-1 gap-1.5">
                                 {section.items.map((subItem) => (
                                   <Link
                                     key={subItem.title}
@@ -261,7 +287,7 @@ export default function Navbar() {
           {/* Request a Demo Button (Desktop) */}
           <div className="hidden md:block">
             <Button asChild>
-              <Link href="#demo">
+              <Link href="/contact">
                 <CalendarIcon className="w-4 h-4 text-white/90 group-hover:text-white transition-colors" />
                 <span>Request a Demo</span>
               </Link>
@@ -299,29 +325,61 @@ export default function Navbar() {
                 const isExpanded = mobileExpandedSection === item.label;
 
                 if (!item.hasDropdown) {
+                  const isActive =
+                    item.href === "/"
+                      ? pathname === "/"
+                      : item.href === "/packages"
+                      ? pathname === "/packages"
+                      : pathname === item.href ||
+                        (Boolean(pathname?.startsWith(`${item.href}/`)) &&
+                          !pathname?.startsWith("/packages/stack-builder"));
+
                   return (
                     <Link
                       key={item.label}
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="px-3.5 py-2.5 text-sm font-semibold text-slate-700 hover:text-primary hover:bg-slate-50 rounded-xl transition-colors"
+                      className={`px-3.5 py-2.5 text-sm rounded-xl transition-colors ${
+                        isActive
+                          ? "text-primary font-bold bg-primary-light/40"
+                          : "font-semibold text-slate-700 hover:text-primary hover:bg-slate-50"
+                      }`}
                     >
                       {item.label}
                     </Link>
                   );
                 }
 
+                const isDropdownActive =
+                  item.dropdownSections?.some((section) =>
+                    section.items.some(
+                      (sub) =>
+                        pathname === sub.href ||
+                        Boolean(pathname?.startsWith(`${sub.href}/`))
+                    )
+                  ) ||
+                  pathname === "/packages/stack-builder" ||
+                  pathname === "/calculator";
+
                 return (
                   <div key={item.label} className="border-b border-slate-100 last:border-b-0 pb-1">
                     <button
                       type="button"
                       onClick={() => toggleMobileSection(item.label)}
-                      className="w-full flex items-center justify-between px-3.5 py-2.5 text-sm font-semibold text-slate-800 hover:bg-slate-50 rounded-xl transition-colors"
+                      className={`w-full flex items-center justify-between px-3.5 py-2.5 text-sm font-semibold rounded-xl transition-colors ${
+                        isDropdownActive
+                          ? "text-primary font-bold bg-primary-light/40"
+                          : "text-slate-800 hover:bg-slate-50"
+                      }`}
                     >
                       <span>{item.label}</span>
                       <ChevronDownIcon
-                        className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
-                          isExpanded ? "rotate-180 text-primary" : ""
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          isExpanded
+                            ? "rotate-180 text-primary"
+                            : isDropdownActive
+                            ? "text-primary"
+                            : "text-slate-400"
                         }`}
                       />
                     </button>
@@ -371,7 +429,7 @@ export default function Navbar() {
               <div className="pt-3 mt-2 border-t border-slate-100">
                 <Button asChild className="w-full">
                   <Link
-                    href="#demo"
+                    href="/contact"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <CalendarIcon className="w-4 h-4 text-white" />

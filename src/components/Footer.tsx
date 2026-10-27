@@ -77,7 +77,7 @@ export default function Footer() {
               {/* Call-to-Action Buttons matching standard Button component */}
               <div className="shrink-0 flex flex-wrap items-center gap-3.5 sm:gap-4">
                 <Button asChild size="lg">
-                  <Link href="#demo">
+                  <Link href="/contact">
                     <CalendarIcon className="w-4 h-4 text-white/90 group-hover:text-white transition-colors" />
                     <span>Schedule a Demo</span>
                     <ArrowRightIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-200" />

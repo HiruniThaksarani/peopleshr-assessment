@@ -6,13 +6,18 @@ import {
   BusinessInputs,
   INITIAL_BUSINESS_INPUTS,
 } from "@/constants/stackBuilder";
-import { CheckSmallIcon } from "@/components/ui/icons";
-import StackBuilderBreadcrumb from "./StackBuilderBreadcrumb";
+import { CheckSmallIcon, SparklesIcon } from "@/components/ui/icons";
 import StackBuilderSidebar from "./StackBuilderSidebar";
 import StepBusiness from "./Steps/StepBusiness";
 import StepChallenges from "./Steps/StepChallenges";
 import StepModules from "./Steps/StepModules";
 import StepSetup from "./Steps/StepSetup";
+import Badge from "@/components/ui/Badge";
+import {
+  MotionDiv,
+  MotionH1,
+  MotionP,
+} from "@/components/framer-motion";
 
 export interface StackBuilderWizardProps {
   initialInputs?: BusinessInputs;
@@ -70,18 +75,37 @@ export function StackBuilderWizard({
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-      {/* Breadcrumbs */}
-      <StackBuilderBreadcrumb onNavigateOverview={onNavigateOverview} />
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
 
       {/* Main Page Header */}
       <div className="pb-8 border-b border-slate-200/80 mb-8">
-        <h1 className="font-extrabold text-3xl sm:text-4xl lg:text-[42px] text-slate-900 tracking-tight leading-[1.15]">
+        <MotionDiv delay={0.05} duration={0.5} yOffset={15}>
+          <Badge
+            variant="primary"
+            icon={<SparklesIcon className="w-3.5 h-3.5 text-primary" />}
+            className="mb-4 shadow-2xs font-bold tracking-wider uppercase"
+          >
+            HR STACK BUILDER
+          </Badge>
+        </MotionDiv>
+
+        <MotionH1
+          delay={0.12}
+          duration={0.65}
+          yOffset={20}
+          className="font-extrabold text-3xl sm:text-4xl lg:text-[42px] text-slate-900 tracking-tight leading-[1.15]"
+        >
           Build Your HR Stack
-        </h1>
-        <p className="mt-2 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+        </MotionH1>
+
+        <MotionP
+          delay={0.22}
+          duration={0.6}
+          yOffset={15}
+          className="mt-3.5 text-sm sm:text-base text-slate-600 font-normal leading-relaxed"
+        >
           Answer a few questions to find the most relevant HR package for your business.
-        </p>
+        </MotionP>
 
         {/* 4-Step Stepper Progress Bar */}
         <div className="mt-8 max-w-2xl">

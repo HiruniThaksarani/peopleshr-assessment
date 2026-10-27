@@ -81,9 +81,6 @@ export function BlogPostDetailView({
 
       {/* Hero Header Section */}
       <header className="relative w-full pt-6 sm:pt-8 pb-10 sm:pb-14 bg-gradient-to-b from-white via-blue-50/20 to-[#f8fbff] border-b border-slate-200/70 overflow-hidden">
-        {/* Ambient lighting */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-10 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb Navigation */}

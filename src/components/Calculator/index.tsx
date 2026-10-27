@@ -3,10 +3,9 @@
 import React, { useState, useMemo } from "react";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/button";
-import { CustomBreadcrumb } from "@/components/ui/breadcrumb";
 import WorkforceParametersCard from "./WorkforceParametersCard";
 import ImpactAnalysisCard from "./ImpactAnalysisCard";
-import { ShieldCheckIcon } from "@/components/ui/icons";
+import { ShieldCheckIcon, CalculatorIcon } from "@/components/ui/icons";
 import {
   CALCULATOR_PRESETS,
   CalculatorPreset,
@@ -183,25 +182,19 @@ export function Calculator() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full min-h-screen bg-[#f8fbff] text-slate-800 pb-20">
       {/* Interactive Screen Dashboard UI */}
       <div className="print:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
-        {/* Top Breadcrumb Navigation */}
-        {/* Breadcrumb Navigation */}
-        <MotionDiv delay={0} duration={0.4} yOffset={10} className="mb-6">
-          <CustomBreadcrumb
-            items={[
-              { label: "Home", href: "/" },
-              { label: "HR ROI Calculator", isCurrent: true },
-            ]}
-          />
-        </MotionDiv>
 
         {/* Page Header */}
         <div className="lg:items-start gap-6 pb-8 border-b border-slate-200/80">
           <div className="w-full">
             <MotionDiv delay={0.05} duration={0.5} yOffset={15}>
-              <Badge variant="primary" className="mb-3.5">
+              <Badge
+                variant="primary"
+                icon={<CalculatorIcon className="w-3.5 h-3.5 text-primary" />}
+                className="mb-4 shadow-2xs font-bold tracking-wider uppercase"
+              >
                 HR ROI Calculator
               </Badge>
             </MotionDiv>
