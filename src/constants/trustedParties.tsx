@@ -341,7 +341,7 @@ export const TRUSTED_PARTIES_ROW_1: TrustedParty[] = [
           fill="currentColor"
           className="text-slate-900 group-hover:text-primary transition-colors"
         >
-          Sampath<span className="font-semibold text-slate-600 group-hover:text-primary">Bank</span>
+          Sampath<tspan className="font-semibold text-slate-600 group-hover:text-primary">Bank</tspan>
         </text>
       </svg>
     ),
@@ -422,7 +422,7 @@ export const TRUSTED_PARTIES_ROW_2: TrustedParty[] = [
           fill="currentColor"
           className="text-slate-900 group-hover:text-primary transition-colors"
         >
-          Fin<span className="text-primary font-bold">Scale</span>
+          Fin<tspan className="text-primary font-bold">Scale</tspan>
         </text>
       </svg>
     ),
@@ -501,7 +501,7 @@ export const TRUSTED_PARTIES_ROW_2: TrustedParty[] = [
           fill="currentColor"
           className="text-slate-900 group-hover:text-primary transition-colors"
         >
-          Cloud<span className="text-indigo-600 font-bold">Core</span>
+          Cloud<tspan className="text-indigo-600 font-bold">Core</tspan>
         </text>
       </svg>
     ),
@@ -561,7 +561,7 @@ export const TRUSTED_PARTIES_ROW_2: TrustedParty[] = [
           fill="currentColor"
           className="text-slate-900 group-hover:text-primary transition-colors"
         >
-          Bio<span className="text-teal-600 font-bold">Health</span>
+          Bio<tspan className="text-teal-600 font-bold">Health</tspan>
         </text>
       </svg>
     ),
@@ -630,7 +630,7 @@ export const TRUSTED_PARTIES_ROW_2: TrustedParty[] = [
           fill="currentColor"
           className="text-slate-900 group-hover:text-primary transition-colors"
         >
-          DFCC <span className="font-semibold text-slate-600 group-hover:text-primary">BANK</span>
+          DFCC <tspan className="font-semibold text-slate-600 group-hover:text-primary">BANK</tspan>
         </text>
       </svg>
     ),
@@ -667,7 +667,7 @@ export const TRUSTED_PARTIES_ROW_2: TrustedParty[] = [
           fill="currentColor"
           className="text-slate-900 group-hover:text-primary transition-colors"
         >
-          NEXUS<span className="text-violet-600 font-bold">CLOUD</span>
+          NEXUS<tspan className="text-violet-600 font-bold">CLOUD</tspan>
         </text>
       </svg>
     ),

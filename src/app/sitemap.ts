@@ -17,7 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       images: [`${baseUrl}${SEO_DEFAULTS.defaultOgImage}`],
     },
     {
-      url: `${baseUrl}/services`,
+      url: `${baseUrl}/features`,
       lastModified: launchBaselineDate,
       changeFrequency: "weekly",
       priority: 0.9,

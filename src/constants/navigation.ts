@@ -32,8 +32,8 @@ export const NAV_ITEMS: NavItem[] = [
     hasDropdown: false,
   },
   {
-    label: "Services",
-    href: "/services",
+    label: "Features",
+    href: "/features",
     hasDropdown: false,
   },
   {

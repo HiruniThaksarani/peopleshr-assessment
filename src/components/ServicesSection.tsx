@@ -1,3 +1,8 @@
-export { PeopleOperations as default, PeopleOperations, PeopleOperations as ServicesSection } from "./PeopleOperations";
+export {
+  default,
+  PeopleOperations,
+  FeaturesSection,
+  ServicesSection,
+} from "./FeaturesSection";
 export * from "./PeopleOperations/PeopleOperationsCard";
 export * from "./PeopleOperations/PeopleOperationsBackground";

@@ -39,7 +39,7 @@ export const SOCIAL_LINKS = {
 
 export const FOOTER_MODULE_LINKS: FooterLink[] = [
   { label: "Solution Packages", href: "/packages", badge: "Packages" },
-  { label: "All HR Services", href: "/services", badge: "Overview" },
+  { label: "Platform Features", href: "/features", badge: "Overview" },
   { label: "Core HR & Directory", href: "#core-hr" },
   { label: "Payroll & Compensation", href: "#payroll", badge: "Popular" },
   { label: "Time & Attendance", href: "#attendance" },

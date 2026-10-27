@@ -10,10 +10,10 @@ export interface ServiceItem {
 }
 
 export const SERVICES_CONTENT = {
-  eyebrow: "OUR SERVICES",
+  eyebrow: "PLATFORM FEATURES",
   title: "Everything You Need to Manage Your People",
   subtitle:
-    "From core HR to payroll, talent and compliance, PeoplesHR provides a complete set of HR solutions to streamline your workforce operations.",
+    "From core HR to payroll, talent and compliance, PeoplesHR provides a complete set of HR features to streamline your workforce operations.",
   services: [
     {
       id: "hr-essentials",
@@ -103,3 +103,7 @@ export const SERVICES_CONTENT = {
     buttonHref: "/packages/stack-builder",
   },
 };
+
+export const FEATURES_CONTENT = SERVICES_CONTENT;
+export type FeatureItem = ServiceItem;
+

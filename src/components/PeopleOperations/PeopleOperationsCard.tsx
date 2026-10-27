@@ -47,7 +47,7 @@ export function PeopleOperationsCard({
     }
   };
 
-  const cardHref = feature.href || "/services";
+  const cardHref = feature.href || "/features";
 
   return (
     <MotionDiv

@@ -9,14 +9,14 @@ export interface OperationFeatureItem {
 }
 
 export const PEOPLE_OPERATIONS_CONTENT = {
-  eyebrow: "OUR SERVICES",
+  eyebrow: "PLATFORM FEATURES",
   titleLead: "Everything You Need to",
   titleHighlight: "Manage Your People",
   subtitle:
     "From core HR to payroll, attendance to performance, PeoplesHR helps you streamline every aspect of your workforce - in one unified platform.",
   cta: {
-    label: "Explore All Services",
-    href: "/services",
+    label: "Explore All Features",
+    href: "/features",
   },
   features: [
     {

@@ -81,7 +81,7 @@ export function ServicesPage() {
               </Button>
 
               <Button asChild variant="outline" size="lg" className="rounded-full px-6 py-3 text-xs sm:text-sm">
-                <a href="#services-grid">Explore All Services ↓</a>
+                <a href="#features-grid">Explore All Features ↓</a>
               </Button>
             </MotionDiv>
           </div>
@@ -107,8 +107,8 @@ export function ServicesPage() {
         </div>
       </section>
 
-      {/* Services Grid Section */}
-      <section id="services-grid" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-18">
+      {/* Features Grid Section */}
+      <section id="features-grid" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-18">
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <MotionDiv delay={0} duration={0.4} yOffset={10}>
             <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">
@@ -121,7 +121,7 @@ export function ServicesPage() {
             yOffset={20}
             className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight"
           >
-            Six Powerful Services. One Unified Cloud.
+            Six Powerful Features. One Unified Cloud.
           </MotionH2>
           <MotionP
             delay={0.2}

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Badge from "@/components/ui/Badge";
+import Button from "@/components/ui/button";
 import { ChevronDownIcon, PhoneIcon, MailIcon } from "@/components/ui/icons";
 import { MotionDiv, MotionH2, MotionP } from "@/components/framer-motion";
 import { CONTACT_FAQS } from "@/constants/contactPage";
@@ -100,7 +101,7 @@ export default function ContactFAQ() {
 
         {/* Bottom Support Banner Card */}
         <MotionDiv delay={0.35} yOffset={20} className="mt-12 sm:mt-16">
-          <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-blue-50 via-slate-50 to-blue-50 border border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-6 text-center sm:text-left">
+          <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-blue-50 via-slate-50 to-blue-50 border border-blue-100 flex flex-col sm:flex-col sm:items-center justify-between gap-6 text-center sm:text-left">
             <div>
               <h4 className="text-base sm:text-lg font-bold text-slate-900">
                 Still have questions or need custom RFP documentation?
@@ -111,21 +112,19 @@ export default function ContactFAQ() {
             </div>
 
             <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 shrink-0">
-              <a
-                href={CONTACT_DETAILS.emailUrl}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-800 hover:text-primary hover:border-primary/50 shadow-xs transition-all"
-              >
-                <MailIcon className="w-3.5 h-3.5 text-primary" />
-                <span>Email Us</span>
-              </a>
+              <Button asChild variant="outline" size="default">
+                <a href={CONTACT_DETAILS.emailUrl}>
+                  <MailIcon className="w-4 h-4 text-primary" />
+                  <span>Email Us</span>
+                </a>
+              </Button>
 
-              <a
-                href={CONTACT_DETAILS.telUrl}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-xs font-bold shadow-xs hover:bg-primary-hover transition-all"
-              >
-                <PhoneIcon className="w-3.5 h-3.5 text-white" />
-                <span>{CONTACT_DETAILS.phone}</span>
-              </a>
+              <Button asChild size="default">
+                <a href={CONTACT_DETAILS.telUrl}>
+                  <PhoneIcon className="w-4 h-4" />
+                  <span>{CONTACT_DETAILS.phone}</span>
+                </a>
+              </Button>
             </div>
           </div>
         </MotionDiv>

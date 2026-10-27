@@ -27,6 +27,13 @@ export const HERO_CONTENT = {
     label: "Explore Packages",
     href: "/packages",
   },
+  reviewRating: {
+    platform: "G2",
+    rating: 4.3,
+    maxRating: 5,
+    reviewsCount: "(81 reviews)",
+    href: "#testimonials",
+  },
   highlights: [
     { label: "Security and compliance", type: "shield" },
     { label: "Payroll managementy", type: "calculator" },

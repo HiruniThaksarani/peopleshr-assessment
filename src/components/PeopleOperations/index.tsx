@@ -13,7 +13,7 @@ import { MotionDiv, MotionH2, MotionP } from "@/components/framer-motion";
 export function PeopleOperations() {
   return (
     <section
-      id="services"
+      id="features"
       className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden"
     >
       {/* Decorative ambient background waves & glows */}
