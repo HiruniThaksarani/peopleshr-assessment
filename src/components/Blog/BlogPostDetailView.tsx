@@ -222,6 +222,27 @@ export function BlogPostDetailView({
               <PortableTextRenderer value={post.body} />
             </div>
 
+            {/* Targeted SEO Keywords & Topics Section */}
+            {post.seoKeywords && post.seoKeywords.length > 0 && (
+              <div className="mt-10 pt-6 border-t border-slate-200/80">
+                <div className="flex items-center gap-2 mb-3 text-xs font-bold uppercase tracking-wider text-slate-500">
+                  <SparklesIcon className="w-3.5 h-3.5 text-primary" />
+                  <span>Related Topics & Target Keywords</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {post.seoKeywords.map((kw, i) => (
+                    <Link
+                      key={i}
+                      href={`/blog?search=${encodeURIComponent(kw)}`}
+                      className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 hover:bg-primary/10 hover:text-primary text-slate-700 transition-colors border border-slate-200/70"
+                    >
+                      #{kw}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* End of article author bio */}
             <div className="mt-12 sm:mt-16 pt-8 border-t border-slate-200">
               <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-4">

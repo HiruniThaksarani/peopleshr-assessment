@@ -71,7 +71,8 @@ export function BlogIndexView({
           post.title.toLowerCase().includes(q) ||
           post.excerpt.toLowerCase().includes(q) ||
           post.author?.name?.toLowerCase().includes(q) ||
-          post.categories?.some((c) => c.title.toLowerCase().includes(q))
+          post.categories?.some((c) => c.title.toLowerCase().includes(q)) ||
+          post.seoKeywords?.some((kw) => kw.toLowerCase().includes(q))
       );
     }
 

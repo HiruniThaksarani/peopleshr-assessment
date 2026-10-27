@@ -68,8 +68,12 @@ export interface Post {
   body?: PortableTextBlock[] | any[];
   // Key takeaways bullet points for quick executive reading
   keyTakeaways?: string[];
-  // SEO fields
+  // SEO & Discoverability fields
+  metaTitle?: string;
   metaDescription?: string;
+  seoKeywords?: string[];
+  canonicalUrl?: string;
+  noIndex?: boolean;
   _updatedAt?: string;
   _createdAt?: string;
 }

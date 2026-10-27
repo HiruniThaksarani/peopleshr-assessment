@@ -9,6 +9,9 @@ export interface SEOOptions {
   ogImage?: string;
   ogType?: "website" | "article";
   publishedTime?: string;
+  modifiedTime?: string;
+  section?: string;
+  tags?: string[];
   authors?: string[];
   noIndex?: boolean;
 }
@@ -142,6 +145,14 @@ export function constructMetadata(options: SEOOptions = {}): Metadata {
       emails: [SEO_DEFAULTS.email],
       phoneNumbers: [SEO_DEFAULTS.phone],
       publishedTime: options.publishedTime,
+      ...(ogType === "article"
+        ? {
+            modifiedTime: options.modifiedTime,
+            section: options.section,
+            tags: options.tags || options.keywords,
+            authors: options.authors,
+          }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",

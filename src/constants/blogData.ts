@@ -98,7 +98,18 @@ export const FALLBACK_POSTS: Post[] = [
       "Cloud HCM systems with automated statutory updates guarantee zero-day regulatory compliance across multiple jurisdictions.",
       "Organizations modernizing payroll reclaim an average of 38 administrative hours per pay cycle.",
     ],
+    metaTitle: "Enterprise Guide to Eliminating Payroll Leakage & Statutory Audits | PeoplesHR",
     metaDescription: "Learn how modern cloud HCM systems and automated statutory rules eliminate payroll leakage and tax penalties for mid-to-enterprise organizations.",
+    seoKeywords: [
+      "payroll leakage",
+      "statutory payroll compliance",
+      "automated payroll audit",
+      "biometric time tracking",
+      "cloud payroll automation",
+      "overtime miscalculation prevention",
+      "labor cost leak calculator",
+    ],
+    _updatedAt: "2026-03-25T10:00:00Z",
     body: [
       {
         _type: "block",
@@ -274,7 +285,17 @@ export const FALLBACK_POSTS: Post[] = [
       "Predictive machine learning models anticipate seasonal rush spikes and adjust headcount demands 3 weeks in advance.",
       "Algorithmic fatigue protection prevents overtime burnout before it compromises work quality or safety.",
     ],
+    metaTitle: "AI Copilots in Workforce Scheduling & Shift Optimization | PeoplesHR",
     metaDescription: "Discover how AI-powered scheduling copilots optimize shift allocation, reduce turnover, and maintain labor compliance effortlessly.",
+    seoKeywords: [
+      "AI workforce scheduling",
+      "shift optimization algorithms",
+      "predictive staffing software",
+      "frontline employee shift swap",
+      "labor fatigue compliance",
+      "cloud HCM scheduling",
+    ],
+    _updatedAt: "2026-03-21T12:00:00Z",
     body: [
       {
         _type: "block",
@@ -339,7 +360,17 @@ export const FALLBACK_POSTS: Post[] = [
       "Self-service document requests (letters, salary confirmations, visa verification) free up over 20 hours per week for HR teams.",
       "Automated approval workflows reduce cycle time from 5 business days to under 4 hours.",
     ],
+    metaTitle: "The Hours Leak Assessment: Diagnosing Lost Time in People Operations | PeoplesHR",
     metaDescription: "Learn how to quantify and reclaim hundreds of administrative hours lost to manual paper-pushing, disconnected systems, and legacy HR tools.",
+    seoKeywords: [
+      "hours leak assessment",
+      "HR administrative drag",
+      "manual HR paperless onboarding",
+      "employee self-service ROI",
+      "people operations efficiency",
+      "automated HR workflows",
+    ],
+    _updatedAt: "2026-03-16T15:00:00Z",
     body: [
       {
         _type: "block",
@@ -397,7 +428,17 @@ export const FALLBACK_POSTS: Post[] = [
       "Transparent goal cascades connect individual daily tasks directly to executive business milestones.",
       "360-degree peer recognition builds a culture of psychological safety and shared accountability.",
     ],
+    metaTitle: "Continuous Feedback vs Annual Reviews: Modern Performance Management | PeoplesHR",
     metaDescription: "Replace cumbersome annual performance cycles with modern, agile pulse reviews and continuous development plans.",
+    seoKeywords: [
+      "continuous performance management",
+      "annual performance review alternative",
+      "agile 1-on-1 employee check-ins",
+      "OKR goal cascades",
+      "talent retention metrics",
+      "continuous feedback software",
+    ],
+    _updatedAt: "2026-03-11T09:00:00Z",
     body: [
       {
         _type: "block",
@@ -455,7 +496,17 @@ export const FALLBACK_POSTS: Post[] = [
       "Statutory notice periods, severance calculations, and mandatory provident fund contributions vary widely across regions.",
       "Centralized cloud HCM ensures single-click compliance reporting for international audits and ISO certifications.",
     ],
+    metaTitle: "Navigating Multi-Country Labor Regulations & Statutory Compliance | PeoplesHR",
     metaDescription: "Essential compliance strategies and regulatory playbooks for multinational organizations managing cross-border workforces.",
+    seoKeywords: [
+      "multi-country labor regulations",
+      "global payroll compliance",
+      "statutory notice periods",
+      "cross-border HR risk mitigation",
+      "international employee data residency",
+      "cloud HCM global compliance",
+    ],
+    _updatedAt: "2026-03-03T11:00:00Z",
     body: [
       {
         _type: "block",
@@ -513,7 +564,16 @@ export const FALLBACK_POSTS: Post[] = [
       "Automated buddy assignments and 30-60-90 day milestone trackers elevate 6-month retention by 24%.",
       "Integrated asset and software provisioning reduces IT onboarding delays from 4 days to 30 minutes.",
     ],
+    metaTitle: "Accelerating New Hire Time-to-Productivity with Digital Onboarding | PeoplesHR",
     metaDescription: "Best practices for building an automated digital onboarding pipeline that boosts engagement and shortens ramp-up time.",
+    seoKeywords: [
+      "digital employee onboarding",
+      "new hire time to productivity",
+      "automated pre-boarding portal",
+      "employee retention onboarding journeys",
+      "HR asset provisioning automation",
+    ],
+    _updatedAt: "2026-02-23T14:00:00Z",
     body: [
       {
         _type: "block",

@@ -4,7 +4,11 @@ import { getAllPosts, getAllCategories, getFeaturedPosts } from "@/sanity/lib/cl
 import { BlogIndexView } from "@/components/Blog/BlogIndexView";
 
 import { constructMetadata } from "@/lib/seo";
-import { CustomBreadcrumbJsonLd, CustomWebPageJsonLd } from "@/lib/json-ld";
+import {
+  CustomBreadcrumbJsonLd,
+  CustomWebPageJsonLd,
+  CustomBlogCollectionJsonLd,
+} from "@/lib/json-ld";
 
 export const metadata: Metadata = constructMetadata({
   title: "HR Insights, Payroll Playbooks & Industry Trends | PeoplesHR",
@@ -32,10 +36,23 @@ async function BlogContent() {
 
   return (
     <>
+      <CustomBreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "HR Insights & Blog", url: "/blog" },
+        ]}
+      />
       <CustomWebPageJsonLd
         title="PeoplesHR Insights & Playbooks"
         description="Actionable HR playbooks, statutory compliance checklists, and modern people operations perspectives."
         url="/blog"
+      />
+      <CustomBlogCollectionJsonLd
+        posts={posts.map((p) => ({
+          title: p.title,
+          url: `/blog/${p.slug.current}`,
+          publishedAt: p.publishedAt,
+        }))}
       />
       <BlogIndexView
         initialPosts={posts}

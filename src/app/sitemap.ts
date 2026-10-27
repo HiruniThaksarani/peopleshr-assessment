@@ -62,19 +62,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const posts = await getAllPosts();
-    const postRoutes: MetadataRoute.Sitemap = posts.map((post) => {
-      const rawDate = post.publishedAt || post._updatedAt || launchBaselineDate;
-      const lastModified = new Date(rawDate).toISOString();
-      const imageUrl = getPostImageUrl(post);
+    const postRoutes: MetadataRoute.Sitemap = posts
+      .filter((post) => !post.noIndex)
+      .map((post) => {
+        const rawDate = post._updatedAt || post.publishedAt || launchBaselineDate;
+        const lastModified = new Date(rawDate).toISOString();
+        const imageUrl = getPostImageUrl(post);
 
-      return {
-        url: `${baseUrl}/blog/${post.slug.current}`,
-        lastModified,
-        changeFrequency: "weekly",
-        priority: 0.75,
-        images: imageUrl ? [imageUrl] : undefined,
-      };
-    });
+        return {
+          url: `${baseUrl}/blog/${post.slug.current}`,
+          lastModified,
+          changeFrequency: "weekly",
+          priority: 0.75,
+          images: imageUrl ? [imageUrl] : undefined,
+        };
+      });
 
     return [...staticRoutes, ...postRoutes];
   } catch (error) {

@@ -329,8 +329,11 @@ export interface ArticleJsonLdProps {
   publishedAt?: string;
   updatedAt?: string;
   authorName?: string;
+  authorRole?: string;
   imageUrl?: string;
   category?: string;
+  keywords?: string[] | string;
+  wordCount?: number;
 }
 
 /**
@@ -343,8 +346,11 @@ export function CustomArticleJsonLd({
   publishedAt,
   updatedAt,
   authorName,
+  authorRole,
   imageUrl,
   category,
+  keywords,
+  wordCount,
 }: ArticleJsonLdProps) {
   const pageUrl = url.startsWith("http") ? url : `${BASE_URL}${url}`;
   const image = imageUrl
@@ -352,6 +358,10 @@ export function CustomArticleJsonLd({
       ? imageUrl
       : `${BASE_URL}${imageUrl}`
     : `${BASE_URL}${SEO_DEFAULTS.defaultOgImage}`;
+
+  const formattedKeywords = Array.isArray(keywords)
+    ? keywords.filter(Boolean).join(", ")
+    : keywords;
 
   const schema = {
     "@context": "https://schema.org",
@@ -363,9 +373,13 @@ export function CustomArticleJsonLd({
     image: [image],
     datePublished: publishedAt || "2026-10-27T00:00:00.000Z",
     dateModified: updatedAt || publishedAt || "2026-10-27T00:00:00.000Z",
+    inLanguage: "en-US",
+    ...(formattedKeywords ? { keywords: formattedKeywords } : {}),
+    ...(wordCount && wordCount > 0 ? { wordCount } : {}),
     author: {
       "@type": "Person",
       name: authorName || "PeoplesHR Editorial Team",
+      ...(authorRole ? { jobTitle: authorRole } : {}),
     },
     publisher: {
       "@type": "Corporation",
@@ -381,6 +395,47 @@ export function CustomArticleJsonLd({
       "@id": pageUrl,
     },
     articleSection: category || "Human Resources Technology",
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export interface BlogCollectionItem {
+  title: string;
+  url: string;
+  publishedAt?: string;
+}
+
+/**
+ * CollectionPage JSON-LD schema for Blog Index
+ */
+export function CustomBlogCollectionJsonLd({
+  posts,
+}: {
+  posts: BlogCollectionItem[];
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${BASE_URL}/blog#collection`,
+    name: "PeoplesHR Insights, HR Playbooks & Industry Trends",
+    description:
+      "Actionable HR playbooks, statutory compliance checklists, and modern people operations perspectives.",
+    url: `${BASE_URL}/blog`,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: posts.map((post, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        url: post.url.startsWith("http") ? post.url : `${BASE_URL}${post.url}`,
+        name: post.title,
+      })),
+    },
   };
 
   return (

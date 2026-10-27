@@ -96,11 +96,46 @@ export const postType = defineType({
       title: "Body Content",
       type: "blockContent",
     }),
+    // ==========================================
+    // SEO & Search Visibility Configuration
+    // ==========================================
+    defineField({
+      name: "metaTitle",
+      title: "Custom SEO Meta Title",
+      type: "string",
+      description: "Optional browser tab & Google SERP title override (max 70 chars). Defaults to '{Title} | PeoplesHR Insights'.",
+      validation: (rule: any) => rule.max(70),
+    }),
     defineField({
       name: "metaDescription",
       title: "SEO Meta Description",
       type: "text",
-      rows: 2,
+      rows: 3,
+      description: "Recommended 120-160 characters summary shown on Google search result snippets. Falls back to post excerpt.",
+      validation: (rule: any) => rule.max(200),
+    }),
+    defineField({
+      name: "seoKeywords",
+      title: "Target SEO Keywords & Long-Tail Phrases",
+      type: "array",
+      of: [{ type: "string" }],
+      options: {
+        layout: "tags",
+      },
+      description: "Specific target keywords for this post (e.g. 'statutory payroll compliance', 'overtime calculation audit', 'cloud HCM platform'). Used in search engine meta tags, OpenGraph article tags, and Article JSON-LD schema.",
+    }),
+    defineField({
+      name: "canonicalUrl",
+      title: "Custom Canonical URL",
+      type: "url",
+      description: "Optional custom canonical URL override if this article was syndicated from another publication.",
+    }),
+    defineField({
+      name: "noIndex",
+      title: "Exclude from Search Engines (noindex)",
+      type: "boolean",
+      description: "Enable to instruct search engines NOT to index this post (e.g. internal guidelines or private drafts).",
+      initialValue: false,
     }),
   ],
   preview: {
