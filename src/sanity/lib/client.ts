@@ -27,6 +27,8 @@ export const client = isSanityConfigured()
 export async function sanityFetch<const QueryString extends string>({
   query,
   params = {},
+  revalidate = 60,
+  tags = [],
 }: {
   query: QueryString;
   params?: QueryParams;
@@ -39,7 +41,10 @@ export async function sanityFetch<const QueryString extends string>({
 
   try {
     return await client.fetch(query, params, {
-      cache: "no-store",
+      next: {
+        revalidate: typeof revalidate === "number" ? revalidate : 60,
+        tags,
+      },
     });
   } catch (error) {
     console.warn("Sanity fetch failed, falling back to local data:", error);
