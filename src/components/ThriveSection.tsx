@@ -1,2 +1,9 @@
-export { Thrive as default, Thrive } from "./Thrive";
-export { default as ThriveCarousel } from "./Thrive/ThriveCarousel";
+export {
+  default,
+  HowItWorks,
+  HowItWorksSection,
+  Thrive,
+  ThriveSection,
+  HowItWorksCarousel,
+  HowItWorksCarousel as ThriveCarousel,
+} from "./HowItWorksSection";

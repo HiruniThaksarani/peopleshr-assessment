@@ -3,7 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import TrustedPartiesSection from "@/components/TrustedPartiesSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import PackagesSection from "@/components/PackagesSection";
-import ThriveSection from "@/components/ThriveSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
 import HoursLeakCalculatorSection from "@/components/HoursLeakCalculatorSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
@@ -23,7 +23,7 @@ export default function Home() {
       <HeroSection />
       <TrustedPartiesSection />
       <FeaturesSection />
-      <ThriveSection />
+      <HowItWorksSection />
       <PackagesSection />
       <HoursLeakCalculatorSection />
       <TestimonialsSection />
