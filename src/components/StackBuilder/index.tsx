@@ -39,9 +39,10 @@ export function StackBuilder({ initialView }: StackBuilderProps) {
         priorities: {
           ...INITIAL_BUSINESS_INPUTS.priorities,
           core: "Must",
+          payroll: "Must",
           leave: "Must",
           attendance: "Must",
-          payroll: "Nice",
+          selfservice: "Must",
           recruitment: "Not now",
           performance: "Not now",
           multi: "Not now",

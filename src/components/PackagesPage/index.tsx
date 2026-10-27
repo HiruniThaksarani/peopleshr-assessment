@@ -22,10 +22,24 @@ import {
 } from "@/components/framer-motion";
 
 export function PackagesPage() {
+  const handleScrollToPackages = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const target = document.getElementById("packages-grid");
+    if (target) {
+      const navbarOffset = 80;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarOffset;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
+      window.history.pushState(null, "", "#packages-grid");
+    }
+  };
+
   return (
     <div className="w-full min-h-screen bg-[#f8fbff] text-slate-800 pb-24">
       {/* Hero Header Section - Clean, Centered Executive Layout */}
-      <section className="relative w-full pt-6 sm:pt-8 pb-14 sm:pb-18 bg-gradient-to-b from-white via-blue-50/20 to-[#f8fbff] border-b border-slate-200/70 overflow-hidden">
+      <section className="relative w-full pt-6 sm:pt-8 pb-10 sm:pb-10 bg-gradient-to-b from-white via-blue-50/20 to-[#f8fbff] border-b border-slate-200/70 overflow-hidden">
         {/* Subtle ambient lighting glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[680px] h-[340px] bg-gradient-to-b from-blue-100/40 via-primary/5 to-transparent rounded-full blur-[110px] pointer-events-none" />
 
@@ -90,7 +104,11 @@ export function PackagesPage() {
                 size="lg"
                 className="rounded-full px-6 py-3 text-xs sm:text-sm font-semibold"
               >
-                <a href="#packages-grid" className="inline-flex items-center gap-1.5">
+                <a
+                  href="#packages-grid"
+                  onClick={handleScrollToPackages}
+                  className="inline-flex items-center gap-1.5"
+                >
                   <span>Explore All Packages ↓</span>
                 </a>
               </Button>
@@ -121,13 +139,13 @@ export function PackagesPage() {
       </section>
 
       {/* Main Content Area */}
-      <div id="packages-grid" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 scroll-mt-20">
+      <div id="packages-grid" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-10 scroll-mt-20">
         {/* Section Title */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
             <MotionDiv delay={0} duration={0.4} yOffset={10}>
               <span className="text-xs font-bold text-primary uppercase tracking-wider block">
-                FOUR CURATED TIERS
+                THREE CURATED TIERS
               </span>
             </MotionDiv>
             <MotionH2
@@ -139,14 +157,6 @@ export function PackagesPage() {
               Explore All Available Packages
             </MotionH2>
           </div>
-          <MotionP
-            delay={0.15}
-            duration={0.6}
-            yOffset={15}
-            className="text-xs sm:text-sm text-slate-500 max-w-md"
-          >
-            Click any package to check compatibility in our interactive HR Stack Builder with pre-selected requirements.
-          </MotionP>
         </div>
 
         {/* 4 Packages Grid (Foundation, Growth, Professional, Enterprise) */}
@@ -189,22 +199,19 @@ export function PackagesPage() {
 
           {/* Alignment Table */}
           <div className="overflow-x-auto rounded-3xl bg-white border border-slate-200/90 shadow-[0_12px_36px_-12px_rgba(13,91,189,0.06)]">
-            <table className="w-full text-left border-collapse min-w-[700px]">
+            <table className="w-full text-left border-collapse min-w-[640px]">
               <thead>
                 <tr className="border-b border-slate-200 bg-slate-50/70">
-                  <th className="py-4 px-6 text-xs font-bold text-slate-900 uppercase tracking-wider w-[34%]">
+                  <th className="py-4 px-6 text-xs font-bold text-slate-900 uppercase tracking-wider w-[40%]">
                     Platform Service
                   </th>
-                  <th className="py-4 px-4 text-xs font-bold text-orange-600 uppercase tracking-wider text-center w-[16.5%]">
+                  <th className="py-4 px-4 text-xs font-bold text-orange-600 uppercase tracking-wider text-center w-[20%]">
                     Foundation
                   </th>
-                  <th className="py-4 px-4 text-xs font-bold text-primary uppercase tracking-wider text-center w-[16.5%] bg-blue-50/60">
+                  <th className="py-4 px-4 text-xs font-bold text-primary uppercase tracking-wider text-center w-[20%] bg-blue-50/60">
                     Growth ★
                   </th>
-                  <th className="py-4 px-4 text-xs font-bold text-amber-600 uppercase tracking-wider text-center w-[16.5%]">
-                    Professional
-                  </th>
-                  <th className="py-4 px-4 text-xs font-bold text-purple-600 uppercase tracking-wider text-center w-[16.5%]">
+                  <th className="py-4 px-4 text-xs font-bold text-purple-600 uppercase tracking-wider text-center w-[20%]">
                     Enterprise
                   </th>
                 </tr>
@@ -222,13 +229,9 @@ export function PackagesPage() {
 
                     {/* Foundation */}
                     <td className="py-4 px-4 text-center">
-                      {row.foundation === true ? (
+                      {row.foundation ? (
                         <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-orange-100 text-orange-600 text-xs font-bold">
                           ✓
-                        </span>
-                      ) : row.foundation === "basic" ? (
-                        <span className="inline-block text-[11px] font-bold text-orange-700 bg-orange-50 border border-orange-200/80 px-2 py-0.5 rounded-full">
-                          Basic
                         </span>
                       ) : (
                         <span className="text-slate-300 font-bold">—</span>
@@ -237,19 +240,8 @@ export function PackagesPage() {
 
                     {/* Growth */}
                     <td className="py-4 px-4 text-center bg-blue-50/20">
-                      {row.growth === true ? (
+                      {row.growth ? (
                         <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-primary text-xs font-bold">
-                          ✓
-                        </span>
-                      ) : (
-                        <span className="text-slate-300 font-bold">—</span>
-                      )}
-                    </td>
-
-                    {/* Professional */}
-                    <td className="py-4 px-4 text-center">
-                      {row.professional === true ? (
-                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">
                           ✓
                         </span>
                       ) : (
@@ -259,7 +251,7 @@ export function PackagesPage() {
 
                     {/* Enterprise */}
                     <td className="py-4 px-4 text-center">
-                      {row.enterprise === true ? (
+                      {row.enterprise ? (
                         <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-purple-100 text-purple-700 text-xs font-bold">
                           ✓
                         </span>

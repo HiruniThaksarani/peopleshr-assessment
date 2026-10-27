@@ -7,7 +7,7 @@ import { CustomBreadcrumbJsonLd, CustomProductJsonLd } from "@/lib/json-ld";
 export const metadata: Metadata = constructMetadata({
   title: "HR Solution Packages & Pricing Bundles | PeoplesHR Platform",
   description:
-    "Explore PeoplesHR's modular solution tiers: Foundation, Growth, Professional, and Enterprise. Scalable cloud HR and payroll bundles tailored for teams of 20 to 10,000+.",
+    "Explore PeoplesHR's modular solution tiers: Foundation, Growth, and Enterprise. Scalable cloud HR and payroll bundles tailored for teams of 20 to 10,000+.",
   canonical: "/packages",
   keywords: [
     "HR software pricing",
@@ -22,7 +22,7 @@ export const metadata: Metadata = constructMetadata({
 const PACKAGES_DATA = [
   {
     name: "Foundation Tier",
-    description: "Core digital HR infrastructure, employee directory, leave management, and company document hub.",
+    description: "Core digital HR infrastructure, employee directory, leave management, automated payroll, and employee self-service portal.",
     url: "/packages#foundation",
     price: "4.50",
   },
@@ -31,12 +31,6 @@ const PACKAGES_DATA = [
     description: "Complete payroll calculation automation, biometric attendance integration, and employee self-service mobile app.",
     url: "/packages#growth",
     price: "8.00",
-  },
-  {
-    name: "Professional Tier",
-    description: "Continuous performance appraisals, OKR tracking, advanced shift scheduling, and recruitment pipeline.",
-    url: "/packages#professional",
-    price: "12.50",
   },
   {
     name: "Enterprise Tier",

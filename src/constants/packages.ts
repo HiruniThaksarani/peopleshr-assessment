@@ -21,11 +21,12 @@ export const ALL_PACKAGES: PackageItem[] = [
     iconType: "cube",
     themeColor: "orange",
     description:
-      "Get started with essential core HR tools to organize employee administration and simplify daily workflows.",
+      "Get started with essential core HR tools, automated payroll and employee self-service to organize administration and simplify daily workflows.",
     bestFor: "Startups & small businesses (1–50 employees) replacing spreadsheets and manual paperwork.",
-    includedServices: ["HR Essentials", "People Experience (Basic)"],
+    includedServices: ["HR Essentials", "Payroll & Time", "People Experience"],
     features: [
       "Core HR & digital employee records",
+      "Automated payroll & statutory compliance",
       "Leave & absence approval workflows",
       "Time & attendance tracking",
       "Employee self-service (ESS) portal",
@@ -106,7 +107,7 @@ export const ALL_PACKAGES: PackageItem[] = [
       "Compliance & Workforce",
     ],
     features: [
-      "Everything in Professional",
+      "Everything in Growth",
       "Multi-country & multi-currency payroll (30+ countries)",
       "Advanced statutory compliance & audit logs",
       "Strategic workforce & headcount planning",
@@ -149,55 +150,57 @@ export const PACKAGES_CONTENT = {
   },
 };
 
-// Alignment matrix between the 6 Cloud Services and the 4 Packages
-export const PACKAGE_SERVICE_MATRIX = [
+// Alignment matrix between the 6 Cloud Services and the 3 Curated Packages
+export interface PackageServiceMatrixRow {
+  service: string;
+  description: string;
+  foundation: boolean;
+  growth: boolean;
+  enterprise: boolean;
+}
+
+export const PACKAGE_SERVICE_MATRIX: PackageServiceMatrixRow[] = [
   {
     service: "HR Essentials",
     description: "Employee records, digital documents & core HR workflows",
     foundation: true,
     growth: true,
-    professional: true,
     enterprise: true,
   },
   {
     service: "Payroll & Time",
     description: "Automated payroll, shifts, time tracking & statutory taxes",
-    foundation: false,
+    foundation: true,
     growth: true,
-    professional: true,
     enterprise: true,
   },
   {
     service: "People Experience",
     description: "Employee self-service portal, mobile app & quick approvals",
-    foundation: "Basic",
+    foundation: true,
     growth: true,
-    professional: true,
     enterprise: true,
   },
   {
     service: "Talent & Performance",
     description: "Recruitment pipeline, 360 appraisals & continuous OKRs",
     foundation: false,
-    growth: "Recruitment & Appraisals",
-    professional: "Full Suite + 360",
-    enterprise: "Full Suite + Succession",
+    growth: true,
+    enterprise: true,
   },
   {
     service: "People Insights",
     description: "Interactive analytics dashboards & retention metrics",
-    foundation: "Basic Reports",
-    growth: "Standard Dashboards",
-    professional: "Advanced Analytics",
-    enterprise: "Custom BI & Predictive",
+    foundation: false,
+    growth: false,
+    enterprise: true,
   },
   {
     service: "Compliance & Workforce",
     description: "Multi-country labor laws, global governance & ERP APIs",
     foundation: false,
     growth: false,
-    professional: "Audit Trail",
-    enterprise: "30+ Countries & ERP APIs",
+    enterprise: true,
   },
 ];
 

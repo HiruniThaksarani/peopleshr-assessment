@@ -121,14 +121,6 @@ export function GlobalSoftwareApplicationJsonLd() {
         },
         {
           "@type": "Offer",
-          name: "Professional Tier",
-          price: "12.50",
-          priceCurrency: "USD",
-          description: "Performance appraisals, learning, and custom workflows",
-          availability: "https://schema.org/InStock",
-        },
-        {
-          "@type": "Offer",
           name: "Enterprise Tier",
           price: "18.00",
           priceCurrency: "USD",

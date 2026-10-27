@@ -62,7 +62,7 @@ export default function FeaturesPage() {
         offers={HR_FEATURES_CATALOG}
       />
       <Suspense fallback={<div className="min-h-screen bg-[#f8fbff]" />}>
-        <ServicesPage />
+        <ServicesPage mode="features" />
       </Suspense>
     </>
   );

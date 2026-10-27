@@ -20,7 +20,38 @@ import {
   AnimatedCounter,
 } from "@/components/framer-motion";
 
-export function ServicesPage() {
+export interface ServicesPageProps {
+  mode?: "features" | "services";
+}
+
+export function ServicesPage({ mode = "features" }: ServicesPageProps = {}) {
+  const isServices = mode === "services";
+  const targetId = isServices ? "services-grid" : "features-grid";
+  const buttonLabel = isServices ? "Explore All Services ↓" : "Explore All Features ↓";
+  const gridTitle = isServices
+    ? "Six Powerful Services. One Unified Cloud."
+    : "Six Powerful Features. One Unified Cloud.";
+
+  const handleScrollToGrid = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const target =
+      document.getElementById(targetId) ||
+      document.getElementById("features-grid") ||
+      document.getElementById("services-grid");
+
+    if (target) {
+      const navbarHeight = 80;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+      window.history.pushState(null, "", `#${targetId}`);
+    }
+  };
+
   const stats = [
     { label: "Countries Supported", value: "30+" },
     { label: "Payroll Accuracy", value: "99.98%" },
@@ -81,7 +112,9 @@ export function ServicesPage() {
               </Button>
 
               <Button asChild variant="outline" size="lg" className="rounded-full px-6 py-3 text-xs sm:text-sm">
-                <a href="#features-grid">Explore All Features ↓</a>
+                <a href={`#${targetId}`} onClick={handleScrollToGrid}>
+                  {buttonLabel}
+                </a>
               </Button>
             </MotionDiv>
           </div>
@@ -108,7 +141,16 @@ export function ServicesPage() {
       </section>
 
       {/* Features Grid Section */}
-      <section id="features-grid" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-18">
+      <section
+        id={targetId}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-18 scroll-mt-20 sm:scroll-mt-24 relative"
+      >
+        {/* Support alternate anchor identifier seamlessly */}
+        <span
+          id={isServices ? "features-grid" : "services-grid"}
+          className="absolute -top-20 pointer-events-none opacity-0"
+          aria-hidden="true"
+        />
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <MotionDiv delay={0} duration={0.4} yOffset={10}>
             <span className="text-xs font-bold text-primary uppercase tracking-wider block mb-2">
@@ -121,7 +163,7 @@ export function ServicesPage() {
             yOffset={20}
             className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight"
           >
-            Six Powerful Features. One Unified Cloud.
+            {gridTitle}
           </MotionH2>
           <MotionP
             delay={0.2}
