@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Post, Category } from "@/sanity/types";
 import { CustomBreadcrumb } from "@/components/ui/breadcrumb";
 import Badge from "@/components/ui/Badge";
@@ -106,77 +107,118 @@ export function BlogIndexView({
             />
           </MotionDiv>
 
-          <div className="max-w-3xl">
-            {/* Eyebrow badge */}
-            <MotionDiv delay={0.05} duration={0.5} yOffset={15}>
-              <Badge
-                variant="primary"
-                icon={<BookOpenIcon className="w-3.5 h-3.5 text-primary" />}
-                className="mb-4 shadow-2xs font-bold tracking-wider uppercase"
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Column: Heading, Subtitle & Search */}
+            <div className="lg:col-span-7 xl:col-span-7">
+              {/* Eyebrow badge */}
+              <MotionDiv delay={0.05} duration={0.5} yOffset={15}>
+                <Badge
+                  variant="primary"
+                  icon={<BookOpenIcon className="w-3.5 h-3.5 text-primary" />}
+                  className="mb-4 shadow-2xs font-bold tracking-wider uppercase"
+                >
+                  Knowledge & Thought Leadership
+                </Badge>
+              </MotionDiv>
+
+              {/* H1 Heading */}
+              <MotionH1
+                delay={0.12}
+                duration={0.65}
+                yOffset={20}
+                className="font-extrabold text-3xl sm:text-4xl lg:text-[44px] text-slate-900 tracking-tight leading-[1.14]"
               >
-                Knowledge & Thought Leadership
-              </Badge>
-            </MotionDiv>
+                HR Insights, Playbooks & Regulatory Trends
+              </MotionH1>
 
-            {/* H1 Heading */}
-            <MotionH1
-              delay={0.12}
-              duration={0.65}
-              yOffset={20}
-              className="font-extrabold text-3xl sm:text-4xl lg:text-[46px] text-slate-900 tracking-tight leading-[1.14]"
-            >
-              HR Insights, Playbooks & Regulatory Trends
-            </MotionH1>
+              {/* Subtitle */}
+              <MotionP
+                delay={0.22}
+                duration={0.6}
+                yOffset={15}
+                className="mt-4 text-sm sm:text-base lg:text-[16px] text-slate-600 font-normal leading-relaxed max-w-2xl"
+              >
+                Actionable workforce playbooks, statutory compliance updates, and modern cloud HCM perspectives written by industry practitioners.
+              </MotionP>
 
-            {/* Subtitle */}
-            <MotionP
-              delay={0.22}
-              duration={0.6}
-              yOffset={15}
-              className="mt-4 text-sm sm:text-base lg:text-[17px] text-slate-600 font-normal leading-relaxed max-w-2xl"
-            >
-              Actionable workforce playbooks, statutory compliance updates, and modern cloud HCM perspectives written by industry practitioners.
-            </MotionP>
-
-            {/* Live Search Bar */}
-            <MotionDiv
-              delay={0.3}
-              duration={0.6}
-              yOffset={15}
-              className="mt-8 max-w-lg"
-            >
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <svg
-                    className="w-4 h-4 text-slate-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
+              {/* Live Search Bar */}
+              <MotionDiv
+                delay={0.3}
+                duration={0.6}
+                yOffset={15}
+                className="mt-8 max-w-lg"
+              >
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg
+                      className="w-4 h-4 text-slate-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search articles by title, keyword, or author..."
+                    className="w-full pl-11 pr-10 py-3 bg-white rounded-full border border-slate-200/90 shadow-sm text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery("")}
+                      className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-xs font-semibold text-slate-400 hover:text-slate-600 cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                  )}
                 </div>
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search articles by title, keyword, or author..."
-                  className="w-full pl-11 pr-10 py-3 bg-white rounded-full border border-slate-200/90 shadow-sm text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-                {searchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery("")}
-                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-xs font-semibold text-slate-400 hover:text-slate-600"
-                  >
-                    Clear
-                  </button>
-                )}
+              </MotionDiv>
+            </div>
+
+            {/* Right Column: Hero Visual Graphic */}
+            <MotionDiv
+              delay={0.25}
+              duration={0.7}
+              yOffset={20}
+              className="lg:col-span-5 xl:col-span-5 relative flex justify-center lg:justify-end"
+            >
+              <div className="relative w-full max-w-md lg:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_20px_50px_-15px_rgba(13,91,189,0.18)] border border-blue-100/90 bg-white group">
+                <div className="relative aspect-[4/3] w-full">
+                  <Image
+                    src="/blog/hr-insights-hero.jpg"
+                    alt="HR Insights, Playbooks & Regulatory Trends"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 42vw"
+                    className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+                  />
+                  {/* Subtle edge highlight */}
+                  <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl sm:rounded-3xl pointer-events-none" />
+
+                  {/* Floating SaaS/Thought Leadership Badge */}
+                  <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-white/95 backdrop-blur-md px-3 sm:px-4 py-2 rounded-xl sm:rounded-2xl border border-white/80 shadow-lg flex items-center gap-2.5 pointer-events-none">
+                    <div className="w-8 h-8 rounded-xl bg-blue-50 text-primary flex items-center justify-center shrink-0">
+                      <SparklesIcon className="w-4 h-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-extrabold uppercase tracking-wider text-primary">
+                        PeoplesHR Insights
+                      </p>
+                      <p className="text-xs font-bold text-slate-800">
+                        Actionable Workforce Trends
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </MotionDiv>
           </div>
