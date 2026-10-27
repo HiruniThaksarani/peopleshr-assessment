@@ -70,6 +70,8 @@ export interface Post {
   keyTakeaways?: string[];
   // SEO fields
   metaDescription?: string;
+  _updatedAt?: string;
+  _createdAt?: string;
 }
 
 export interface TableOfContentsItem {

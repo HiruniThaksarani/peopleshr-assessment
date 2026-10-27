@@ -9,6 +9,9 @@ import {
 import { BlogPostDetailView } from "@/components/Blog/BlogPostDetailView";
 import { getPostImageUrl } from "@/sanity/lib/image";
 
+import { constructMetadata } from "@/lib/seo";
+import { CustomArticleJsonLd, CustomBreadcrumbJsonLd } from "@/lib/json-ld";
+
 interface BlogPostPageProps {
   params: Promise<{
     slug: string;
@@ -29,38 +32,30 @@ export async function generateMetadata({
   const post = await getPostBySlug(slug);
 
   if (!post) {
-    return {
+    return constructMetadata({
       title: "Article Not Found | PeoplesHR",
-    };
+      noIndex: true,
+    });
   }
 
   const imageUrl = getPostImageUrl(post);
+  const categories = post.categories?.map((c) => c.title) || [];
 
-  return {
+  return constructMetadata({
     title: `${post.title} | PeoplesHR Insights`,
     description: post.metaDescription || post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.metaDescription || post.excerpt,
-      type: "article",
-      publishedTime: post.publishedAt,
-      authors: post.author?.name ? [post.author.name] : undefined,
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: post.mainImage?.alt || post.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.metaDescription || post.excerpt,
-      images: [imageUrl],
-    },
-  };
+    canonical: `/blog/${post.slug.current}`,
+    ogImage: imageUrl,
+    ogType: "article",
+    publishedTime: post.publishedAt,
+    authors: post.author?.name ? [post.author.name] : undefined,
+    keywords: [
+      ...categories,
+      "Human Capital Management",
+      "PeoplesHR Insights",
+      "HR Best Practices",
+    ],
+  });
 }
 
 async function BlogPostContent({ slug }: { slug: string }) {
@@ -70,10 +65,32 @@ async function BlogPostContent({ slug }: { slug: string }) {
     notFound();
   }
 
+  const imageUrl = getPostImageUrl(post);
   const categoryIds = post.categories?.map((c) => c._id || "").filter(Boolean) || [];
   const relatedPosts = await getRelatedPosts(post.slug.current, categoryIds);
 
-  return <BlogPostDetailView post={post} relatedPosts={relatedPosts} />;
+  return (
+    <>
+      <CustomBreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "HR Insights", url: "/blog" },
+          { name: post.title, url: `/blog/${post.slug.current}` },
+        ]}
+      />
+      <CustomArticleJsonLd
+        title={post.title}
+        description={post.metaDescription || post.excerpt || ""}
+        url={`/blog/${post.slug.current}`}
+        publishedAt={post.publishedAt}
+        updatedAt={post._updatedAt}
+        authorName={post.author?.name}
+        imageUrl={imageUrl}
+        category={post.categories?.[0]?.title}
+      />
+      <BlogPostDetailView post={post} relatedPosts={relatedPosts} />
+    </>
+  );
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {

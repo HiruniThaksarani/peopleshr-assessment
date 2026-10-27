@@ -4,6 +4,13 @@ import React, { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { constructMetadata } from "@/lib/seo";
+import {
+  GlobalOrganizationJsonLd,
+  GlobalSoftwareApplicationJsonLd,
+  GlobalLocalBusinessJsonLd,
+  GlobalWebSiteJsonLd,
+} from "@/lib/json-ld";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -19,11 +26,7 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "PeoplesHR | Cloud Human Capital Management & Payroll",
-  description:
-    "Empower your workforce with modern HR, automated payroll, performance tracking, and employee self-service.",
-};
+export const metadata: Metadata = constructMetadata();
 
 export default function RootLayout({
   children,
@@ -40,6 +43,10 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-full flex flex-col font-sans bg-background text-foreground"
       >
+        <GlobalOrganizationJsonLd />
+        <GlobalSoftwareApplicationJsonLd />
+        <GlobalLocalBusinessJsonLd />
+        <GlobalWebSiteJsonLd />
         <Suspense fallback={<div className="h-[72px] bg-white border-b border-slate-100" />}>
           <Navbar />
         </Suspense>

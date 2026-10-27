@@ -3,17 +3,23 @@ import React, { Suspense } from "react";
 import { getAllPosts, getAllCategories, getFeaturedPosts } from "@/sanity/lib/client";
 import { BlogIndexView } from "@/components/Blog/BlogIndexView";
 
-export const metadata: Metadata = {
-  title: "HR Insights, Playbooks & Industry Trends | PeoplesHR Platform",
+import { constructMetadata } from "@/lib/seo";
+import { CustomBreadcrumbJsonLd, CustomWebPageJsonLd } from "@/lib/json-ld";
+
+export const metadata: Metadata = constructMetadata({
+  title: "HR Insights, Payroll Playbooks & Industry Trends | PeoplesHR",
   description:
-    "Explore actionable playbooks, statutory compliance guides, payroll benchmarks, and people operations tech perspectives from experienced HR practitioners.",
-  openGraph: {
-    title: "HR Insights & Playbooks | PeoplesHR",
-    description:
-      "Enterprise human capital management playbooks, statutory payroll compliance guides, and AI workforce technology.",
-    type: "website",
-  },
-};
+    "Explore expert playbooks on statutory payroll compliance, workforce scheduling, AI in HR, talent retention, and labor cost optimization from veteran HR practitioners.",
+  canonical: "/blog",
+  keywords: [
+    "HR blog",
+    "Payroll compliance playbooks",
+    "Statutory payroll guide",
+    "Human capital trends",
+    "Workforce management articles",
+    "AI in HR",
+  ],
+});
 
 export const instant = false;
 
@@ -25,11 +31,18 @@ async function BlogContent() {
   ]);
 
   return (
-    <BlogIndexView
-      initialPosts={posts}
-      categories={categories}
-      featuredPosts={featuredPosts}
-    />
+    <>
+      <CustomWebPageJsonLd
+        title="PeoplesHR Insights & Playbooks"
+        description="Actionable HR playbooks, statutory compliance checklists, and modern people operations perspectives."
+        url="/blog"
+      />
+      <BlogIndexView
+        initialPosts={posts}
+        categories={categories}
+        featuredPosts={featuredPosts}
+      />
+    </>
   );
 }
 

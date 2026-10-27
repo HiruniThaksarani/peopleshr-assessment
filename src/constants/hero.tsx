@@ -14,9 +14,9 @@ export interface HeroFeature {
 
 export const HERO_CONTENT = {
   eyebrow: "ALL-IN-ONE HR SOFTWARE",
-  titlePart1: "Intelligent Human Capital &",
-  titleHighlight: "Payroll",
-  titlePart2: "Management",
+  titlePart1: "Simplify  ",
+  titleHighlight: "HR Mangement",
+  titlePart2: "For Your Growing Business",
   subtitle:
     "Streamline your HR operations, empower your people, and make smarter decisions with PeoplesHR - the complete HR platform for growing businesses.",
   ctaPrimary: {
