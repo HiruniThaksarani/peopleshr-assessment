@@ -274,13 +274,6 @@ export function HoursLeakCalculator() {
                   <LightbulbIcon className="w-4 h-4 text-amber-500 shrink-0" />
                   <span>{CALCULATOR_CONTENT.footerNote}</span>
                 </div>
-                <Link
-                  href={CALCULATOR_CONTENT.methodologyLink.href}
-                  className="font-semibold text-primary hover:text-blue-700 transition-colors inline-flex items-center gap-1 shrink-0 cursor-pointer"
-                >
-                  <span>{CALCULATOR_CONTENT.methodologyLink.label}</span>
-                  <ArrowRightIcon className="w-3.5 h-3.5 text-primary" />
-                </Link>
               </div>
             </div>
           </MotionDiv>

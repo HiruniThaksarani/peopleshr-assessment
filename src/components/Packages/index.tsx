@@ -88,9 +88,6 @@ export function Packages() {
               <ArrowRightIcon className="w-4 h-4 text-white/90 group-hover:text-white transition-colors" />
             </Link>
           </Button>
-          <span className="text-xs text-slate-500 font-medium">
-            Compare all 4 tiers, included services &amp; features
-          </span>
         </MotionDiv>
 
         {/* Bottom Interactive Tool Card */}
