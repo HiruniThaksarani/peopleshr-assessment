@@ -192,8 +192,8 @@ export const CALCULATOR_CONTENT = {
   ] as CompanyTier[],
   footerNote: "Estimated time and dollar savings are modeled on industry benchmarks. Individual financial outcomes may vary.",
   methodologyLink: {
-    label: "Learn about our methodology",
-    href: "/methodology",
+    label: "Read how we estimate savings",
+    href: "/#faq",
   },
 };
 

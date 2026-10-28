@@ -50,13 +50,14 @@ export const FOOTER_TOOL_LINKS: FooterLink[] = [
 
 export const FOOTER_RESOURCE_LINKS: FooterLink[] = [
   { label: "HR Insights & Blog", href: "/blog" },
+  { label: "HR Software Sri Lanka", href: "/hr-software-sri-lanka" },
   { label: "Contact & Demo", href: "/contact", badge: "Live" },
 ];
 
 export const FOOTER_LEGAL_LINKS: FooterLink[] = [
-  { label: "Privacy Policy", href: "#privacy" },
-  { label: "Terms of Service", href: "#terms" },
-  { label: "Security & ISO 27001", href: "#security" },
-  { label: "Cookie Preferences", href: "#cookies" },
-  { label: "Trust Center", href: "#trust" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "Security & ISO 27001", href: "/privacy#security" },
+  { label: "Cookie Preferences", href: "/privacy#cookies" },
+  { label: "Trust Center", href: "/privacy#trust" },
 ];

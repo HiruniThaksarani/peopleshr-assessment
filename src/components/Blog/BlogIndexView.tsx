@@ -3,8 +3,8 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { Post, Category } from "@/sanity/types";
-import { CustomBreadcrumb } from "@/components/ui/breadcrumb";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/button";
 import {
@@ -34,7 +34,11 @@ export function BlogIndexView({
   categories,
   featuredPosts,
 }: BlogIndexViewProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const searchParams = useSearchParams();
+  const urlSearch = searchParams.get("search") ?? "";
+  const [typedSearch, setTypedSearch] = useState<string | null>(null);
+  const searchQuery = typedSearch ?? urlSearch;
+  const setSearchQuery = (value: string) => setTypedSearch(value);
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   // Post counts per category
@@ -302,7 +306,7 @@ export function BlogIndexView({
               No matching articles found
             </h3>
             <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-6">
-              We couldn't find any articles matching "{searchQuery}". Try searching for terms like "payroll", "compliance", "AI", or "onboarding".
+              We couldn&apos;t find any articles matching &quot;{searchQuery}&quot;. Try searching for terms like &quot;payroll&quot;, &quot;compliance&quot;, &quot;AI&quot;, or &quot;onboarding&quot;.
             </p>
             <Button
               onClick={() => {
@@ -335,7 +339,7 @@ export function BlogIndexView({
                 Put these strategic insights into practice.
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
-                Build your organization's custom HR tech stack, calculate saved administrative hours, or schedule an executive consultation with our workforce specialists.
+                Build your organization&apos;s custom HR tech stack, calculate saved administrative hours, or schedule an executive consultation with our workforce specialists.
               </p>
             </div>
 

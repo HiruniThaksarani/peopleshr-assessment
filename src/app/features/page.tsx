@@ -5,9 +5,9 @@ import { constructMetadata } from "@/lib/seo";
 import { CustomBreadcrumbJsonLd, CustomServiceJsonLd } from "@/lib/json-ld";
 
 export const metadata: Metadata = constructMetadata({
-  title: "Enterprise Cloud HR Features & Workforce Solutions | PeoplesHR",
+  title: "HR Software Features: Payroll, ESS, Talent & Analytics | PeoplesHR",
   description:
-    "Explore PeoplesHR's modular cloud features: Core HR directory, automated payroll & tax calculations, real-time time & attendance, talent performance, and workforce analytics.",
+    "Explore PeoplesHR platform features: HR Essentials, payroll and time, employee self-service, talent and performance, people insights, and compliance for growing businesses.",
   canonical: "/features",
   keywords: [
     "Enterprise HR features",
@@ -21,28 +21,28 @@ export const metadata: Metadata = constructMetadata({
 
 const HR_FEATURES_CATALOG = [
   {
-    name: "Core HR & Employee Directory",
-    description: "Centralized employee profiles, automated document storage, and organizational hierarchy charts.",
+    name: "HR Essentials",
+    description: "Employee information, organisational structure, and document management.",
   },
   {
-    name: "Automated Payroll & Statutory Compliance",
-    description: "Multi-country tax rule engines, direct salary bank transfers, and automated statutory tax slip generation.",
+    name: "Payroll & Time",
+    description: "Payroll processing, time and attendance, and leave management.",
   },
   {
-    name: "Time & Attendance Tracking",
-    description: "Biometric and mobile clock-in, overtime rule automation, and shift scheduling.",
+    name: "People Experience",
+    description: "Employee self-service, requests and approvals, and mobile access.",
   },
   {
-    name: "Performance & Goal Management",
-    description: "360-degree feedback, continuous appraisal cycles, and KPI alignment frameworks.",
+    name: "Talent & Performance",
+    description: "Recruitment and onboarding, performance management, and learning support.",
   },
   {
-    name: "Employee Self-Service (ESS)",
-    description: "Mobile and web portal for leave requests, pay stub downloads, and personal info updates.",
+    name: "People Insights",
+    description: "Interactive dashboards, workforce analytics, and custom reports.",
   },
   {
-    name: "People Analytics & Workforce Insights",
-    description: "Turnover risk predictions, compensation benchmarking, and real-time executive workforce dashboards.",
+    name: "Compliance & Workforce",
+    description: "Regulatory compliance, policy management, and multi-country support.",
   },
 ];
 

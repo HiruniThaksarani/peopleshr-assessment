@@ -26,6 +26,7 @@ export const PEOPLE_OPERATIONS_CONTENT = {
       iconName: "users",
       iconBgColor: "bg-[#eff6ff]", // soft blue
       iconColor: "text-[#2563eb]",
+      href: "/features/hr-essentials",
     },
     {
       id: "payroll",
@@ -34,6 +35,7 @@ export const PEOPLE_OPERATIONS_CONTENT = {
       iconName: "file-text",
       iconBgColor: "bg-[#ecfdf5]", // soft green
       iconColor: "text-[#10b981]",
+      href: "/features/payroll-time",
     },
     {
       id: "time-attendance",
@@ -42,6 +44,7 @@ export const PEOPLE_OPERATIONS_CONTENT = {
       iconName: "calendar",
       iconBgColor: "bg-[#eff6ff]", // soft blue
       iconColor: "text-[#2563eb]",
+      href: "/features/payroll-time",
     },
     {
       id: "talent-management",
@@ -50,6 +53,7 @@ export const PEOPLE_OPERATIONS_CONTENT = {
       iconName: "chart-bars",
       iconBgColor: "bg-[#fff7ed]", // soft orange
       iconColor: "text-[#f97316]",
+      href: "/features/talent-performance",
     },
     {
       id: "performance",
@@ -58,6 +62,7 @@ export const PEOPLE_OPERATIONS_CONTENT = {
       iconName: "star",
       iconBgColor: "bg-[#faf5ff]", // soft purple
       iconColor: "text-[#9333ea]",
+      href: "/features/talent-performance",
     },
     {
       id: "compliance",
@@ -66,6 +71,7 @@ export const PEOPLE_OPERATIONS_CONTENT = {
       iconName: "shield-check",
       iconBgColor: "bg-[#ecfdf5]", // soft emerald
       iconColor: "text-[#10b981]",
+      href: "/features/compliance-workforce",
     },
   ] as OperationFeatureItem[],
 };

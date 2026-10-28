@@ -8,7 +8,8 @@ export const metadata: Metadata = constructMetadata({
   title: "HR Module Finder & Needs Assessment Questionnaire | PeoplesHR",
   description:
     "Take our 2-minute interactive HR questionnaire to discover the most effective combination of cloud HR and payroll modules for your organization.",
-  canonical: "/packages/stack-builder/finder",
+  // Same wizard UX as Stack Builder — canonicalize to avoid duplicate indexing.
+  canonical: "/packages/stack-builder",
   keywords: [
     "HR needs questionnaire",
     "Find HR software",

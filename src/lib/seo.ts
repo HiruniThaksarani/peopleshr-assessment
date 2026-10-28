@@ -23,7 +23,7 @@ export const SEO_DEFAULTS = {
   domain: process.env.NEXT_PUBLIC_SITE_URL || "https://peopleshr.com",
   defaultTitle: "PeoplesHR | Cloud Human Capital Management & Payroll Platform",
   defaultDescription:
-    "Enterprise-grade HR automation, intelligent workforce scheduling, automated statutory payroll, and employee self-service built to empower high-performance teams worldwide.",
+    "PeoplesHR is cloud HCM and payroll software for growing businesses—employee records, statutory payroll, time and attendance, self-service, talent, and workforce analytics in one platform.",
   defaultKeywords: [
     "PeoplesHR",
     "Cloud HCM",

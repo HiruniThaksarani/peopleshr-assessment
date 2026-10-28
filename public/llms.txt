@@ -1,0 +1,48 @@
+# PeoplesHR
+
+> Cloud Human Capital Management (HCM) and payroll platform for growing and enterprise organisations.
+
+PeoplesHR helps businesses manage employee information, statutory payroll, time and attendance, leave, employee self-service, talent and performance, people analytics, and workforce compliance from one cloud platform.
+
+## Product modules
+
+- HR Essentials: employee information, organisational structure, document management — /features/hr-essentials
+- Payroll & Time: payroll processing, time and attendance, leave management — /features/payroll-time
+- People Experience: employee self-service, requests and approvals, mobile access — /features/people-experience
+- Talent & Performance: recruitment and onboarding, performance management, learning support — /features/talent-performance
+- People Insights: dashboards, workforce analytics, custom reports — /features/people-insights
+- Compliance & Workforce: regulatory compliance, policy management, multi-country support — /features/compliance-workforce
+
+## Packages
+
+- Foundation: essential HR operations for smaller teams (core HR, payroll, leave, attendance, ESS)
+- Growth: complete HR solution for scaling organisations (adds talent, performance, native mobile ESS)
+- Enterprise: advanced multi-country payroll, analytics, compliance controls, APIs, and SSO
+
+Details: /packages
+
+## Interactive tools
+
+- HR Stack Builder (module prioritisation and package match): /packages/stack-builder
+- Hours Leak & HR ROI Calculator: /calculator
+
+## Implementation support
+
+- Go-live and rollout guidance path: /services
+
+## Market notes
+
+- Statutory payroll cues referenced in product content include EPF, ETF, and PAYE/APIT
+- Currency cues include LKR alongside other multi-currency support on higher tiers
+- Sri Lanka-focused overview: /hr-software-sri-lanka
+
+## Content and contact
+
+- Blog / HR insights: /blog
+- Contact and demo requests: /contact
+- Privacy: /privacy
+- Terms: /terms
+
+## Optional
+
+- Content studio (not for public indexing): /studio

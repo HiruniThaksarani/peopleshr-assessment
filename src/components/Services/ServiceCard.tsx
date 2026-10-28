@@ -155,7 +155,7 @@ export function ServiceCard({ service, className = "" }: ServiceCardProps) {
             href={targetHref}
             className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary-hover hover:underline transition-colors"
           >
-            <span>Build stack with this service</span>
+            <span>{service.linkHref?.startsWith("/features/") ? "Explore this feature" : "Build stack with this service"}</span>
             <ArrowRightIcon className="w-3.5 h-3.5" />
           </Link>
         </div>

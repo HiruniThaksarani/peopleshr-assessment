@@ -202,7 +202,7 @@ export default function ContactFormSection() {
                     </h3>
 
                     <p className="text-slate-600 mt-2 max-w-sm text-sm leading-relaxed">
-                      We have received your message. One of our enterprise HR specialists will contact you within 24 hours.
+                      We have received your message. A PeoplesHR specialist will contact you within 24 hours to confirm your goals and schedule a product walkthrough. No payment is required at this step.
                     </p>
 
                     <div className="mt-6 flex items-center gap-3">
@@ -225,7 +225,7 @@ export default function ContactFormSection() {
                         Send Us a Message
                       </h3>
                       <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                        Fill in your details and we&apos;ll get back to you shortly.
+                        Share your details to request a demo. After you submit, we confirm your request and follow up within one business day.
                       </p>
                     </div>
 

@@ -145,6 +145,8 @@ export default function Navbar() {
               );
             }
 
+            const isToolsDropdown = item.label === "Interactive Tools";
+            const isFeaturesDropdown = item.label === "Features";
             const isDropdownActive =
               item.dropdownSections?.some((section) =>
                 section.items.some(
@@ -153,8 +155,11 @@ export default function Navbar() {
                     Boolean(pathname?.startsWith(`${sub.href}/`))
                 )
               ) ||
-              pathname === "/packages/stack-builder" ||
-              pathname === "/calculator";
+              (isFeaturesDropdown && Boolean(pathname?.startsWith("/features"))) ||
+              (isToolsDropdown &&
+                (pathname === "/packages/stack-builder" ||
+                  pathname === "/calculator" ||
+                  Boolean(pathname?.startsWith("/packages/stack-builder/"))));
 
             return (
               <div
@@ -350,6 +355,8 @@ export default function Navbar() {
                   );
                 }
 
+                const isToolsDropdown = item.label === "Interactive Tools";
+                const isFeaturesDropdown = item.label === "Features";
                 const isDropdownActive =
                   item.dropdownSections?.some((section) =>
                     section.items.some(
@@ -358,8 +365,11 @@ export default function Navbar() {
                         Boolean(pathname?.startsWith(`${sub.href}/`))
                     )
                   ) ||
-                  pathname === "/packages/stack-builder" ||
-                  pathname === "/calculator";
+                  (isFeaturesDropdown && Boolean(pathname?.startsWith("/features"))) ||
+                  (isToolsDropdown &&
+                    (pathname === "/packages/stack-builder" ||
+                      pathname === "/calculator" ||
+                      Boolean(pathname?.startsWith("/packages/stack-builder/"))));
 
                 return (
                   <div key={item.label} className="border-b border-slate-100 last:border-b-0 pb-1">

@@ -34,7 +34,57 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: "Features",
     href: "/features",
-    hasDropdown: false,
+    hasDropdown: true,
+    dropdownSections: [
+      {
+        heading: "Platform Modules",
+        items: [
+          {
+            title: "HR Essentials",
+            description: "Employee records, org structure, and documents",
+            href: "/features/hr-essentials",
+            iconName: "users",
+          },
+          {
+            title: "Payroll & Time",
+            description: "Payroll, attendance, and leave workflows",
+            href: "/features/payroll-time",
+            iconName: "calculator",
+          },
+          {
+            title: "People Experience",
+            description: "Employee self-service and mobile access",
+            href: "/features/people-experience",
+            iconName: "sparkles",
+          },
+          {
+            title: "Talent & Performance",
+            description: "Recruitment, onboarding, and appraisals",
+            href: "/features/talent-performance",
+            iconName: "sparkles",
+          },
+          {
+            title: "People Insights",
+            description: "Dashboards, analytics, and custom reports",
+            href: "/features/people-insights",
+            iconName: "calculator",
+          },
+          {
+            title: "Compliance & Workforce",
+            description: "Policy, statutory, and multi-country support",
+            href: "/features/compliance-workforce",
+            iconName: "sparkles",
+          },
+        ],
+      },
+    ],
+    featured: {
+      tag: "All Capabilities",
+      title: "Explore the Full Feature Suite",
+      description: "See how PeoplesHR modules work together across HR, payroll, and people operations.",
+      href: "/features",
+      cta: "View All Features",
+    },
   },
   {
     label: "Packages",

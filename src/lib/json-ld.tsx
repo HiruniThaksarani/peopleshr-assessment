@@ -101,7 +101,7 @@ export function GlobalSoftwareApplicationJsonLd() {
       priceCurrency: "USD",
       lowPrice: "4.50",
       highPrice: "18.00",
-      offerCount: "4",
+      offerCount: "3",
       offers: [
         {
           "@type": "Offer",

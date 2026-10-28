@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SEO_DEFAULTS } from "@/lib/seo";
+import { FEATURE_SLUGS } from "@/constants/featurePages";
 import { getAllPosts } from "@/sanity/lib/client";
 import { getPostImageUrl } from "@/sanity/lib/image";
 
@@ -7,7 +8,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SEO_DEFAULTS.domain;
   const launchBaselineDate = "2026-10-27T00:00:00.000Z";
 
-  // Static core routes
+  const featureRoutes: MetadataRoute.Sitemap = FEATURE_SLUGS.map((slug) => ({
+    url: `${baseUrl}/features/${slug}`,
+    lastModified: launchBaselineDate,
+    changeFrequency: "weekly",
+    priority: 0.85,
+  }));
+
+  // Static core routes (finder omitted — canonicalizes to stack-builder)
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}`,
@@ -22,6 +30,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+    ...featureRoutes,
+    {
+      url: `${baseUrl}/services`,
+      lastModified: launchBaselineDate,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     {
       url: `${baseUrl}/packages`,
       lastModified: launchBaselineDate,
@@ -33,12 +48,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: launchBaselineDate,
       changeFrequency: "weekly",
       priority: 0.85,
-    },
-    {
-      url: `${baseUrl}/packages/stack-builder/finder`,
-      lastModified: launchBaselineDate,
-      changeFrequency: "weekly",
-      priority: 0.8,
     },
     {
       url: `${baseUrl}/calculator`,
@@ -58,6 +67,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/hr-software-sri-lanka`,
+      lastModified: launchBaselineDate,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/privacy`,
+      lastModified: launchBaselineDate,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/terms`,
+      lastModified: launchBaselineDate,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 
   try {
@@ -72,7 +99,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         return {
           url: `${baseUrl}/blog/${post.slug.current}`,
           lastModified,
-          changeFrequency: "weekly",
+          changeFrequency: "weekly" as const,
           priority: 0.75,
           images: imageUrl ? [imageUrl] : undefined,
         };

@@ -1,0 +1,225 @@
+import React from "react";
+import Link from "next/link";
+import Badge from "@/components/ui/Badge";
+import Button from "@/components/ui/button";
+import { CustomBreadcrumb } from "@/components/ui/breadcrumb";
+import {
+  ArrowRightIcon,
+  CheckSmallIcon,
+  SparklesIcon,
+  LayersStackIcon,
+} from "@/components/ui/icons";
+import {
+  FEATURE_PAGES,
+  type FeaturePageContent,
+  type FeatureSlug,
+} from "@/constants/featurePages";
+
+export function FeatureDetailView({ feature }: { feature: FeaturePageContent }) {
+  const related = feature.relatedSlugs
+    .map((slug) => FEATURE_PAGES[slug as FeatureSlug])
+    .filter(Boolean);
+
+  return (
+    <div className="w-full min-h-screen bg-[#f8fbff] text-slate-800 pb-24">
+      <section className="relative w-full pt-6 sm:pt-8 pb-12 sm:pb-16 bg-gradient-to-b from-white via-blue-50/20 to-[#f8fbff] border-b border-slate-200/70">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <CustomBreadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Features", href: "/features" },
+              { label: feature.name },
+            ]}
+          />
+
+          <div className="mt-6 max-w-3xl">
+            <Badge
+              variant="primary"
+              icon={<LayersStackIcon className="w-3.5 h-3.5 text-primary" />}
+              className="mb-4 shadow-2xs font-bold tracking-wider uppercase"
+            >
+              {feature.eyebrow}
+            </Badge>
+            <h1 className="font-extrabold text-3xl sm:text-4xl lg:text-[42px] text-slate-900 tracking-tight leading-[1.14]">
+              {feature.headline}
+            </h1>
+            <p className="mt-4 text-sm sm:text-base lg:text-[17px] text-slate-600 font-normal leading-relaxed">
+              {feature.summary}
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3.5">
+              <Button asChild size="lg" className="rounded-full shadow-md px-7 py-3 text-xs sm:text-sm font-bold group">
+                <Link href={feature.primaryCta.href} className="inline-flex items-center gap-2">
+                  <span>{feature.primaryCta.label}</span>
+                  <ArrowRightIcon className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="rounded-full px-6 py-3 text-xs sm:text-sm">
+                <Link href={feature.secondaryCta.href}>{feature.secondaryCta.label}</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 space-y-14 sm:space-y-16">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="rounded-3xl bg-white border border-slate-200/90 p-7 sm:p-8 shadow-[0_12px_36px_-12px_rgba(13,91,189,0.06)]">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+              The problem this solves
+            </h2>
+            <p className="mt-3 text-sm text-slate-600 leading-relaxed">{feature.problem}</p>
+          </div>
+          <div className="rounded-3xl bg-white border border-slate-200/90 p-7 sm:p-8 shadow-[0_12px_36px_-12px_rgba(13,91,189,0.06)]">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+              Who benefits
+            </h2>
+            <ul className="mt-4 space-y-3">
+              {feature.whoBenefits.map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-sm text-slate-700">
+                  <span className="mt-0.5 w-4 h-4 rounded-full bg-blue-50 text-primary flex items-center justify-center shrink-0">
+                    <CheckSmallIcon className="w-3.5 h-3.5 text-primary stroke-[2.8]" />
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Capabilities
+          </h2>
+          <p className="mt-2 text-sm text-slate-500 max-w-2xl">
+            Practical workflows included in {feature.name}, aligned with PeoplesHR packages.
+          </p>
+          <ul className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {feature.capabilities.map((capability) => (
+              <li
+                key={capability}
+                className="rounded-2xl bg-white border border-slate-200/90 px-5 py-4 text-sm font-medium text-slate-700 flex items-start gap-2.5"
+              >
+                <span className="mt-0.5 w-4 h-4 rounded-full bg-blue-50 text-primary flex items-center justify-center shrink-0">
+                  <CheckSmallIcon className="w-3.5 h-3.5 text-primary stroke-[2.8]" />
+                </span>
+                <span>{capability}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-xs text-slate-500">
+            Available in: {feature.packages.join(", ")}
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            How it works
+          </h2>
+          <ol className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+            {feature.howItWorks.map((item, index) => (
+              <li
+                key={item.step}
+                className="rounded-3xl bg-white border border-slate-200/90 p-6 shadow-[0_12px_36px_-12px_rgba(13,91,189,0.06)]"
+              >
+                <span className="text-[11px] font-extrabold text-primary tracking-wider uppercase">
+                  Step {index + 1}
+                </span>
+                <h3 className="mt-2 text-lg font-bold text-slate-900">{item.step}</h3>
+                <p className="mt-2 text-sm text-slate-600 leading-relaxed">{item.detail}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Business benefits
+          </h2>
+          <ul className="mt-6 space-y-3 max-w-3xl">
+            {feature.benefits.map((benefit) => (
+              <li key={benefit} className="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                <span className="mt-1 w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                  <CheckSmallIcon className="w-3.5 h-3.5 stroke-[2.8]" />
+                </span>
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Related features
+          </h2>
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+            {related.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/features/${item.slug}`}
+                className="rounded-3xl bg-white border border-slate-200/90 p-6 hover:border-primary/40 hover:shadow-md transition-all group"
+              >
+                <h3 className="text-lg font-bold text-slate-900 group-hover:text-primary transition-colors">
+                  {item.name}
+                </h3>
+                <p className="mt-2 text-sm text-slate-600 line-clamp-3">{item.summary}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-primary">
+                  Learn more
+                  <ArrowRightIcon className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Frequently asked questions
+          </h2>
+          <div className="mt-6 space-y-4 max-w-3xl">
+            {feature.faqs.map((faq) => (
+              <details
+                key={faq.question}
+                className="group rounded-2xl bg-white border border-slate-200/90 px-5 py-4 open:shadow-sm"
+              >
+                <summary className="cursor-pointer list-none font-bold text-slate-900 text-sm sm:text-base flex items-center justify-between gap-3">
+                  {faq.question}
+                  <span className="text-slate-400 group-open:rotate-45 transition-transform text-lg leading-none">
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 text-sm text-slate-600 leading-relaxed">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section className="relative rounded-3xl bg-gradient-to-r from-blue-50/80 via-sky-50/50 to-indigo-50/60 border border-blue-100 p-8 sm:p-10">
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100/80 text-primary text-[10.5px] font-extrabold tracking-wider uppercase mb-3">
+                <SparklesIcon className="w-3.5 h-3.5 text-primary" />
+                <span>Next step</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl lg:text-[28px] font-extrabold text-slate-900 tracking-tight leading-snug">
+                See {feature.shortName} in a live PeoplesHR workflow
+              </h2>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
+                Book a demo, compare packages, or use the Stack Builder to check whether this module belongs in your must-have list.
+              </p>
+            </div>
+            <div className="shrink-0 flex flex-col sm:flex-row gap-3">
+              <Button asChild size="lg" className="rounded-full shadow-md px-7 py-3 text-xs sm:text-sm font-bold">
+                <Link href="/contact">Request a Demo</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="rounded-full px-6 py-3 text-xs sm:text-sm">
+                <Link href="/packages">View Packages</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+export default FeatureDetailView;

@@ -15,10 +15,10 @@ export interface HeroFeature {
 export const HERO_CONTENT = {
   eyebrow: "ALL-IN-ONE HR SOFTWARE",
   titlePart1: "Simplify  ",
-  titleHighlight: "HR Mangement",
+  titleHighlight: "HR Management",
   titlePart2: "For Your Growing Business",
   subtitle:
-    "Streamline your HR operations, empower your people, and make smarter decisions with PeoplesHR - the complete HR platform for growing businesses.",
+    "Manage employee records, payroll, time and attendance, and people workflows from one cloud HCM platform built for growing businesses.",
   ctaPrimary: {
     label: "Request a Demo",
     href: "/contact",
@@ -36,7 +36,7 @@ export const HERO_CONTENT = {
   },
   highlights: [
     { label: "Security and compliance", type: "shield" },
-    { label: "Payroll managementy", type: "calculator" },
+    { label: "Payroll management", type: "calculator" },
     { label: "Workforce insights", type: "clock" },
   ],
   image: "/image.png",

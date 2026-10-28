@@ -13,7 +13,7 @@ export const SERVICES_CONTENT = {
   eyebrow: "PLATFORM FEATURES",
   title: "Everything You Need to Manage Your People",
   subtitle:
-    "From core HR to payroll, talent and compliance, PeoplesHR provides a complete set of HR features to streamline your workforce operations.",
+    "Explore modular PeoplesHR capabilities—from employee records and statutory payroll to self-service, talent, analytics, and compliance—then open each feature page for workflows and FAQs.",
   services: [
     {
       id: "hr-essentials",
@@ -27,6 +27,7 @@ export const SERVICES_CONTENT = {
       bestFor: "All businesses getting started with digital HR.",
       iconType: "users",
       themeColor: "blue",
+      linkHref: "/features/hr-essentials",
     },
     {
       id: "payroll-time",
@@ -40,6 +41,7 @@ export const SERVICES_CONTENT = {
       bestFor: "Businesses that want to simplify payroll and time tracking.",
       iconType: "payroll",
       themeColor: "green",
+      linkHref: "/features/payroll-time",
     },
     {
       id: "people-experience",
@@ -53,6 +55,7 @@ export const SERVICES_CONTENT = {
       bestFor: "Teams looking to improve employee experience.",
       iconType: "calendar",
       themeColor: "sky",
+      linkHref: "/features/people-experience",
     },
     {
       id: "talent-performance",
@@ -66,6 +69,7 @@ export const SERVICES_CONTENT = {
       bestFor: "Growing businesses focused on talent development.",
       iconType: "talent",
       themeColor: "amber",
+      linkHref: "/features/talent-performance",
     },
     {
       id: "people-insights",
@@ -79,6 +83,7 @@ export const SERVICES_CONTENT = {
       bestFor: "Leaders who need better visibility into their people data.",
       iconType: "insights",
       themeColor: "purple",
+      linkHref: "/features/people-insights",
     },
     {
       id: "compliance-workforce",
@@ -92,6 +97,7 @@ export const SERVICES_CONTENT = {
       bestFor: "Organisations with complex or multi-country requirements.",
       iconType: "compliance",
       themeColor: "emerald",
+      linkHref: "/features/compliance-workforce",
     },
   ] as ServiceItem[],
   ctaBanner: {

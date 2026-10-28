@@ -84,7 +84,7 @@ export function ServicesPage({ mode = "features" }: ServicesPageProps = {}) {
               yOffset={20}
               className="font-extrabold text-3xl sm:text-4xl lg:text-[46px] text-slate-900 tracking-tight leading-[1.14]"
             >
-              Everything You Need to Manage Your People
+              {SERVICES_CONTENT.title}
             </MotionH1>
 
             <MotionP
@@ -93,7 +93,7 @@ export function ServicesPage({ mode = "features" }: ServicesPageProps = {}) {
               yOffset={15}
               className="mt-4 text-sm sm:text-base lg:text-[17px] text-slate-600 font-normal leading-relaxed max-w-2xl"
             >
-              From core employee records to automated statutory payroll, recruitment and global compliance, PeoplesHR provides a unified platform to power every stage of your workforce lifecycle.
+              {SERVICES_CONTENT.subtitle}
             </MotionP>
 
             {/* Header Actions */}

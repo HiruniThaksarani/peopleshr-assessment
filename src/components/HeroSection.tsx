@@ -101,6 +101,7 @@ export default function HeroSection() {
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 55vw"
+            quality={80}
             className="object-cover object-[center_top] lg:object-contain lg:object-right"
           />
 

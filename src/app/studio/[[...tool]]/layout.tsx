@@ -5,6 +5,14 @@ export const metadata: Metadata = {
   ...studioMetadata,
   title: "PeoplesHR Content Studio",
   description: "Manage HR Insights, Blog Posts, Authors, and Categories.",
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
 };
 
 export const viewport: Viewport = {
