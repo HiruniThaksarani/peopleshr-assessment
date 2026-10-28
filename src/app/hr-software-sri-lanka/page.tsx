@@ -10,6 +10,7 @@ import {
   SparklesIcon,
 } from "@/components/ui/icons";
 import { SRI_LANKA_PAGE_CONTENT } from "@/constants/sriLankaPage";
+import FaqAccordion from "@/components/FaqAccordion";
 import { constructMetadata } from "@/lib/seo";
 import {
   CustomBreadcrumbJsonLd,
@@ -154,25 +155,24 @@ export default function HrSoftwareSriLankaPage() {
             </ul>
           </section>
 
-          <section>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Frequently asked questions
-            </h2>
-            <div className="mt-6 space-y-4 max-w-3xl">
-              {content.faqs.map((faq) => (
-                <details
-                  key={faq.question}
-                  className="group rounded-2xl bg-white border border-slate-200/90 px-5 py-4"
+          <section aria-label="Frequently Asked Questions" className="pt-2">
+            <div className="max-w-4xl">
+              <div className="mb-6 sm:mb-8">
+                <Badge
+                  variant="primary"
+                  className="mb-3.5 shadow-2xs font-bold uppercase tracking-wider text-[11px]"
                 >
-                  <summary className="cursor-pointer list-none font-bold text-slate-900 text-sm sm:text-base flex items-center justify-between gap-3">
-                    {faq.question}
-                    <span className="text-slate-400 group-open:rotate-45 transition-transform text-lg leading-none">
-                      +
-                    </span>
-                  </summary>
-                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">{faq.answer}</p>
-                </details>
-              ))}
+                  FREQUENTLY ASKED QUESTIONS
+                </Badge>
+                <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-[38px] text-slate-900 tracking-tight leading-[1.15]">
+                  Frequently Asked <span className="text-primary">Questions</span>
+                </h2>
+                <p className="mt-3 text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-2xl">
+                  Key details on Sri Lanka payroll automation, statutory contributions, and local implementation.
+                </p>
+              </div>
+
+              <FaqAccordion faqs={content.faqs} />
             </div>
           </section>
 
